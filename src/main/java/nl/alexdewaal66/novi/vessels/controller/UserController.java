@@ -4,6 +4,7 @@ import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.model.User;
 import nl.alexdewaal66.novi.vessels.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -11,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Map;
 
-//@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -24,11 +25,13 @@ public class UserController {
     public ResponseEntity<Object> createUser(@RequestBody User user) {
         String newUsername = userService.createUser(user);
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{username}")
-                .buildAndExpand(newUsername).toUri();
+//        URI location = ServletUriComponentsBuilder
+//                .fromCurrentRequest().path("/{username}")
+//                .buildAndExpand(newUsername).toUri();
+//
+//        return ResponseEntity.created(location).build();
 
-        return ResponseEntity.created(location).build();
+        return new ResponseEntity<>(String.format("User %s created", newUsername), HttpStatus.CREATED);
     }
 
     // READ

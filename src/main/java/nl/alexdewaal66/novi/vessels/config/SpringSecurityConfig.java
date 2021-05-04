@@ -5,6 +5,7 @@ import nl.alexdewaal66.novi.vessels.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -51,11 +52,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .formLogin().disable()
             .authorizeRequests()
                 .antMatchers("/members/**")
-                .hasAnyRole("MEMBER", "EXPERT", "ADMIN")
+                    .hasAnyRole("MEMBER", "EXPERT", "ADMIN")
                 .antMatchers("/experts/**").hasAnyRole("EXPERT", "ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/authenticated").authenticated()
                 .antMatchers("/authenticate").permitAll()
+//                .antMatchers(HttpMethod.GET, "/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/**").authenticated()
+//                .antMatchers(HttpMethod.PUT, "/**").authenticated()
+//                .antMatchers(HttpMethod.PATCH, "/**").authenticated()
+//                .antMatchers(HttpMethod.DELETE, "/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
             .sessionManagement()

@@ -17,14 +17,13 @@ public class XyzController {
     // POST=CREATE
     @PostMapping(value = "")
     public ResponseEntity<Object> createXyz(@RequestBody Xyz xyz) {
-//        long newId = xyzService.createXyz(xyz);
-//
+        long newId = xyzService.createXyz(xyz);
+
 //        URI location = ServletUriComponentsBuilder
 //                .fromCurrentRequest().path("/{xyzString}")
 //                .buildAndExpand(newId).toUri();
 //
 //        return ResponseEntity.created(location).build();
-        long newId = xyzService.createXyz(xyz);
         return new ResponseEntity<>(String.format("Xyz %d created", newId), HttpStatus.CREATED);
     }
 
