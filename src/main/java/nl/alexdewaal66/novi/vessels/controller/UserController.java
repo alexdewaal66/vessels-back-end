@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Map;
 
@@ -22,8 +23,8 @@ public class UserController {
 
     // CREATE
     @PostMapping(value = "")
-    public ResponseEntity<Object> createUser(@RequestBody User user) {
-        System.out.println("UserController - CreateUser" + user.toString());
+    public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
+        System.out.println("» UserController - CreateUser: " + user.toString());
         String newUsername = userService.createUser(user);
 
 //        URI location = ServletUriComponentsBuilder

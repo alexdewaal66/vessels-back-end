@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,9 +27,9 @@ public class User {
     @Column
     private String apikey;
 
+    @NotBlank(message = "Email is mandatory")
     @Column
-//            (nullable = false)
-    private String email;
+    private String email = "";
 
     @OneToMany(
             targetEntity = nl.alexdewaal66.novi.vessels.model.Authority.class,
