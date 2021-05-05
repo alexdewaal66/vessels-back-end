@@ -35,4 +35,11 @@ public class Authority implements Serializable {
         this.authority = authority;
     }
 
+    @Override
+    public String toString() {
+        return "Authority{" +
+                "username='" + username + '\'' +
+                ", authority='" + authority + '\'' +
+                '}';
+    }
 }

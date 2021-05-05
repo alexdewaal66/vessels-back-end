@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String createUser(User user) {
+//        System.out.println("UserServiceImpl - createUser" + user.toString());
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         user.setApikey(randomString);
         user.setPassword(passwordEncoder.encode(user.getPassword()));

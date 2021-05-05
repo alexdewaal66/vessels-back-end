@@ -23,6 +23,7 @@ public class UserController {
     // CREATE
     @PostMapping(value = "")
     public ResponseEntity<Object> createUser(@RequestBody User user) {
+        System.out.println("UserController - CreateUser" + user.toString());
         String newUsername = userService.createUser(user);
 
 //        URI location = ServletUriComponentsBuilder

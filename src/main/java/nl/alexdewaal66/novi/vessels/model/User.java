@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,7 +15,8 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @JsonIgnore
+// TODO: find out if BCrypted password is needed by Front End, sounds like a potential security leak
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false, length = 255)
     private String password;
 
@@ -25,6 +27,7 @@ public class User {
     private String apikey;
 
     @Column
+//            (nullable = false)
     private String email;
 
     @OneToMany(
@@ -60,4 +63,15 @@ public class User {
         this.authorities.remove(authority);
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", apikey='" + apikey + '\'' +
+                ", email='" + email + '\'' +
+                ", authorities=" + authorities +
+                '}';
+    }
 }
