@@ -12,11 +12,13 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
 
+    @NotBlank(message = "Username is mandatory")
     @Id
     @Column(nullable = false, unique = true)
     private String username;
 
 // TODO: find out if BCrypted password is needed by Front End, sounds like a potential security leak
+@NotBlank(message = "Password is mandatory")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false, length = 255)
     private String password;
@@ -40,15 +42,9 @@ public class User {
     private Set<nl.alexdewaal66.novi.vessels.model.Authority> authorities = new HashSet<>();
 
     public String getUsername() { return username; }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setUsername(String username) { this.username = username; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
     public boolean isEnabled() { return enabled;}
     public void setEnabled(boolean enabled) { this.enabled = enabled; }
     public String getApikey() { return apikey; }

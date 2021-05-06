@@ -23,7 +23,7 @@ public class UserController {
 
     // CREATE
     @PostMapping(value = "")
-    public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<Object> createUser(@Valid() @RequestBody User user) {
         System.out.println("» UserController - CreateUser: " + user.toString());
         String newUsername = userService.createUser(user);
 

@@ -4,6 +4,7 @@ import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.exceptions.UsernameNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,12 @@ public class ExceptionController {
     @ExceptionHandler(value = UsernameNotFoundException.class)
     public ResponseEntity<Object> exception(UsernameNotFoundException exception) {
         return ResponseEntity.badRequest().build();
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> exception(MethodArgumentNotValidException exception) {
+        String message = exception.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+        return ResponseEntity.badRequest().body(message); // TODO: meaningful message
     }
 
 }
