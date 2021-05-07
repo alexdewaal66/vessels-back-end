@@ -2,6 +2,7 @@ package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.exceptions.UsernameNotFoundException;
+import nl.alexdewaal66.novi.vessels.exceptions.UsernameExistsException;
 import nl.alexdewaal66.novi.vessels.model.Authority;
 import nl.alexdewaal66.novi.vessels.model.User;
 import nl.alexdewaal66.novi.vessels.repository.UserRepository;
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String createUser(User user) {
-//        System.out.println("UserServiceImpl - createUser" + user.toString());
+        if (userRepository.existsById(user.getUsername())) throw new UsernameExistsException("User exists!!");
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         user.setApikey(randomString);
         user.setPassword(passwordEncoder.encode(user.getPassword()));

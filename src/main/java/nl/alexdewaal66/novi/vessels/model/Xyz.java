@@ -1,6 +1,9 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 
 @Entity
 public class Xyz {
@@ -18,7 +21,8 @@ public class Xyz {
     @Column
     private String description;
 
-    @Column
+    @Positive(message = "Negative ratios not allowed")
+    @Column()
     private Double ratio = 0.0;
 
     public long getId() { return id; }

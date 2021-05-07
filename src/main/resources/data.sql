@@ -6,6 +6,7 @@ INSERT INTO users (username, password, enabled, email) VALUES
 
 INSERT INTO authorities (username, authority) VALUES
     ('gewoonlid',  'ROLE_MEMBER'),
+
     ('deskundige', 'ROLE_MEMBER'),
     ('deskundige', 'ROLE_EXPERT'),
 
@@ -14,4 +15,4 @@ INSERT INTO authorities (username, authority) VALUES
     ('beheerder',  'ROLE_ADMIN');
 
 INSERT INTO xyz (xyz_string, item_name, description, ratio ) VALUES
-    ('De eerste IksWaaiZieString!', 'hoera', 'héél erg blij mee!', 6.122e22);
+    ('De eerste IksWaaiZieString!', 'hoera', 'héél erg blij mee!', 6.022e23);

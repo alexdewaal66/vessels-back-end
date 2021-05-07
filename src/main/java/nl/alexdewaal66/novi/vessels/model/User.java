@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class User {
     private String username;
 
 // TODO: find out if BCrypted password is needed by Front End, sounds like a potential security leak
-@NotBlank(message = "Password is mandatory")
+    @NotBlank(message = "Password is mandatory")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false, length = 255)
     private String password;
@@ -30,6 +31,7 @@ public class User {
     private String apikey;
 
     @NotBlank(message = "Email is mandatory")
+    @Email(message = "Not a valid email address")
     @Column
     private String email = "";
 

@@ -3,14 +3,13 @@ package nl.alexdewaal66.novi.vessels.controller;
 import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.model.User;
 import nl.alexdewaal66.novi.vessels.service.UserService;
+import nl.alexdewaal66.novi.vessels.utils.MessageList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -21,11 +20,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    MessageList messages = new MessageList();
+
     // CREATE
     @PostMapping(value = "")
     public ResponseEntity<Object> createUser(@Valid() @RequestBody User user) {
         System.out.println("» UserController - CreateUser: " + user.toString());
         String newUsername = userService.createUser(user);
+        messages.clear().addMessage("User " + newUsername + " created");
 
 //        URI location = ServletUriComponentsBuilder
 //                .fromCurrentRequest().path("/{username}")
@@ -33,7 +35,9 @@ public class UserController {
 //
 //        return ResponseEntity.created(location).build();
 
-        return new ResponseEntity<>(String.format("User %s created", newUsername), HttpStatus.CREATED);
+//        return new ResponseEntity<>(String.format("User %s created", newUsername), HttpStatus.CREATED);
+//        return new ResponseEntity<>(message, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(messages);
     }
 
     // READ

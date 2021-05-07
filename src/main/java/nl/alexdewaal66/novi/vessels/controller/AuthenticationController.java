@@ -25,8 +25,9 @@ public class AuthenticationController {
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    JwtUtil jwtUtl;
+    JwtUtil jwtUtil;
 
+    // TODO: WTF is this?
     @GetMapping(value = "/authenticated")
     public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
         return ResponseEntity.ok().body(principal);
@@ -50,7 +51,7 @@ public class AuthenticationController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(username);
 
-        final String jwt = jwtUtl.generateToken(userDetails);
+        final String jwt = jwtUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }

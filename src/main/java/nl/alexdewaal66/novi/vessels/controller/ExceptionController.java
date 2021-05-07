@@ -31,7 +31,7 @@ public class ExceptionController {
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Object> exception(MethodArgumentNotValidException exception) {
         String message = exception.getBindingResult().getAllErrors().get(0).getDefaultMessage();
-        return ResponseEntity.badRequest().body(message); // TODO: meaningful message
+        return ResponseEntity.badRequest().body(message);
     }
 
 }
