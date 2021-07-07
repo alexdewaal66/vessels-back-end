@@ -21,7 +21,7 @@ public class MessageList {
     }
 
     public MessageList clear() {
-        this.clear();
+        this.messages.clear();
         return this;
     }
 }

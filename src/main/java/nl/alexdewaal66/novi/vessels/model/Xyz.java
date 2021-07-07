@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 public class Xyz {
@@ -21,7 +22,7 @@ public class Xyz {
     @Column
     private String description;
 
-    @Positive(message = "Negative ratios not allowed")
+    @PositiveOrZero(message = "Negative ratios not allowed")
     @Column()
     private Double ratio = 0.0;
 

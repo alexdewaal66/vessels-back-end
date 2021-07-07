@@ -54,7 +54,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/members/**")
                     .hasAnyRole("MEMBER", "EXPERT", "ADMIN")
                 .antMatchers("/experts/**").hasAnyRole("EXPERT", "ADMIN")
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admins/**").hasRole("ADMIN")
                 .antMatchers("/authenticated").authenticated()
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/users").authenticated()
@@ -71,3 +71,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+/*
+        Rob gebruikt geen literals als Role:
+        .antMatchers("/customers/**").hasRole(Role.CUSTOMER.toString())
+ */

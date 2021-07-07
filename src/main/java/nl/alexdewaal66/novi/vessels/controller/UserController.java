@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Map;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -36,7 +36,6 @@ public class UserController {
 //        return ResponseEntity.created(location).build();
 
 //        return new ResponseEntity<>(String.format("User %s created", newUsername), HttpStatus.CREATED);
-//        return new ResponseEntity<>(message, HttpStatus.CREATED);
         return ResponseEntity.status(HttpStatus.CREATED).body(messages);
     }
 
