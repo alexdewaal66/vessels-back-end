@@ -15,4 +15,7 @@ INSERT INTO authorities (username, authority) VALUES
     ('beheerder',  'ROLE_ADMIN');
 
 INSERT INTO xyz (xyz_string, item_name, description, ratio ) VALUES
-    ('De eerste IksWaaiZieString!', 'hoera', 'héél erg blij mee!', 6.022e23);
+    ('De eerste IksWaaiZieString!', 'hoera', 'héél erg blij mee!', 1.23456789),
+    ('vacuum magnetic permeability', 'μ0', 'Vacuum permeability is the magnetic permeability in a classical vacuum.', 1.25663706212e-6),
+    ('atomic mass constant', 'mu', 'xxxxxxxxxxxxxxxxx', 1.66053906660e-27),
+    ('Avogadro constant', 'NA', 'xxxxxxxxxxxxxxxxx', 6.02214076e23);

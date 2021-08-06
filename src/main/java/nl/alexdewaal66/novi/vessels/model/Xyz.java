@@ -1,10 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.*;
 
 @Entity
 public class Xyz {
@@ -13,12 +10,15 @@ public class Xyz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Size(max = 200)
     @Column
     private String xyzString;
 
+    @Size(max = 100)
     @Column(name = "item_name")
     private String name;
 
+    @Size(max = 1000)
     @Column
     private String description;
 
@@ -45,4 +45,15 @@ public class Xyz {
     public double getRatio() { return (ratio != null) ? ratio : 0.0; }
 
     public void setRatio(double ratio) { this.ratio = ratio; }
+
+    @Override
+    public String toString() {
+        return "Xyz{" +
+                "id=" + id +
+                ", xyzString='" + xyzString + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", ratio=" + ratio +
+                '}';
+    }
 }

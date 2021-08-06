@@ -18,7 +18,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-// TODO: find out if BCrypted password is needed by Front End, sounds like a potential security leak
     @NotBlank(message = "Password is mandatory")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false, length = 255)

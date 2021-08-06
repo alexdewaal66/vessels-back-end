@@ -9,14 +9,19 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/xyzs")
+//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "*")
 public class XyzController {
 
     @Autowired
     private XyzService xyzService;
 
+    //TODO: WHEN ID IS PRESENT IN POST-REQUEST, createXyz() OVERWRITES THAT PARTICULAR ITEM, FUNCTIONING AS A PUT/UPDATE
+
     // POST=CREATE
     @PostMapping(value = "")
     public ResponseEntity<Object> createXyz(@RequestBody Xyz xyz) {
+        System.out.println("» XyzController - CreateXyz: " + xyz.toString());
         long newId = xyzService.createXyz(xyz);
 
 //        URI location = ServletUriComponentsBuilder

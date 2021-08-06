@@ -43,7 +43,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String createUser(User user) {
+    public String createUser(User user)
+    {
         if (userRepository.existsById(user.getUsername())) throw new UsernameExistsException(user.getUsername());
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         user.setApikey(randomString);

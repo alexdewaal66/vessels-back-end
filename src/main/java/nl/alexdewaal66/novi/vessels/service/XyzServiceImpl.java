@@ -63,6 +63,7 @@ public class XyzServiceImpl implements XyzService {
     public long createXyz(Xyz xyz) {
         if (xyz.getXyzString() == null)
             throw new IncompleteRecordException();
+        xyz.setId(0); // protects from overwriting existing instance
         Xyz newXyz = xyzRepository.save(xyz);
         return newXyz.getId();
     }
