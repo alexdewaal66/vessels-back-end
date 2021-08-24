@@ -11,7 +11,6 @@ public class Xyz {
     private long id;
 
     @Size(max = 200)
-    @Column
     private String xyzString;
 
     @Size(max = 100)
@@ -19,11 +18,9 @@ public class Xyz {
     private String name;
 
     @Size(max = 1000)
-    @Column
     private String description;
 
     @PositiveOrZero(message = "Negative ratios not allowed")
-    @Column()
     private Double ratio = 0.0;
 
     public long getId() { return id; }

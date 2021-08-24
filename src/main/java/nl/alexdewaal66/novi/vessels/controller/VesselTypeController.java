@@ -20,7 +20,9 @@ public class VesselTypeController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getVesselType(@PathVariable("id") long id) {
-        return ResponseEntity.ok().body(vesselTypeService.getVesselType(id));
+        return ResponseEntity.ok().body(vesselTypeService.getVesselTypeById(id));
     }
+
+//    todo: POST, PUT, DELETE
 
 }

@@ -10,32 +10,29 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
-    private String shortNameNl;
+    @Column(name = "short_name_nl")
+    private String shortNameNL;
 
-    @Column
-    private String shortNameEn;
+    @Column(name = "short_name_en")
+    private String shortNameEN;
 
-    @Column
     private String alpha2Code;
 
-    @Column
     private String alpha3Code;
 
-    @Column
     private String numericCode;
 
     public long getId() { return id; }
 
     public void setId(long id) { this.id = id; }
 
-    public String getShortNameNl() { return shortNameNl; }
+    public String getShortNameNL() { return shortNameNL; }
 
-    public void setShortNameNl(String shortNameNL) { this.shortNameNl = shortNameNL; }
+    public void setShortNameNL(String shortNameNL) { this.shortNameNL = shortNameNL; }
 
-    public String getShortNameEn() { return shortNameEn; }
+    public String getShortNameEN() { return shortNameEN; }
 
-    public void setShortNameEn(String shortNameEN) { this.shortNameEn = shortNameEN; }
+    public void setShortNameEN(String shortNameEN) { this.shortNameEN = shortNameEN; }
 
     public String getAlpha2Code() { return alpha2Code; }
 

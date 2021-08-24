@@ -15,11 +15,6 @@ public class XyzServiceImpl implements XyzService {
     @Autowired
     private XyzRepository xyzRepository;
 
-//    @Override
-//    public long createXyz(Xyz xyz) {
-//        return 0;
-//    }
-
     @Override
     public Collection<Xyz> getXyzs() {
         return xyzRepository.findAll();
@@ -38,24 +33,8 @@ public class XyzServiceImpl implements XyzService {
     public Xyz getXyzByXyzString(String xyzString) {
         try {
             return xyzRepository.findByXyzStringIgnoreCase(xyzString);
-        }
-        catch (Exception ex) {
+        } catch (Exception e) {
             throw new RecordNotFoundException();
-        }
-    }
-
-    @Override
-    public void updateXyz(long id, Xyz newXyz) {
-        if (xyzExists(id)) {
-            Xyz xyz = xyzRepository.findById(id).get();
-            xyz.setXyzString(newXyz.getXyzString());
-            xyz.setName(newXyz.getName());
-            xyz.setDescription(newXyz.getDescription());
-            xyz.setRatio(newXyz.getRatio());
-            xyzRepository.save(xyz);
-        } else {
-//            throw new RecordNotFoundException();
-            throw new RecordNotFoundException("Xyz", id);
         }
     }
 
@@ -67,6 +46,18 @@ public class XyzServiceImpl implements XyzService {
         Xyz newXyz = xyzRepository.save(xyz);
         return newXyz.getId();
     }
+
+    @Override
+    public void updateXyz(long id, Xyz newXyz) {
+
+        if (xyzExists(id)) {
+            newXyz.setId(id);
+            xyzRepository.save(newXyz);
+        } else {
+            System.out.printf("❌ RecordNotFoundException(\"Xyz\", %d)%n", id);
+            throw new RecordNotFoundException("Xyz", id);
+        }
+}
 
     @Override
     public void deleteXyz(long id) {

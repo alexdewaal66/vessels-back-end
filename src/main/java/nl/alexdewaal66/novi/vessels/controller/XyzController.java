@@ -16,8 +16,6 @@ public class XyzController {
     @Autowired
     private XyzService xyzService;
 
-    //TODO: WHEN ID IS PRESENT IN POST-REQUEST, createXyz() OVERWRITES THAT PARTICULAR ITEM, FUNCTIONING AS A PUT/UPDATE
-
     // POST=CREATE
     @PostMapping(value = "")
     public ResponseEntity<Object> createXyz(@RequestBody Xyz xyz) {

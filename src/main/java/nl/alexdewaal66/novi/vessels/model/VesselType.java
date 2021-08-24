@@ -13,16 +13,20 @@ public class VesselType {
     private long id;
 
     @Size(max = 100)
-    private String nameNl;
+    @Column(name = "name_nl")
+    private String nameNL;
 
     @Size(max = 100)
-    private String nameEn;
+    @Column(name = "name_en")
+    private String nameEN;
 
     @Size(max = 1000)
-    private String descNl;
+    @Column(name = "desc_nl")
+    private String descNL;
 
     @Size(max = 1000)
-    private String descEn;
+    @Column(name = "desc_en")
+    private String descEN;
 
     @PositiveOrZero(message = "Negative tonnage not allowed")
     private Integer tonnageMin;
@@ -43,10 +47,10 @@ public class VesselType {
     private Double draft;
 
     @ManyToOne
-    private VesselType parentType;
+    private VesselType superType;
 
-    @OneToMany(mappedBy = "parentType")
-    private Set<VesselType> subTypes = new HashSet<>();
+//    @OneToMany(mappedBy = "superType")
+//    private Set<VesselType> subTypes = new HashSet<>();
 
     public long getId() {
         return id;
@@ -56,36 +60,36 @@ public class VesselType {
         this.id = id;
     }
 
-    public String getNameNl() {
-        return nameNl;
+    public String getNameNL() {
+        return nameNL;
     }
 
-    public void setNameNl(String nameNl) {
-        this.nameNl = nameNl;
+    public void setNameNL(String nameNL) {
+        this.nameNL = nameNL;
     }
 
-    public String getNameEn() {
-        return nameEn;
+    public String getNameEN() {
+        return nameEN;
     }
 
-    public void setNameEn(String nameEn) {
-        this.nameEn = nameEn;
+    public void setNameEN(String nameEN) {
+        this.nameEN = nameEN;
     }
 
-    public String getDescNl() {
-        return descNl;
+    public String getDescNL() {
+        return descNL;
     }
 
-    public void setDescNl(String descNl) {
-        this.descNl = descNl;
+    public void setDescNL(String descNl) {
+        this.descNL = descNl;
     }
 
-    public String getDescEn() {
-        return descEn;
+    public String getDescEN() {
+        return descEN;
     }
 
-    public void setDescEn(String descEn) {
-        this.descEn = descEn;
+    public void setDescEN(String descEn) {
+        this.descEN = descEn;
     }
 
     public Integer getTonnageMin() {
@@ -136,20 +140,20 @@ public class VesselType {
         this.draft = draft;
     }
 
-    public VesselType getParentType() {
-        return parentType;
+    public VesselType getSuperType() {
+        return superType;
     }
 
-    public void setParentType(VesselType parentType) {
-        this.parentType = parentType;
+    public void setSuperType(VesselType superType) {
+        this.superType = superType;
     }
 
-    public Set<VesselType> getSubTypes() {
-        return subTypes;
-    }
+//    public Set<VesselType> getSubTypes() {
+//        return subTypes;
+//    }
 
-    public void setSubTypes(Set<VesselType> subTypes) {
-        this.subTypes = subTypes;
-    }
+//    public void setSubTypes(Set<VesselType> subTypes) {
+//        this.subTypes = subTypes;
+//    }
 }
 

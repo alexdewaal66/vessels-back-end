@@ -6,11 +6,11 @@ import java.util.Collection;
 
 public interface XyzService {
 
-    long createXyz(Xyz xyz);
-
     Collection<Xyz> getXyzs();
     Xyz getXyzById(long id);
     Xyz getXyzByXyzString(String xyzString);
+
+    long createXyz(Xyz xyz);
 
     void updateXyz(long id, Xyz xyz);
 

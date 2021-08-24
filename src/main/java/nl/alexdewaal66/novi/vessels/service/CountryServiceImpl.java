@@ -24,7 +24,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     public Country getCountryByName(String nameEN, String nameNL) {
-        return countryRepository.findByShortNameEnContainsOrShortNameNlContains(nameEN, nameNL);
+        return countryRepository.findByShortNameENContainsOrShortNameNLContains(nameEN, nameNL);
     }
 
     public Country getCountryByCode(String alpha2Code, String alpha3Code, String numericCode) {

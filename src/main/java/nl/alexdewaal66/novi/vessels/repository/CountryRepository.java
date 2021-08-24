@@ -9,5 +9,5 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
             String alpha3Code,
             String numericCode);
 
-    Country findByShortNameEnContainsOrShortNameNlContains(String nameEN, String nameNL);
+    Country findByShortNameENContainsOrShortNameNLContains(String nameEN, String nameNL);
 }
