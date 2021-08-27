@@ -46,7 +46,7 @@ public class VesselType {
     @PositiveOrZero(message = "Negative draft not allowed")
     private Double draft;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private VesselType superType;
 
 //    @OneToMany(mappedBy = "superType")

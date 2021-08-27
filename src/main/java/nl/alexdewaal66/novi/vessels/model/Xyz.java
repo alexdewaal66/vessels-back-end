@@ -23,6 +23,10 @@ public class Xyz {
     @PositiveOrZero(message = "Negative ratios not allowed")
     private Double ratio = 0.0;
 
+    @ManyToOne
+            // (cascade = CascadeType.PERSIST)
+    private Zyx zyx;
+
     public long getId() { return id; }
 
     public void setId(long id) { this.id = id; }
@@ -42,6 +46,10 @@ public class Xyz {
     public double getRatio() { return (ratio != null) ? ratio : 0.0; }
 
     public void setRatio(double ratio) { this.ratio = ratio; }
+
+    public Zyx getZyx() { return zyx; }
+
+    public void setZyx(Zyx zyx) { this.zyx = zyx; }
 
     @Override
     public String toString() {

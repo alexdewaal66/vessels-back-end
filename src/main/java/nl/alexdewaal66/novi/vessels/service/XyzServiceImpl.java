@@ -25,7 +25,7 @@ public class XyzServiceImpl implements XyzService {
         if (xyzExists(id)) {
             return xyzRepository.findById(id).orElse(null);
         } else {
-            throw new RecordNotFoundException();
+            throw new RecordNotFoundException("Xyz", id);
         }
     }
 
@@ -49,7 +49,6 @@ public class XyzServiceImpl implements XyzService {
 
     @Override
     public void updateXyz(long id, Xyz newXyz) {
-
         if (xyzExists(id)) {
             newXyz.setId(id);
             xyzRepository.save(newXyz);

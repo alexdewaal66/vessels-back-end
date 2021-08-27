@@ -1,7 +1,6 @@
 package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.model.Xyz;
-
 import java.util.Collection;
 
 public interface XyzService {
