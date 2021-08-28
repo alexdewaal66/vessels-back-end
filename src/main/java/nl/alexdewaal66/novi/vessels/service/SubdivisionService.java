@@ -1,7 +1,7 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.model.Subdivision;
 import java.util.Collection;
+import nl.alexdewaal66.novi.vessels.model.Subdivision;
 
 public interface SubdivisionService {
     Collection<Subdivision> getSubdivisions();

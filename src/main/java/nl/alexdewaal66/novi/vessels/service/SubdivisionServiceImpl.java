@@ -1,11 +1,11 @@
 package nl.alexdewaal66.novi.vessels.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import nl.alexdewaal66.novi.vessels.exceptions.IncompleteRecordException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.model.Subdivision;
 import nl.alexdewaal66.novi.vessels.repository.SubdivisionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
@@ -14,7 +14,6 @@ public class SubdivisionServiceImpl implements SubdivisionService {
 
     @Autowired
     private SubdivisionRepository subdivisionRepository;
-
 
     @Override
     public Collection<Subdivision> getSubdivisions() {
