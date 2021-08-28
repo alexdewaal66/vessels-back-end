@@ -1,7 +1,7 @@
 package nl.alexdewaal66.novi.vessels.repository;
 
-import nl.alexdewaal66.novi.vessels.model.Subdivision;
 import org.springframework.data.jpa.repository.JpaRepository;
+import nl.alexdewaal66.novi.vessels.model.Subdivision;
 
 public interface SubdivisionRepository extends JpaRepository<Subdivision, Long> {
 
