@@ -11,7 +11,7 @@ public class Subdivision {
     private long id;
 
     @Size(max = 2)
-    private String alpha_2_code;
+    private String alpha2Code;
 
     @Size(max = 3)
     private String code;
@@ -24,4 +24,43 @@ public class Subdivision {
     @Column(name = "subdivision_type")
     private String type;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getAlpha2Code() {
+        return alpha2Code;
+    }
+
+    public void setAlpha2Code(String alpha2Code) {
+        this.alpha2Code = alpha2Code;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
