@@ -1,11 +1,15 @@
 package nl.alexdewaal66.novi.vessels.model;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 // official column explanations below class definition
-
+// a '1' in the function classifier denotes a port
 @Entity
+@Table(name = "un_locode")
+//@Where(clause = "function_classifier LIKE '%1%'")
 public class UNLocode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -154,6 +158,7 @@ public class UNLocode {
 
 /*
 CONTENTS AND LAYOUT OF UN/LOCODE: CODES AND ABBREVIATIONS USED
+                        (= United Nations Code for Trade and Transport Locations)
 
 1. The UN approved Location codes are presented in 11 columns, with the following content (column designations between quotes):
 

@@ -43,7 +43,7 @@ public class UNLocodeServiceImpl implements UNLocodeService{
     public UNLocode getUNLocodeByName(String name) {
         try {
             return unLocodeRepository
-                    .findByNameDiacriticsContainsOrNameWoDiacriticsContains(name);
+                    .findByNameDiacriticsContainsOrNameWoDiacriticsContains(name, name);
         } catch (Exception e) {
             throw new RecordNotFoundException();
         }

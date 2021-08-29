@@ -1,10 +1,10 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
-import nl.alexdewaal66.novi.vessels.model.Subdivision;
-import nl.alexdewaal66.novi.vessels.service.SubdivisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import nl.alexdewaal66.novi.vessels.model.Subdivision;
+import nl.alexdewaal66.novi.vessels.service.SubdivisionService;
 
 @RestController
 @RequestMapping(value = "/subdivisions")

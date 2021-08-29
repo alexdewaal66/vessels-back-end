@@ -7,6 +7,6 @@ public interface UNLocodeRepository extends JpaRepository<UNLocode, Long> {
 
     UNLocode findByAlpha2CodeAndLocationCode(String alpha2Code, String locationCode);
 
-    UNLocode findByNameDiacriticsContainsOrNameWoDiacriticsContains(String name);
+    UNLocode findByNameDiacriticsContainsOrNameWoDiacriticsContains(String name, String nameWo);
 
 }
