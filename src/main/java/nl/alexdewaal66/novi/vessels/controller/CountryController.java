@@ -1,6 +1,5 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
-import nl.alexdewaal66.novi.vessels.model.Country;
 import nl.alexdewaal66.novi.vessels.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +26,23 @@ public class CountryController {
         return ResponseEntity.ok().body(countryService.getCountry(id));
     }
 
-    @GetMapping(value = "/find")
+    @GetMapping(value = "/name")
     public ResponseEntity<Object> getCountryByName(
-            @RequestParam(required = false, name = "name_en") String nameEN,
-            @RequestParam(required = false, name = "name_nl") String nameNL) {
-        return ResponseEntity.ok().body(countryService.getCountryByName(nameEN, nameNL));
+            @RequestParam(required = true, name = "name") String name) {
+        return ResponseEntity.ok().body(countryService.getCountryByName(name));
     }
+
+    @GetMapping(value = "/code")
+    public ResponseEntity<Object> getCountryByCode(
+            @RequestParam(required = true, name = "code") String code) {
+        return ResponseEntity.ok().body(countryService.getCountryByCode(code));
+    }
+
+    @GetMapping(value = "/find")
+    public ResponseEntity<Object> findCountry(
+            @RequestParam(required = false, name = "code") String code,
+            @RequestParam(required = false, name = "name") String name) {
+        return ResponseEntity.ok().body(countryService.findCountry(code, name));
+    }
+
 }

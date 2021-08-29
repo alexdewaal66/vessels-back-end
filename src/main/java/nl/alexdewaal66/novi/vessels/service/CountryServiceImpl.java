@@ -23,12 +23,23 @@ public class CountryServiceImpl implements CountryService {
         return countryRepository.findById(id);
     }
 
-    public Country getCountryByName(String nameEN, String nameNL) {
-        return countryRepository.findByShortNameENContainsOrShortNameNLContains(nameEN, nameNL);
+    public Country findCountry(String code, String name) {
+        if (code != null) {
+            return getCountryByCode(code);
+        }
+        if (name != null) {
+            return getCountryByName(name);
+        }
+        return null;
     }
 
-    public Country getCountryByCode(String alpha2Code, String alpha3Code, String numericCode) {
-        return countryRepository.findByAlpha2CodeEqualsOrAlpha3CodeEqualsOrNumericCodeEquals(
-                alpha2Code, alpha3Code, numericCode);
+    public Country getCountryByName(String name) {
+        return countryRepository.findByShortNameENContainsOrShortNameNLContains(name, name);
     }
+
+    public Country getCountryByCode(String code) {
+        return countryRepository.findByAlpha2CodeEqualsOrAlpha3CodeEqualsOrNumericCodeEquals(
+                code, code, code);
+    }
+
 }
