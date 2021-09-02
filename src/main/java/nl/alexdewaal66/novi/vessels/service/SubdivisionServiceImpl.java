@@ -16,6 +16,11 @@ public class SubdivisionServiceImpl implements SubdivisionService {
     private SubdivisionRepository subdivisionRepository;
 
     @Override
+    public Collection<Long> getAllIds() {
+        return subdivisionRepository.getAllIds();
+    }
+
+    @Override
     public Collection<Subdivision> getSubdivisions() {
         return subdivisionRepository.findAll();
     }
@@ -25,14 +30,15 @@ public class SubdivisionServiceImpl implements SubdivisionService {
         if (subdivisionExists(id)) {
             return subdivisionRepository.findById(id).orElse(null);
         } else {
+            System.out.println("❌ SubdivisionServiceImpl.getSubdivisionById(long id) \n\t Record with id=" + id + " doesn't exist.");
             throw new RecordNotFoundException("Subdivision", id);
         }
     }
 
     @Override
-    public Subdivision getSubdivisionByCodes(String alpha2Code, String code) {
+    public Subdivision getSubdivisionByCodes(String alpha2Code, String subCode) {
         try {
-            return subdivisionRepository.findByAlpha2CodeAndCode(alpha2Code, code);
+            return subdivisionRepository.findByAlpha2CodeAndSubCode(alpha2Code, subCode);
         } catch (Exception e) {
             throw new RecordNotFoundException();
         }
@@ -40,6 +46,6 @@ public class SubdivisionServiceImpl implements SubdivisionService {
 
     @Override
     public boolean subdivisionExists(long id) {
-        return false;
+        return subdivisionRepository.existsById(id);
     }
 }

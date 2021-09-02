@@ -14,7 +14,8 @@ public class Subdivision {
     private String alpha2Code;
 
     @Size(max = 3)
-    private String code;
+    @Column(name = "subdivision_code")
+    private String subCode;
 
     @Size(max = 150)
     @Column(name = "subdivision_name")
@@ -40,12 +41,12 @@ public class Subdivision {
         this.alpha2Code = alpha2Code;
     }
 
-    public String getCode() {
-        return code;
+    public String getSubCode() {
+        return subCode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setSubCode(String code) {
+        this.subCode = code;
     }
 
     public String getName() {

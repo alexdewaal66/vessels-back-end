@@ -13,6 +13,11 @@ public class UNLocodeController {
     @Autowired
     private UNLocodeService unLocodeService;
 
+    @GetMapping(value = "/ids")
+    public ResponseEntity<Object> getUNLocodeIds() {
+        return ResponseEntity.ok().body(unLocodeService.getAllIds());
+    }
+
     @GetMapping(value = "")
     public ResponseEntity<Object> getUNLocodes() {
         return ResponseEntity.ok().body(unLocodeService.getUNLocodes());

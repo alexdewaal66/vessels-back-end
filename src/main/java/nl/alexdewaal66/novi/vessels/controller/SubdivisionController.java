@@ -3,7 +3,6 @@ package nl.alexdewaal66.novi.vessels.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import nl.alexdewaal66.novi.vessels.model.Subdivision;
 import nl.alexdewaal66.novi.vessels.service.SubdivisionService;
 
 @RestController
@@ -13,6 +12,11 @@ public class SubdivisionController {
 
     @Autowired
     private SubdivisionService subdivisionService;
+
+    @GetMapping(value = "/ids")
+    public ResponseEntity<Object> getSubdivisionIds() {
+        return ResponseEntity.ok().body(subdivisionService.getAllIds());
+    }
 
     @GetMapping(value = "")
     public ResponseEntity<Object> getSubdivisions() {
@@ -27,9 +31,9 @@ public class SubdivisionController {
     @GetMapping(value = "/find")
     public ResponseEntity<Object> getSubdivisionByCodes(
             @RequestParam(name = "alpha2code") String alpha2Code,
-            @RequestParam(name = "code") String code) {
+            @RequestParam(name = "subCode") String subCode) {
         return ResponseEntity.ok().body(subdivisionService
-                .getSubdivisionByCodes(alpha2Code, code)
+                .getSubdivisionByCodes(alpha2Code, subCode)
         );
     }
 

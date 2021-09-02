@@ -4,6 +4,8 @@ import java.util.Collection;
 import nl.alexdewaal66.novi.vessels.model.UNLocode;
 
 public interface UNLocodeService {
+
+    Collection<Long> getAllIds();
     Collection<UNLocode> getUNLocodes();
     UNLocode getUNLocodeById(long id);
     UNLocode getUNLocodeByCodes(String alpha2Code, String locationCode);

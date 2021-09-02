@@ -9,7 +9,7 @@ public class Zyx {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Size(max = 100)
     @Column(name = "item_name")
@@ -18,11 +18,11 @@ public class Zyx {
     @Size(max = 1000)
     private String description;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

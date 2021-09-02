@@ -16,6 +16,11 @@ public class VesselTypeController {
     @Autowired
     private VesselTypeService vesselTypeService;
 
+    @GetMapping(value = "/ids")
+    public ResponseEntity<Object> getVesselTypeIds() {
+        return ResponseEntity.ok().body(vesselTypeService.getAllIds());
+    }
+
     @GetMapping(value = "")
     public ResponseEntity<Object> getVesselTypes() {
         return ResponseEntity.ok().body(vesselTypeService.getVesselTypes());

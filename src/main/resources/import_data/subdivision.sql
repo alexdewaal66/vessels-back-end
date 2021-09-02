@@ -1,4 +1,4 @@
-INSERT INTO subdivision (id, alpha2code, code, subdivision_name, subdivision_type) VALUES
+INSERT INTO subdivision (id, alpha2code, subdivision_code, subdivision_name, subdivision_type) VALUES
 (2,'AD','03','Encamp','Parish'),
 (1,'AD','02','Canillo','Parish'),
 (3,'AD','04','La Massana','Parish'),

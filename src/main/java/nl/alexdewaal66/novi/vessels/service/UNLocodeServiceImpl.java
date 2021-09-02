@@ -16,6 +16,11 @@ public class UNLocodeServiceImpl implements UNLocodeService{
     private UNLocodeRepository unLocodeRepository;
 
     @Override
+    public Collection<Long> getAllIds() {
+        return unLocodeRepository.getAllIds();
+    }
+
+    @Override
     public Collection<UNLocode> getUNLocodes() {
         return unLocodeRepository.findAll();
     }

@@ -5,6 +5,7 @@ import java.util.Collection;
 
 public interface XyzService {
 
+    Collection<Long> getAllIds();
     Collection<Xyz> getXyzs();
     Xyz getXyzById(long id);
     Xyz getXyzByXyzString(String xyzString);

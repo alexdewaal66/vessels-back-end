@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface CountryService {
 
+    Collection<Long> getAllIds();
     Collection<Country> getCountries();
 
     Optional<Country> getCountry(long id);

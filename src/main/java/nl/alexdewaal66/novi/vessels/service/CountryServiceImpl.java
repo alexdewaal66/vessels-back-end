@@ -14,6 +14,11 @@ public class CountryServiceImpl implements CountryService {
     @Autowired
     private CountryRepository countryRepository;
 
+    @Override
+    public Collection<Long> getAllIds() {
+        return countryRepository.getAllIds();
+    }
+
     public Collection<Country> getCountries() {
         return countryRepository.findAll();
     }

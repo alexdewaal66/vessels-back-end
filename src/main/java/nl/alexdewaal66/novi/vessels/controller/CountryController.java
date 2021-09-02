@@ -14,6 +14,12 @@ public class CountryController {
     @Autowired
     private CountryService countryService;
 
+
+    @GetMapping(value = "/ids")
+    public ResponseEntity<Object> getCountryIds() {
+        return ResponseEntity.ok().body(countryService.getAllIds());
+    }
+
     // GET=READ
     @GetMapping(value = "")
     public ResponseEntity<Object> getCountries() {

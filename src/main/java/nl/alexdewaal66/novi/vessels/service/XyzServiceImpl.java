@@ -16,6 +16,11 @@ public class XyzServiceImpl implements XyzService {
     private XyzRepository xyzRepository;
 
     @Override
+    public Collection<Long> getAllIds() {
+        return xyzRepository.getAllIds();
+    }
+
+    @Override
     public Collection<Xyz> getXyzs() {
         return xyzRepository.findAll();
     }

@@ -5,6 +5,7 @@ import java.util.Collection;
 
 public interface ZyxService {
 
+    Collection<Long> getAllIds();
     Collection<Zyx> getZyxs();
     Zyx getZyxById(long id);
     Zyx getZyxByName(String Name);

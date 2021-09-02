@@ -16,6 +16,11 @@ public class XyzController {
     @Autowired
     private XyzService xyzService;
 
+    @GetMapping(value = "/ids")
+    public ResponseEntity<Object> getXyzIds() {
+        return ResponseEntity.ok().body(xyzService.getAllIds());
+    }
+
     // GET=READ
     @GetMapping(value = "")
     public ResponseEntity<Object> getXyzs() {

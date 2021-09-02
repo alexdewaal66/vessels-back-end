@@ -16,6 +16,11 @@ public class ZyxServiceImpl implements ZyxService {
     private ZyxRepository zyxRepository;
 
     @Override
+    public Collection<Long> getAllIds() {
+        return zyxRepository.getAllIds();
+    }
+
+    @Override
     public Collection<Zyx> getZyxs() {
         return zyxRepository.findAll();
     }
@@ -40,7 +45,7 @@ public class ZyxServiceImpl implements ZyxService {
 
     @Override
     public long createZyx(Zyx zyx) {
-        zyx.setId(0);
+        zyx.setId(0L);
         Zyx newZyx = zyxRepository.save(zyx);
         return newZyx.getId();
     }

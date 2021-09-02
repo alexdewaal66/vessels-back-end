@@ -21,6 +21,11 @@ public class ZyxController {
         return new ResponseEntity<>(String.format("Zyx %d created", newId), HttpStatus.CREATED);
     }
 
+    @GetMapping(value = "/ids")
+    public ResponseEntity<Object> getZyxIds() {
+        return ResponseEntity.ok().body(zyxService.getAllIds());
+    }
+
     // GET=READ
     @GetMapping(value = "")
     public ResponseEntity<Object> getZyxs() {
