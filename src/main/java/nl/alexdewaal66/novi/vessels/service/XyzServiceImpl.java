@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class XyzServiceImpl implements XyzService {
@@ -23,6 +24,11 @@ public class XyzServiceImpl implements XyzService {
     @Override
     public Collection<Xyz> getXyzs() {
         return xyzRepository.findAll();
+    }
+
+    @Override
+    public List<Xyz> getByIds(List<Long> ids) {
+        return xyzRepository.findAllById(ids);
     }
 
     @Override

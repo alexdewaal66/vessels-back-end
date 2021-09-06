@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import nl.alexdewaal66.novi.vessels.model.Xyz;
 import nl.alexdewaal66.novi.vessels.service.XyzService;
 
+import java.util.Collection;
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/xyzs")
 @CrossOrigin(origins = "*")
@@ -21,16 +24,19 @@ public class XyzController {
         return ResponseEntity.ok().body(xyzService.getAllIds());
     }
 
-    // GET=READ
     @GetMapping(value = "")
     public ResponseEntity<Object> getXyzs() {
         return ResponseEntity.ok().body(xyzService.getXyzs());
     }
 
-    // GET=READ
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getXyz(@PathVariable("id") long id) {
         return ResponseEntity.ok().body(xyzService.getXyzById(id));
+    }
+
+    @PostMapping(value = "/ids")
+    public ResponseEntity<Object> getXyzsByIds(@RequestBody List<Long> ids) {
+        return ResponseEntity.ok().body(xyzService.getByIds(ids));
     }
 
     @PostMapping(value = "")

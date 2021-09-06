@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +24,11 @@ public class VesselTypeServiceImpl implements VesselTypeService{
     @Override
     public Collection<VesselType> getVesselTypes() {
         return vesselTypeRepository.findAll();
+    }
+
+    @Override
+    public List<VesselType> getByIds(List<Long> ids) {
+        return vesselTypeRepository.findAllById(ids);
     }
 
     @Override

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -40,6 +41,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(messages);
     }
 
+    @GetMapping(value = "/ids")
+    public ResponseEntity<Object> getUserIds() {
+        return ResponseEntity.ok().body(userService.getAllIds());
+    }
+
     // READ
     @GetMapping(value = "")
     public ResponseEntity<Object> getUsers() {
@@ -50,6 +56,11 @@ public class UserController {
     @GetMapping(value = "/{username}")
     public ResponseEntity<Object> getUser(@PathVariable("username") String username) {
         return ResponseEntity.ok().body(userService.getUser(username));
+    }
+
+    @PostMapping(value = "/ids")
+    public ResponseEntity<Object> getUsersByUsernames(@RequestBody List<String> usernames) {
+        return ResponseEntity.ok().body(userService.getByIds(usernames));
     }
 
     // UPDATE

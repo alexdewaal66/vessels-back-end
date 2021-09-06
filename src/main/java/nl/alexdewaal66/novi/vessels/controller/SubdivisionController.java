@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import nl.alexdewaal66.novi.vessels.service.SubdivisionService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/subdivisions")
 @CrossOrigin(origins = "*")
@@ -16,6 +18,11 @@ public class SubdivisionController {
     @GetMapping(value = "/ids")
     public ResponseEntity<Object> getSubdivisionIds() {
         return ResponseEntity.ok().body(subdivisionService.getAllIds());
+    }
+
+    @PostMapping(value = "/ids")
+    public ResponseEntity<Object> getSubdivisionsByIds(@RequestBody List<Long> ids) {
+        return ResponseEntity.ok().body(subdivisionService.getByIds(ids));
     }
 
     @GetMapping(value = "")

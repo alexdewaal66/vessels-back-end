@@ -5,6 +5,7 @@ import nl.alexdewaal66.novi.vessels.exceptions.UsernameNotFoundException;
 import nl.alexdewaal66.novi.vessels.exceptions.UsernameExistsException;
 import nl.alexdewaal66.novi.vessels.model.Authority;
 import nl.alexdewaal66.novi.vessels.model.User;
+import nl.alexdewaal66.novi.vessels.model.Xyz;
 import nl.alexdewaal66.novi.vessels.repository.UserRepository;
 import nl.alexdewaal66.novi.vessels.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -28,6 +30,11 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
+    public Collection<String> getAllIds() {
+        return userRepository.getAllIds();
+    }
+
+    @Override
     public Collection<User> getUsers() {
         return userRepository.findAll();
     }
@@ -36,6 +43,12 @@ public class UserServiceImpl implements UserService {
     public Optional<User> getUser(String username) {
         return userRepository.findById(username);
     }
+
+    @Override
+    public List<User> getByIds(List<String> usernames) {
+        return  userRepository.findAllById(usernames);
+    }
+
 
     @Override
     public boolean userExists(String username) {

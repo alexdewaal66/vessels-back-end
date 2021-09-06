@@ -8,6 +8,7 @@ import nl.alexdewaal66.novi.vessels.model.UNLocode;
 import nl.alexdewaal66.novi.vessels.repository.UNLocodeRepository;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class UNLocodeServiceImpl implements UNLocodeService{
@@ -23,6 +24,11 @@ public class UNLocodeServiceImpl implements UNLocodeService{
     @Override
     public Collection<UNLocode> getUNLocodes() {
         return unLocodeRepository.findAll();
+    }
+
+    @Override
+    public List<UNLocode> getByIds(List<Long> ids) {
+        return unLocodeRepository.findAllById(ids);
     }
 
     @Override
@@ -56,7 +62,7 @@ public class UNLocodeServiceImpl implements UNLocodeService{
 
     @Override
     public boolean unLocodeExists(long id) {
-        return false;
+        return unLocodeRepository.existsById(id);
     }
 
 }

@@ -14,13 +14,6 @@ public class ZyxController {
     @Autowired
     private ZyxService zyxService;
 
-    @PostMapping(value = "")
-    public ResponseEntity<Object> createZyx(@RequestBody Zyx zyx) {
-        System.out.println("» ZyxController - CreateZyx: " + zyx.toString());
-        long newId = zyxService.createZyx(zyx);
-        return new ResponseEntity<>(String.format("Zyx %d created", newId), HttpStatus.CREATED);
-    }
-
     @GetMapping(value = "/ids")
     public ResponseEntity<Object> getZyxIds() {
         return ResponseEntity.ok().body(zyxService.getAllIds());
@@ -36,6 +29,13 @@ public class ZyxController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getZyx(@PathVariable("id") long id) {
         return ResponseEntity.ok().body(zyxService.getZyxById(id));
+    }
+
+    @PostMapping(value = "")
+    public ResponseEntity<Object> createZyx(@RequestBody Zyx zyx) {
+        System.out.println("» ZyxController - CreateZyx: " + zyx.toString());
+        long newId = zyxService.createZyx(zyx);
+        return new ResponseEntity<>(String.format("Zyx %d created", newId), HttpStatus.CREATED);
     }
 
     // PUT=UPDATE

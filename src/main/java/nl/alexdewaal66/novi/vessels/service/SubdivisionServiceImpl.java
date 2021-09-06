@@ -1,5 +1,6 @@
 package nl.alexdewaal66.novi.vessels.service;
 
+import nl.alexdewaal66.novi.vessels.model.Xyz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import nl.alexdewaal66.novi.vessels.exceptions.IncompleteRecordException;
@@ -8,6 +9,7 @@ import nl.alexdewaal66.novi.vessels.model.Subdivision;
 import nl.alexdewaal66.novi.vessels.repository.SubdivisionRepository;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class SubdivisionServiceImpl implements SubdivisionService {
@@ -24,6 +26,13 @@ public class SubdivisionServiceImpl implements SubdivisionService {
     public Collection<Subdivision> getSubdivisions() {
         return subdivisionRepository.findAll();
     }
+
+    @Override
+    public List<Subdivision> getByIds(List<Long> ids) {
+        return subdivisionRepository.findAllById(ids);
+    }
+
+
 
     @Override
     public Subdivision getSubdivisionById(long id) {

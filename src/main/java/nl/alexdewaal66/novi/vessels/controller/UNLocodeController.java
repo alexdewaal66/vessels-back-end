@@ -3,7 +3,11 @@ package nl.alexdewaal66.novi.vessels.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import nl.alexdewaal66.novi.vessels.model.UNLocode;
 import nl.alexdewaal66.novi.vessels.service.UNLocodeService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/un_locode")
@@ -25,7 +29,8 @@ public class UNLocodeController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getUNLocode(@PathVariable("id") long id) {
-        return ResponseEntity.ok().body(unLocodeService.getUNLocodeById(id));
+        UNLocode unLocode = unLocodeService.getUNLocodeById(id);
+        return ResponseEntity.ok().body(unLocode);
     }
 
     @GetMapping(value = "/find")
@@ -35,6 +40,11 @@ public class UNLocodeController {
         return ResponseEntity.ok().body(unLocodeService
                 .getUNLocodeByCodes(alpha2Code, locationCode)
         );
+    }
+
+    @PostMapping(value = "/ids")
+    public ResponseEntity<Object> getUNLocodesByIds(@RequestBody List<Long> ids) {
+        return ResponseEntity.ok().body(unLocodeService.getByIds(ids));
     }
 
 }

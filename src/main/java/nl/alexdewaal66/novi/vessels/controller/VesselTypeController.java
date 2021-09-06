@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import nl.alexdewaal66.novi.vessels.model.VesselType;
 import nl.alexdewaal66.novi.vessels.service.VesselTypeService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/vesseltypes")
 @CrossOrigin(origins = "*")
@@ -29,6 +31,11 @@ public class VesselTypeController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getVesselType(@PathVariable("id") long id) {
         return ResponseEntity.ok().body(vesselTypeService.getVesselTypeById(id));
+    }
+
+    @PostMapping(value = "/ids")
+    public ResponseEntity<Object> getVesselTypesByIds(@RequestBody List<Long> ids) {
+        return ResponseEntity.ok().body(vesselTypeService.getByIds(ids));
     }
 
     @PostMapping(value = "")

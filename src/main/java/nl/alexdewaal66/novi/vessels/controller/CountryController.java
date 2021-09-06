@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/countries")
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -30,6 +32,11 @@ public class CountryController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getCountry(@PathVariable("id") long id) {
         return ResponseEntity.ok().body(countryService.getCountry(id));
+    }
+
+    @PostMapping(value = "/ids")
+    public ResponseEntity<Object> getCountriesByIds(@RequestBody List<Long> ids) {
+        return ResponseEntity.ok().body(countryService.getByIds(ids));
     }
 
     @GetMapping(value = "/name")

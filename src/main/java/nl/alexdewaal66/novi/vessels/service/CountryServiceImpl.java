@@ -1,11 +1,13 @@
 package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.model.Country;
+import nl.alexdewaal66.novi.vessels.model.Xyz;
 import nl.alexdewaal66.novi.vessels.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +23,11 @@ public class CountryServiceImpl implements CountryService {
 
     public Collection<Country> getCountries() {
         return countryRepository.findAll();
+    }
+
+    @Override
+    public List<Country> getByIds(List<Long> ids) {
+        return countryRepository.findAllById(ids);
     }
 
     @Override

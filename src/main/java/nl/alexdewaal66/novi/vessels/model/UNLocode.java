@@ -6,10 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 // official column explanations below class definition
-// a '1' in the function classifier denotes a port
 @Entity
 @Table(name = "un_locode")
-//@Where(clause = "function_classifier LIKE '%1%'")
 public class UNLocode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -153,6 +151,25 @@ public class UNLocode {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    @Override
+    public String toString() {
+        return "UNLocode{" +
+                "id=" + id +
+                ", change='" + change + '\'' +
+                ", alpha2Code='" + alpha2Code + '\'' +
+                ", locationCode='" + locationCode + '\'' +
+                ", nameDiacritics='" + nameDiacritics + '\'' +
+                ", nameWoDiacritics='" + nameWoDiacritics + '\'' +
+                ", subdivisionCode='" + subdivisionCode + '\'' +
+                ", functionClassifier='" + functionClassifier + '\'' +
+                ", status='" + status + '\'' +
+                ", updateYear='" + updateYear + '\'' +
+                ", iata='" + iata + '\'' +
+                ", coordinates='" + coordinates + '\'' +
+                ", remarks='" + remarks + '\'' +
+                '}';
     }
 }
 
