@@ -24,7 +24,6 @@ public class UserController {
 
     MessageList messages = new MessageList();
 
-    // CREATE
     @PostMapping(value = "")
     public ResponseEntity<Object> createUser(@Valid() @RequestBody User user) {
         System.out.println("» UserController - CreateUser: " + user.toString());
@@ -46,13 +45,11 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getAllIds());
     }
 
-    // READ
     @GetMapping(value = "")
     public ResponseEntity<Object> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    // READ
     @GetMapping(value = "/{username}")
     public ResponseEntity<Object> getUser(@PathVariable("username") String username) {
         return ResponseEntity.ok().body(userService.getUser(username));
@@ -63,14 +60,12 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getByIds(usernames));
     }
 
-    // UPDATE
     @PutMapping(value = "/{username}")
     public ResponseEntity<Object> updateUser(@PathVariable("username") String username, @RequestBody User user) {
         userService.updateUser(username, user);
         return ResponseEntity.noContent().build();
     }
 
-    // DELETE
     @DeleteMapping(value = "/{username}")
     public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
         userService.deleteUser(username);

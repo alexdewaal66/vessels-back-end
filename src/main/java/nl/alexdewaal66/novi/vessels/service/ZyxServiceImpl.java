@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class ZyxServiceImpl implements ZyxService {
@@ -23,6 +24,11 @@ public class ZyxServiceImpl implements ZyxService {
     @Override
     public Collection<Zyx> getZyxs() {
         return zyxRepository.findAll();
+    }
+
+    @Override
+    public List<Zyx> getByIds(List<Long> ids) {
+        return zyxRepository.findAllById(ids);
     }
 
     @Override

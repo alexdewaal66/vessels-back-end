@@ -14,7 +14,8 @@ public interface SubdivisionService {
     List<Subdivision> getByIds(List<Long> ids);
 
     Subdivision getSubdivisionById(long id);
-    Subdivision getSubdivisionByCodes(String alpha2Code, String subCode);
+
+    Subdivision findSubdivision(String alpha2Code, String subdivisionCode);
 
     boolean subdivisionExists(long id);
 

@@ -36,11 +36,12 @@ public class SubdivisionController {
     }
 
     @GetMapping(value = "/find")
-    public ResponseEntity<Object> getSubdivisionByCodes(
+    public ResponseEntity<Object> findSubdivision(
             @RequestParam(name = "alpha2code") String alpha2Code,
-            @RequestParam(name = "subCode") String subCode) {
+            @RequestParam(name = "subcode") String subdivisionCode) {
+        System.out.println("❌ alpha2Code=" + alpha2Code + ", subdivisionCode=" + subdivisionCode);
         return ResponseEntity.ok().body(subdivisionService
-                .getSubdivisionByCodes(alpha2Code, subCode)
+                .findSubdivision(alpha2Code, subdivisionCode)
         );
     }
 

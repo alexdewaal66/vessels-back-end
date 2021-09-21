@@ -44,10 +44,10 @@ public class SubdivisionServiceImpl implements SubdivisionService {
         }
     }
 
-    @Override
-    public Subdivision getSubdivisionByCodes(String alpha2Code, String subCode) {
+//    @Override
+    public Subdivision findSubdivision(String alpha2Code, String subdivisionCode) {
         try {
-            return subdivisionRepository.findByAlpha2CodeAndSubCode(alpha2Code, subCode);
+            return subdivisionRepository.findByAlpha2CodeAndSubdivisionCode(alpha2Code, subdivisionCode);
         } catch (Exception e) {
             throw new RecordNotFoundException();
         }

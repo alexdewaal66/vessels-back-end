@@ -5,10 +5,12 @@ import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.model.Xyz;
 import nl.alexdewaal66.novi.vessels.repository.XyzRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class XyzServiceImpl implements XyzService {
@@ -47,6 +49,13 @@ public class XyzServiceImpl implements XyzService {
         } catch (Exception e) {
             throw new RecordNotFoundException();
         }
+    }
+
+    @Override
+    public Optional<Xyz> getXyzByExample(Xyz probe) {
+        System.out.println("» XyzServiceImpl » getXyzByExample \n\tprobe=" + probe.toString());
+        Example<Xyz> example = Example.of(probe);
+        return xyzRepository.findOne(example);
     }
 
     @Override

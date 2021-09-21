@@ -53,8 +53,9 @@ public class CountryController {
 
     @GetMapping(value = "/find")
     public ResponseEntity<Object> findCountry(
-            @RequestParam(required = false, name = "code") String code,
-            @RequestParam(required = false, name = "name") String name) {
+            @RequestParam(required = false) String code,
+            @RequestParam(required = false) String name) {
+        System.out.println("❌ code=" + code + ", name=" + name);
         return ResponseEntity.ok().body(countryService.findCountry(code, name));
     }
 

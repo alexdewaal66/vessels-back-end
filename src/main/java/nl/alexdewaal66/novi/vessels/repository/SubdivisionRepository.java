@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public interface SubdivisionRepository extends JpaRepository<Subdivision, Long> {
 
-    Subdivision findByAlpha2CodeAndSubCode(String alpha2Code, String subCode);
+    Subdivision findByAlpha2CodeAndSubdivisionCode(String alpha2Code, String subdivisionCode);
 
     Subdivision findByNameContains(String name);
 

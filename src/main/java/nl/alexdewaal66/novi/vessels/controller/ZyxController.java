@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/zyxs")
 @CrossOrigin(origins = "*")
@@ -29,6 +31,11 @@ public class ZyxController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getZyx(@PathVariable("id") long id) {
         return ResponseEntity.ok().body(zyxService.getZyxById(id));
+    }
+
+    @PostMapping(value = "/ids")
+    public ResponseEntity<Object> getZyxsByIds(@RequestBody List<Long> ids) {
+        return ResponseEntity.ok().body(zyxService.getByIds(ids));
     }
 
     @PostMapping(value = "")
