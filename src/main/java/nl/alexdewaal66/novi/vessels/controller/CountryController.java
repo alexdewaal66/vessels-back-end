@@ -1,5 +1,6 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
+import nl.alexdewaal66.novi.vessels.model.Country;
 import nl.alexdewaal66.novi.vessels.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -58,5 +59,25 @@ public class CountryController {
         System.out.println("❌ code=" + code + ", name=" + name);
         return ResponseEntity.ok().body(countryService.findCountry(code, name));
     }
+
+    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+    @PostMapping(value = "/qbe")
+    public ResponseEntity<Object> findCountryByExample(@RequestBody Country probe) {
+//        System.out.println("» CountryController » getCountryByExample \n\tprobe=" + probe.toString());
+        Country country = countryService.findCountryByExample(probe).orElse(fallbackCountry());
+//        System.out.println("» CountryController » getCountryByExample \n\tcountry=" + country.toString());
+        return ResponseEntity.ok().body(country);
+    }
+    Country fallbackCountry() {
+        Country fallback = new Country();
+        fallback.setId(-1L);
+        fallback.setAlpha2Code("--");
+        fallback.setAlpha3Code("---");
+        fallback.setNumericCode("000");
+        fallback.setShortNameEN("fallback-shortnameEN");
+        fallback.setShortNameNL("fallback-shortnameNL");
+        return fallback;
+    }
+    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 }

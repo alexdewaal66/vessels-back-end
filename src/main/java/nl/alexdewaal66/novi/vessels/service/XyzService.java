@@ -18,7 +18,7 @@ public interface XyzService {
 
     Xyz getXyzByXyzString(String xyzString);
 
-    Optional<Xyz> getXyzByExample(Xyz probe);
+    Optional<Xyz> findXyzByExample(Xyz probe);
 
     long createXyz(Xyz xyz);
 

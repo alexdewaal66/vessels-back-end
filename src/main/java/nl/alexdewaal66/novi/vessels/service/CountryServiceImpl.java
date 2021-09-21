@@ -4,6 +4,8 @@ import nl.alexdewaal66.novi.vessels.model.Country;
 import nl.alexdewaal66.novi.vessels.model.Xyz;
 import nl.alexdewaal66.novi.vessels.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -44,6 +46,16 @@ public class CountryServiceImpl implements CountryService {
         }
         return null;
     }
+
+    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+    @Override
+    public Optional<Country> findCountryByExample(Country probe) {
+        ExampleMatcher matcher = ExampleMatcher.matchingAny()
+                .withIgnorePaths("id").withIgnoreCase();
+        Example<Country> example = Example.of(probe, matcher);
+        return countryRepository.findOne(example);
+    }
+    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
     public Country getCountryByName(String name) {
         return countryRepository.findByShortNameENContainsOrShortNameNLContains(name, name);

@@ -22,4 +22,5 @@ public interface CountryService {
 
     Country findCountry(String code, String name);
 
+    Optional<Country> findCountryByExample(Country probe);
 }

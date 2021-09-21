@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import nl.alexdewaal66.novi.vessels.model.Xyz;
 import nl.alexdewaal66.novi.vessels.service.XyzService;
 
-import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -39,18 +38,25 @@ public class XyzController {
         return ResponseEntity.ok().body(xyzService.getByIds(ids));
     }
 
+
+    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
     @PostMapping(value = "/qbe")
-    public ResponseEntity<Object> getXyzByExample(@RequestBody Xyz probe) {
-        System.out.println("» XyzController » getXyzByExample \n\tprobe=" + probe.toString());
+    public ResponseEntity<Object> findXyzByExample(@RequestBody Xyz probe) {
+//        System.out.println("» XyzController » getXyzByExample \n\tprobe=" + probe.toString());
+        Xyz xyz = xyzService.findXyzByExample(probe).orElse(fallbackXyz());
+//        System.out.println("» XyzController » getXyzByExample \n\txyz=" + xyz.toString());
+        return ResponseEntity.ok().body(xyz);
+    }
+    Xyz fallbackXyz() {
         Xyz fallback = new Xyz();
         fallback.setId(-1);
         fallback.setName("fallback-name");
         fallback.setXyzString("fallback-xyzString");
         fallback.setDescription("fallback-description");
-        Xyz xyz = xyzService.getXyzByExample(probe).orElse(fallback);
-        System.out.println("» XyzController » getXyzByExample \n\txyz=" + xyz.toString());
-        return ResponseEntity.ok().body(xyz);
+        return fallback;
     }
+    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
 
     @PostMapping(value = "")
     public ResponseEntity<Object> createXyz(@RequestBody Xyz xyz) {
@@ -81,4 +87,5 @@ public class XyzController {
         xyzService.deleteXyz(id);
         return ResponseEntity.noContent().build();
     }
+
 }

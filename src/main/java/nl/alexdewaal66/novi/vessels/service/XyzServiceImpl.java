@@ -6,6 +6,7 @@ import nl.alexdewaal66.novi.vessels.model.Xyz;
 import nl.alexdewaal66.novi.vessels.repository.XyzRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -51,12 +52,17 @@ public class XyzServiceImpl implements XyzService {
         }
     }
 
+
+    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
     @Override
-    public Optional<Xyz> getXyzByExample(Xyz probe) {
-        System.out.println("» XyzServiceImpl » getXyzByExample \n\tprobe=" + probe.toString());
-        Example<Xyz> example = Example.of(probe);
+    public Optional<Xyz> findXyzByExample(Xyz probe) {
+        ExampleMatcher matcher = ExampleMatcher.matchingAny()
+                .withIgnorePaths("id").withIgnoreCase();
+        Example<Xyz> example = Example.of(probe, matcher);
         return xyzRepository.findOne(example);
     }
+    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
 
     @Override
     public long createXyz(Xyz xyz) {
