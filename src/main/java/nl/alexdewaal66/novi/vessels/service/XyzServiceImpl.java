@@ -9,6 +9,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -54,6 +55,9 @@ public class XyzServiceImpl implements XyzService {
 
 
     /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+List<String> properties = Arrays.asList("xyzString", "name", "description");
+
     @Override
     public Optional<Xyz> findXyzByExample(Xyz probe) {
         ExampleMatcher matcher = ExampleMatcher.matchingAny()

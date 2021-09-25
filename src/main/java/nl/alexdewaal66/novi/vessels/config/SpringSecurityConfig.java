@@ -71,7 +71,3 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
-/*
-        Rob gebruikt geen literals als Role:
-        .antMatchers("/customers/**").hasRole(Role.CUSTOMER.toString())
- */

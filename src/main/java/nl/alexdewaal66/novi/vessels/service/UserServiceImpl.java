@@ -5,7 +5,6 @@ import nl.alexdewaal66.novi.vessels.exceptions.UsernameNotFoundException;
 import nl.alexdewaal66.novi.vessels.exceptions.UsernameExistsException;
 import nl.alexdewaal66.novi.vessels.model.Authority;
 import nl.alexdewaal66.novi.vessels.model.User;
-import nl.alexdewaal66.novi.vessels.model.Xyz;
 import nl.alexdewaal66.novi.vessels.repository.UserRepository;
 import nl.alexdewaal66.novi.vessels.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +97,7 @@ public class UserServiceImpl implements UserService {
     public void removeAuthority(String username, String authority) {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepository.findById(username).get();
-        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().get();
+        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getRole().equalsIgnoreCase(authority)).findAny().get();
         user.removeAuthority(authorityToRemove);
         userRepository.save(user);
     }

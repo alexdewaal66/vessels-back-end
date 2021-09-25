@@ -5,6 +5,7 @@ import nl.alexdewaal66.novi.vessels.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import nl.alexdewaal66.novi.vessels.utils.Match;
 
 import java.util.List;
 
@@ -61,13 +62,23 @@ public class CountryController {
     }
 
     /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-    @PostMapping(value = "/qbe")
-    public ResponseEntity<Object> findCountryByExample(@RequestBody Country probe) {
+
+    @PostMapping(value = "/findall")
+    public ResponseEntity<Object> findCountriesByExample(@RequestBody Match<Country> match) {
+//        System.out.println("❌ match.probe=" + match.probe + ", match.mode=" + match.mode);
+        List<Country> countries = countryService.findCountriesByExample(match);
+        return ResponseEntity.ok().body(countries);
+    }
+
+    @PostMapping(value = "/findone")
+    public ResponseEntity<Object> findCountryByExample(@RequestBody Match<Country> match) {
 //        System.out.println("» CountryController » getCountryByExample \n\tprobe=" + probe.toString());
-        Country country = countryService.findCountryByExample(probe).orElse(fallbackCountry());
+        Country country = countryService.findCountryByExample(match)
+                .orElse(fallbackCountry());
 //        System.out.println("» CountryController » getCountryByExample \n\tcountry=" + country.toString());
         return ResponseEntity.ok().body(country);
     }
+
     Country fallbackCountry() {
         Country fallback = new Country();
         fallback.setId(-1L);

@@ -1,16 +1,15 @@
 package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.model.Country;
-import nl.alexdewaal66.novi.vessels.model.Xyz;
 import nl.alexdewaal66.novi.vessels.repository.CountryRepository;
+import nl.alexdewaal66.novi.vessels.model.ProjectId;
+import nl.alexdewaal66.novi.vessels.utils.Match;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import nl.alexdewaal66.novi.vessels.utils.Matcher;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -19,8 +18,8 @@ public class CountryServiceImpl implements CountryService {
     private CountryRepository countryRepository;
 
     @Override
-    public Collection<Long> getAllIds() {
-        return countryRepository.getAllIds();
+    public Collection<ProjectId> getAllIds() {
+        return countryRepository.findAllBy();
     }
 
     public Collection<Country> getCountries() {
@@ -48,13 +47,36 @@ public class CountryServiceImpl implements CountryService {
     }
 
     /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+    List<String> properties = Arrays.asList("shortNameNL", "shortNameEN");
+
     @Override
-    public Optional<Country> findCountryByExample(Country probe) {
-        ExampleMatcher matcher = ExampleMatcher.matchingAny()
-                .withIgnorePaths("id").withIgnoreCase();
-        Example<Country> example = Example.of(probe, matcher);
+    public Optional<Country> findCountryByExample(Match<Country> match) {
+        Country probe = match.getProbe();
+        String mode = match.getMode();
+        Example<Country> example = Example.of(probe, Matcher.build(mode, properties));
         return countryRepository.findOne(example);
     }
+
+    @Override
+    public List<Country> findCountriesByExample(Match<Country> match) {
+        Country probe = match.getProbe();
+        String mode = match.getMode();
+        Example<Country> example = Example.of(probe, Matcher.build(mode, properties));
+        return countryRepository.findAll(example);
+    }
+
+//    class FindByExample<E,R> {
+//
+//        @Autowired
+//        R repository;
+//        public Optional<E> findOne(Match<E> match) {
+//            E probe = match.getProbe();
+//            String mode = match.getMode();
+//            Example<E> example = Example.of(probe, Matcher.build(mode, properties));
+//            return repository.findAll(example);
+//        }
+//    }
+
     /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
     public Country getCountryByName(String name) {
