@@ -14,12 +14,12 @@ public class Authority implements Serializable {
 
     @Id
     @Column(nullable = false)
-    private String authority;
+    private String role;
 
     public Authority() {}
-    public Authority(String username, String authority) {
+    public Authority(String username, String role) {
         this.username = username;
-        this.authority = authority;
+        this.role = role;
     }
 
     public String getUsername() {
@@ -28,18 +28,18 @@ public class Authority implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getAuthority() {
-        return authority;
+    public String getRole() {
+        return role;
     }
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setRole(String authority) {
+        this.role = authority;
     }
 
     @Override
     public String toString() {
         return "Authority{" +
                 "username='" + username + '\'' +
-                ", authority='" + authority + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

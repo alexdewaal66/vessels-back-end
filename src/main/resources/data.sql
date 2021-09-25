@@ -4,7 +4,7 @@ INSERT INTO users (username, password, enabled, email) VALUES
     ('deskundige', '$2a$10$2yCcoDgyC3UnusuXf8ICr.vgyS6gNYKRVnde0INpXEMV.lE0O6ZMW', TRUE, 'deskundige@vessels.novi.alexdewaal66.nl'), -- IkMagVeel
     ('gewoonlid',  '$2a$10$KlL3ZzRPDz4JWxhgrfoAyeawo5OFkYSfYPY/uIiN1pDx5kGiK7DgS', TRUE, 'gewoonlid@vessels.novi.alexdewaal66.nl'); -- IkMagBeperkt
 
-INSERT INTO authorities (username, authority) VALUES
+INSERT INTO authorities (username, role) VALUES
     ('gewoonlid',  'ROLE_MEMBER'),
 
     ('deskundige', 'ROLE_MEMBER'),
