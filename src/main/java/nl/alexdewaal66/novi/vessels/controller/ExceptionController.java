@@ -4,6 +4,8 @@ import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.exceptions.UsernameNotFoundException;
 import nl.alexdewaal66.novi.vessels.exceptions.UsernameExistsException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,18 +23,17 @@ import java.util.stream.Collectors;
 
 @RestController
 @ControllerAdvice
-//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @CrossOrigin(origins = {"*"})
 public class ExceptionController {
 
     @ExceptionHandler(value = RecordNotFoundException.class)
     public ResponseEntity<Object> exception(RecordNotFoundException exception) {
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
     @ExceptionHandler(value = BadRequestException.class)
     public ResponseEntity<Object> exception(BadRequestException exception) {
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body(exception.getMessage());
     }
 
     @ExceptionHandler(value = UsernameNotFoundException.class)
@@ -69,4 +70,8 @@ public class ExceptionController {
 
     }
 
+@ExceptionHandler(value = IncorrectResultSizeDataAccessException.class)
+    public ResponseEntity<Object> exception(IncorrectResultSizeDataAccessException exception) {
+        return ResponseEntity.badRequest().body(exception.getMessage().split(":")[0]);
+}
 }

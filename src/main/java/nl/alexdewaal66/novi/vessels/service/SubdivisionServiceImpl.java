@@ -1,15 +1,21 @@
 package nl.alexdewaal66.novi.vessels.service;
 
+import nl.alexdewaal66.novi.vessels.model.ProjectId;
 import nl.alexdewaal66.novi.vessels.model.Xyz;
+import nl.alexdewaal66.novi.vessels.utils.Match;
+import nl.alexdewaal66.novi.vessels.utils.Matcher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import nl.alexdewaal66.novi.vessels.exceptions.IncompleteRecordException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.model.Subdivision;
 import nl.alexdewaal66.novi.vessels.repository.SubdivisionRepository;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubdivisionServiceImpl implements SubdivisionService {
@@ -18,8 +24,8 @@ public class SubdivisionServiceImpl implements SubdivisionService {
     private SubdivisionRepository subdivisionRepository;
 
     @Override
-    public Collection<Long> getAllIds() {
-        return subdivisionRepository.getAllIds();
+    public Collection<ProjectId> getAllIds() {
+        return subdivisionRepository.findAllBy();
     }
 
     @Override
@@ -53,8 +59,29 @@ public class SubdivisionServiceImpl implements SubdivisionService {
         }
     }
 
+    //--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
+    List<String> textProperties = Arrays.asList("name");
+
+    @Override
+    public Optional<Subdivision> findSubdivisionByExample(Match<Subdivision> match) {
+        Subdivision probe = match.getProbe();
+        String mode = match.getMode();
+        Example<Subdivision> example = Example.of(probe, Matcher.build(mode, textProperties));
+        return subdivisionRepository.findOne(example);
+    }
+
+    @Override
+    public List<Subdivision> findSubdivisionsByExample(Match<Subdivision> match) {
+        Subdivision probe = match.getProbe();
+        String mode = match.getMode();
+        Example<Subdivision> example = Example.of(probe, Matcher.build(mode, textProperties));
+        return subdivisionRepository.findAll(example);
+    }
+    //--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
+
     @Override
     public boolean subdivisionExists(long id) {
         return subdivisionRepository.existsById(id);
     }
+
 }

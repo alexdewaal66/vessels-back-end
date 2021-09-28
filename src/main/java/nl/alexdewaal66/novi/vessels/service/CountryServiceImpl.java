@@ -46,14 +46,14 @@ public class CountryServiceImpl implements CountryService {
         return null;
     }
 
-    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-    List<String> properties = Arrays.asList("shortNameNL", "shortNameEN");
+    //--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
+    List<String> textProperties = Arrays.asList("shortNameNL", "shortNameEN");
 
     @Override
     public Optional<Country> findCountryByExample(Match<Country> match) {
         Country probe = match.getProbe();
         String mode = match.getMode();
-        Example<Country> example = Example.of(probe, Matcher.build(mode, properties));
+        Example<Country> example = Example.of(probe, Matcher.build(mode, textProperties));
         return countryRepository.findOne(example);
     }
 
@@ -61,23 +61,24 @@ public class CountryServiceImpl implements CountryService {
     public List<Country> findCountriesByExample(Match<Country> match) {
         Country probe = match.getProbe();
         String mode = match.getMode();
-        Example<Country> example = Example.of(probe, Matcher.build(mode, properties));
+        Example<Country> example = Example.of(probe, Matcher.build(mode, textProperties));
         return countryRepository.findAll(example);
     }
+    //--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
 
-//    class FindByExample<E,R> {
+//--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
+//    class FindByExample<T,R> {
 //
 //        @Autowired
 //        R repository;
-//        public Optional<E> findOne(Match<E> match) {
+//        public Optional<T> findOne(Match<T> match) {
 //            E probe = match.getProbe();
 //            String mode = match.getMode();
-//            Example<E> example = Example.of(probe, Matcher.build(mode, properties));
+//            Example<T> example = Example.of(probe, Matcher.build(mode, properties));
 //            return repository.findAll(example);
 //        }
 //    }
-
-    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+//--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
 
     public Country getCountryByName(String name) {
         return countryRepository.findByShortNameENContainsOrShortNameNLContains(name, name);

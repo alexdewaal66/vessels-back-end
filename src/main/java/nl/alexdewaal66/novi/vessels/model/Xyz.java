@@ -1,14 +1,21 @@
 package nl.alexdewaal66.novi.vessels.model;
 
+import nl.alexdewaal66.novi.vessels.utils.Property;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
-public class Xyz {
+public class Xyz implements GenericEntity{
+    public static final String entityName = "Xyz";
+    public static final List<String> textProperties =
+            Arrays.asList("xyzString", "name", "description");
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Size(max = 200)
     private String xyzString;
@@ -27,7 +34,13 @@ public class Xyz {
             // (cascade = CascadeType.PERSIST)
     private Zyx zyx;
 
-    public long getId() { return id; }
+    @Override
+    public Long getId() { return id; }
+
+    @Override
+    public void setId(Long id) {
+
+    }
 
     public void setId(long id) { this.id = id; }
 

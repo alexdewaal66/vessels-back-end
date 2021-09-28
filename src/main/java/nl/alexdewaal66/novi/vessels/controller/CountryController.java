@@ -61,21 +61,17 @@ public class CountryController {
         return ResponseEntity.ok().body(countryService.findCountry(code, name));
     }
 
-    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
+    //--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
     @PostMapping(value = "/findall")
     public ResponseEntity<Object> findCountriesByExample(@RequestBody Match<Country> match) {
-//        System.out.println("❌ match.probe=" + match.probe + ", match.mode=" + match.mode);
         List<Country> countries = countryService.findCountriesByExample(match);
         return ResponseEntity.ok().body(countries);
     }
 
     @PostMapping(value = "/findone")
     public ResponseEntity<Object> findCountryByExample(@RequestBody Match<Country> match) {
-//        System.out.println("» CountryController » getCountryByExample \n\tprobe=" + probe.toString());
         Country country = countryService.findCountryByExample(match)
                 .orElse(fallbackCountry());
-//        System.out.println("» CountryController » getCountryByExample \n\tcountry=" + country.toString());
         return ResponseEntity.ok().body(country);
     }
 
@@ -89,6 +85,6 @@ public class CountryController {
         fallback.setShortNameNL("fallback-shortnameNL");
         return fallback;
     }
-    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+    //--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
 
 }

@@ -1,12 +1,16 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
+import nl.alexdewaal66.novi.vessels.repository.XyzRepository;
+import nl.alexdewaal66.novi.vessels.service.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.service.XyzService;
+import nl.alexdewaal66.novi.vessels.utils.Match;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import nl.alexdewaal66.novi.vessels.model.Xyz;
-import nl.alexdewaal66.novi.vessels.service.XyzService;
+//import nl.alexdewaal66.novi.vessels.service.XyzService;
 
 import java.util.List;
 
@@ -14,6 +18,9 @@ import java.util.List;
 @RequestMapping(value = "/xyzs")
 @CrossOrigin(origins = "*")
 public class XyzController {
+
+//    @Autowired
+//    private GenericServiceImpl<Xyz, XyzRepository> xyzService;
 
     @Autowired
     private XyzService xyzService;
@@ -25,43 +32,67 @@ public class XyzController {
 
     @GetMapping(value = "")
     public ResponseEntity<Object> getXyzs() {
-        return ResponseEntity.ok().body(xyzService.getXyzs());
+        return ResponseEntity.ok().body(xyzService.getAll());
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getXyz(@PathVariable("id") long id) {
-        return ResponseEntity.ok().body(xyzService.getXyzById(id));
+        return ResponseEntity.ok().body(xyzService.getById(id));
     }
 
     @PostMapping(value = "/ids")
     public ResponseEntity<Object> getXyzsByIds(@RequestBody List<Long> ids) {
+        System.out.println("XyzController » getXyzsByIds \n\t ids=" + ids);
         return ResponseEntity.ok().body(xyzService.getByIds(ids));
     }
 
 
     /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-    @PostMapping(value = "/qbe")
-    public ResponseEntity<Object> findXyzByExample(@RequestBody Xyz probe) {
-//        System.out.println("» XyzController » getXyzByExample \n\tprobe=" + probe.toString());
-        Xyz xyz = xyzService.findXyzByExample(probe).orElse(fallbackXyz());
-//        System.out.println("» XyzController » getXyzByExample \n\txyz=" + xyz.toString());
+//    @PostMapping(value = "/qbe")
+//    public ResponseEntity<Object> findByExample(@RequestBody Xyz probe) {
+////        System.out.println("» XyzController » getXyzByExample \n\tprobe=" + probe.toString());
+//        Xyz xyz = xyzService.findItemByExample(probe).orElse(fallbackXyz());
+////        System.out.println("» XyzController » getXyzByExample \n\txyz=" + xyz.toString());
+//        return ResponseEntity.ok().body(xyz);
+//    }
+//    Xyz fallbackXyz() {
+//        Xyz fallback = new Xyz();
+//        fallback.setId(-1);
+//        fallback.setName("fallback-name");
+//        fallback.setXyzString("fallback-xyzString");
+//        fallback.setDescription("fallback-description");
+//        return fallback;
+//    }
+    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+    //--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
+    @PostMapping(value = "/findall")
+    public ResponseEntity<Object> findItemsByExample(@RequestBody Match<Xyz> match) {
+        List<Xyz> xyzs = xyzService.findAllByExample(match);
+        return ResponseEntity.ok().body(xyzs);
+    }
+
+    @PostMapping(value = "/findone")
+    public ResponseEntity<Object> findItemByExample(@RequestBody Match<Xyz> match) {
+//        System.out.println("XyzController » findItemByExample \n\tprobe=" + match.getProbe().toString());
+        Xyz xyz = xyzService.findOneByExample(match);
         return ResponseEntity.ok().body(xyz);
     }
+
     Xyz fallbackXyz() {
         Xyz fallback = new Xyz();
-        fallback.setId(-1);
+        fallback.setId(-1L);
         fallback.setName("fallback-name");
         fallback.setXyzString("fallback-xyzString");
-        fallback.setDescription("fallback-description");
         return fallback;
     }
-    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+//--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
 
 
     @PostMapping(value = "")
     public ResponseEntity<Object> createXyz(@RequestBody Xyz xyz) {
         System.out.println("» XyzController - CreateXyz: " + xyz.toString());
-        long newId = xyzService.createXyz(xyz);
+        long newId = xyzService.create(xyz);
 
 //        URI location = ServletUriComponentsBuilder
 //                .fromCurrentRequest().path("/{xyzString}")
@@ -75,7 +106,7 @@ public class XyzController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateXyz(@PathVariable("id") long id,
                                             @RequestBody Xyz xyz) {
-        xyzService.updateXyz(id, xyz);
+        xyzService.update(id, xyz);
         return ResponseEntity.noContent().build();
     }
 
@@ -84,8 +115,13 @@ public class XyzController {
     // DELETE
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteXyz(@PathVariable("id") long id) {
-        xyzService.deleteXyz(id);
+        xyzService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
 }
+
+/*
+
+
+ */
