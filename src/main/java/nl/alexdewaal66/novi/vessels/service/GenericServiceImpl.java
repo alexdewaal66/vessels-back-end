@@ -28,6 +28,8 @@ public class GenericServiceImpl<T extends GenericEntity>
 
     private final GenericRepository<T> repository;
 
+    // GenericRepository<> is not to be a bean by design
+    @SuppressWarnings(value="SpringJavaInjectionPointsAutowiringInspection")
     public GenericServiceImpl(GenericRepository<T> repository) {
         this.repository = repository;
     }
