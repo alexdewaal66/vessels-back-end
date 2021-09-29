@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
 import nl.alexdewaal66.novi.vessels.repository.XyzRepository;
+import nl.alexdewaal66.novi.vessels.service.GenericService;
 import nl.alexdewaal66.novi.vessels.service.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.service.XyzService;
 import nl.alexdewaal66.novi.vessels.utils.Match;
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import nl.alexdewaal66.novi.vessels.model.Xyz;
-//import nl.alexdewaal66.novi.vessels.service.XyzService;
 
 import java.util.List;
 
@@ -19,11 +19,8 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class XyzController {
 
-//    @Autowired
-//    private GenericServiceImpl<Xyz, XyzRepository> xyzService;
-
     @Autowired
-    private XyzService xyzService;
+    private GenericService<Xyz> xyzService;
 
     @GetMapping(value = "/ids")
     public ResponseEntity<Object> getXyzIds() {
@@ -46,26 +43,6 @@ public class XyzController {
         return ResponseEntity.ok().body(xyzService.getByIds(ids));
     }
 
-
-    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-//    @PostMapping(value = "/qbe")
-//    public ResponseEntity<Object> findByExample(@RequestBody Xyz probe) {
-////        System.out.println("» XyzController » getXyzByExample \n\tprobe=" + probe.toString());
-//        Xyz xyz = xyzService.findItemByExample(probe).orElse(fallbackXyz());
-////        System.out.println("» XyzController » getXyzByExample \n\txyz=" + xyz.toString());
-//        return ResponseEntity.ok().body(xyz);
-//    }
-//    Xyz fallbackXyz() {
-//        Xyz fallback = new Xyz();
-//        fallback.setId(-1);
-//        fallback.setName("fallback-name");
-//        fallback.setXyzString("fallback-xyzString");
-//        fallback.setDescription("fallback-description");
-//        return fallback;
-//    }
-    /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-    //--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
     @PostMapping(value = "/findall")
     public ResponseEntity<Object> findItemsByExample(@RequestBody Match<Xyz> match) {
         List<Xyz> xyzs = xyzService.findAllByExample(match);
@@ -74,20 +51,9 @@ public class XyzController {
 
     @PostMapping(value = "/findone")
     public ResponseEntity<Object> findItemByExample(@RequestBody Match<Xyz> match) {
-//        System.out.println("XyzController » findItemByExample \n\tprobe=" + match.getProbe().toString());
         Xyz xyz = xyzService.findOneByExample(match);
         return ResponseEntity.ok().body(xyz);
     }
-
-    Xyz fallbackXyz() {
-        Xyz fallback = new Xyz();
-        fallback.setId(-1L);
-        fallback.setName("fallback-name");
-        fallback.setXyzString("fallback-xyzString");
-        return fallback;
-    }
-//--//--//--//--//--//--//--//--//--//--//--//--//--//--//--
-
 
     @PostMapping(value = "")
     public ResponseEntity<Object> createXyz(@RequestBody Xyz xyz) {
@@ -102,7 +68,6 @@ public class XyzController {
         return new ResponseEntity<>(String.format("Xyz %d created", newId), HttpStatus.CREATED);
     }
 
-    // PUT=UPDATE
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateXyz(@PathVariable("id") long id,
                                             @RequestBody Xyz xyz) {
@@ -112,7 +77,6 @@ public class XyzController {
 
     // PATCH=PARTIAL-UPDATE
 
-    // DELETE
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteXyz(@PathVariable("id") long id) {
         xyzService.delete(id);
@@ -122,6 +86,5 @@ public class XyzController {
 }
 
 /*
-
 
  */

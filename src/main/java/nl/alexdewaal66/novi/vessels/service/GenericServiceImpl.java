@@ -12,23 +12,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import nl.alexdewaal66.novi.vessels.model.*;
 
 //@Service
-//public class GenericServiceImpl<T extends GenericEntity, R extends GenericRepository<T>>
-//        implements GenericService<T, R> {
-//
-//    private R repository;
-
-//@Service
-//public class GenericServiceImpl<T extends GenericEntity, R extends GenericRepository<T>>
-//        implements GenericService<T, R> {
-@Service
 public class GenericServiceImpl<T extends GenericEntity>
         implements GenericService<T> {
 
     private final GenericRepository<T> repository;
 
-    // GenericRepository<> is not to be a bean by design
+    // GenericRepository<> is not to be a bean by design, error in IntelliJ is erroneous
     @SuppressWarnings(value="SpringJavaInjectionPointsAutowiringInspection")
     public GenericServiceImpl(GenericRepository<T> repository) {
         this.repository = repository;
@@ -58,7 +50,11 @@ public class GenericServiceImpl<T extends GenericEntity>
     public T findOneByExample(Match<T> match) {
         T probe = match.getProbe();
         String mode = match.getMode();
-        Example<T> example = Example.of(probe, Matcher.build(mode, T.textProperties));
+        System.out.println("GenericServiceImpl » findOneByExample()" +
+                "\n\tmatch = " + match +
+                "\n\tgetEntityName() = " + probe.getEntityName() +
+                "\n\tgetTextProperties() = " + probe.getTextProperties());
+        Example<T> example = Example.of(probe, Matcher.build(mode, probe.getTextProperties()));
         return repository.findOne(example)
                 .orElseThrow(() -> new BadRequestException("no result found"));
     }
@@ -67,7 +63,8 @@ public class GenericServiceImpl<T extends GenericEntity>
     public List<T> findAllByExample(Match<T> match) {
         T probe = match.getProbe();
         String mode = match.getMode();
-        Example<T> example = Example.of(probe, Matcher.build(mode, T.textProperties));
+        System.out.println("GenericServiceImpl » findAllByExample()\n\tmatch = " + match);
+        Example<T> example = Example.of(probe, Matcher.build(mode, probe.getTextProperties()));
         return repository.findAll(example);
     }
 
@@ -84,8 +81,8 @@ public class GenericServiceImpl<T extends GenericEntity>
             newItem.setId(id);
             repository.save(newItem);
         } else {
-            System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", T.entityName, id);
-            throw new RecordNotFoundException(T.entityName, id);
+            System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", newItem.getEntityName(), id);
+            throw new RecordNotFoundException(newItem.getEntityName(), id);
         }
     }
 

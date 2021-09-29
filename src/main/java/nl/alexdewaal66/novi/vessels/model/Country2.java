@@ -1,10 +1,20 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
-public class Country {
+public class Country2 implements GenericEntity{
+    @Override
+    public String getEntityName() {
+        return "Country2";
+    }
+
+    @Override
+    public List<String> getTextProperties() {
+        return Arrays.asList("shortNameNL", "shortNameEN");
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +32,9 @@ public class Country {
 
     private String numericCode;
 
+    @Override
     public Long getId() { return id; }
+    @Override
     public void setId(Long id) { this.id = id; }
 
     public String getShortNameNL() { return shortNameNL; }
