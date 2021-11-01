@@ -6,7 +6,9 @@ import org.aspectj.apache.bcel.generic.RET;
 import javax.persistence.Id;
 import java.util.List;
 
-public interface GenericEntity {
+public interface GenericEntity<T> {
+
+//    T shallowCopy();
 
     String getEntityName();
 

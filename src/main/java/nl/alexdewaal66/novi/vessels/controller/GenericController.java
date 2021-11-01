@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public abstract class GenericController<T extends GenericEntity> {
+public abstract class GenericController<T extends GenericEntity<T>> {
 
     private final GenericServiceImpl<T> service;
 
-//    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    //    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     public GenericController(GenericServiceImpl<T> service) {
         this.service = service;
     }
@@ -54,19 +54,20 @@ public abstract class GenericController<T extends GenericEntity> {
 
     @PostMapping(value = "")
     public ResponseEntity<Object> create(@RequestBody T item) {
-        System.out.println("» GenericController » create() \n\titem=" + item.toString());
+        System.out.println("» GenericController » create()"
+                + "\n\titem=" + item.toString());
         long newId = service.create(item);
+        System.out.println("» GenericController » create()"
+                + "\n\tid=" + newId);
         return new ResponseEntity<>(String.format("%s %d created", item.getEntityName(), newId), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> update(@PathVariable("id") Long id,
-                                            @RequestBody T item) {
+                                         @RequestBody T item) {
         service.update(id, item);
         return ResponseEntity.noContent().build();
     }
-
-    // PATCH=PARTIAL-UPDATE
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteXyz(@PathVariable("id") Long id) {

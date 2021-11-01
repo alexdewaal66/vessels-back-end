@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Xyz implements GenericEntity{
+public class Xyz implements GenericEntity<Xyz>{
 
     @Override
     @JsonIgnore
@@ -39,7 +39,6 @@ public class Xyz implements GenericEntity{
     private Double ratio = 0.0;
 
     @ManyToOne
-            // (cascade = CascadeType.PERSIST)
     private Zyx zyx;
 
     @Override

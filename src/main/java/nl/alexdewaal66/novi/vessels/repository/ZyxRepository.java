@@ -5,9 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Collection;
 
-public interface ZyxRepository extends JpaRepository<Zyx, Long> {
+public interface ZyxRepository extends GenericRepository<Zyx> {
     Zyx findByName(String name);
 
-    @Query(value = "SELECT z.id FROM zyx z", nativeQuery = true)
-    Collection<Long> getAllIds();
 }

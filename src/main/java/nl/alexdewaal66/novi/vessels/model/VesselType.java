@@ -1,16 +1,58 @@
 package nl.alexdewaal66.novi.vessels.model;
 
+import com.fasterxml.jackson.annotation.*;
+//import nl.alexdewaal66.novi.vessels.config.SpringConfiguration;
+import nl.alexdewaal66.novi.vessels.repository.VesselTypeRepository;
+import nl.alexdewaal66.novi.vessels.service.VesselTypeService;
+import nl.alexdewaal66.novi.vessels.service.VesselTypeServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-public class VesselType {
+public class VesselType implements GenericEntity<VesselType> {
+    public VesselType() {
+    }
+
+    public VesselType shallowCopy() {
+        VesselType copy = new VesselType();
+        copy.nameNL = this.nameNL;
+        copy.nameEN = this.nameEN;
+        copy.descNL = this.descNL;
+        copy.descEN = this.descEN;
+        copy.tonnageMin = this.tonnageMin;
+        copy.tonnageMax = this.tonnageMax;
+        copy.length = this.length;
+        copy.beam = this.beam;
+        copy.height = this.height;
+        copy.draft = this.draft;
+        copy.superType = this.superType;
+        return copy;
+    }
+
+    @Override
+    @JsonIgnore
+    @Transient
+    public String getEntityName() {
+        return "VesselType";
+    }
+
+    @Override
+    @JsonIgnore
+    @Transient
+    public List<String> getTextProperties() {
+        return Arrays.asList("nameNL", "nameEN", "descNL", "descEN");
+    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Size(max = 100)
     @Column(name = "name_nl")
@@ -46,17 +88,20 @@ public class VesselType {
     @PositiveOrZero(message = "Negative draft not allowed")
     private Double draft;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    //    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "super_type_id", nullable = true)
     private VesselType superType;
 
-//    @OneToMany(mappedBy = "superType")
-//    private Set<VesselType> subTypes = new HashSet<>();
+    @OneToMany(mappedBy = "superType")
+    private Set<VesselType> subTypes = new HashSet<>();
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -147,13 +192,38 @@ public class VesselType {
     public void setSuperType(VesselType superType) {
         this.superType = superType;
     }
-
-//    public Set<VesselType> getSubTypes() {
-//        return subTypes;
+//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//    @JsonIdentityReference(alwaysAsId = true)
+//    @JsonProperty("superType")
+//    public void setSuperType(Long id) {
+//        this.superType = entityManager.getReference(VesselType.class, id);
 //    }
 
-//    public void setSubTypes(Set<VesselType> subTypes) {
-//        this.subTypes = subTypes;
-//    }
+    @JsonIgnore
+    public Set<VesselType> getSubTypes() {
+        return subTypes;
+    }
+
+    public void setSubTypes(Set<VesselType> subTypes) {
+        this.subTypes = subTypes;
+    }
+
+    @Override
+    public String toString() {
+        return "VesselType{" +
+                "id=" + id +
+                ", nameNL='" + nameNL + '\'' +
+                ", nameEN='" + nameEN + '\'' +
+                ", descNL='" + descNL + '\'' +
+                ", descEN='" + descEN + '\'' +
+                ", tonnageMin=" + tonnageMin +
+                ", tonnageMax=" + tonnageMax +
+                ", length=" + length +
+                ", beam=" + beam +
+                ", height=" + height +
+                ", draft=" + draft +
+                ", superType=" + superType +
+                '}';
+    }
 }
 

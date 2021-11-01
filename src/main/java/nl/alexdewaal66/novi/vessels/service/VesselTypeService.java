@@ -9,20 +9,6 @@ import java.util.Optional;
 
 public interface VesselTypeService {
 
-    Collection<Long> getAllIds();
-    Collection<VesselType> getVesselTypes();
-
-    List<VesselType> getByIds(List<Long> ids);
-
-    Optional<VesselType> getVesselTypeById(long id);
     VesselType getVesselTypeByName(String nameEN, String nameNL);
-
-    long createVesselType(VesselType vesselType);
-
-    void updateVesselType(long id, VesselType vesselType);
-
-    void deleteVesselType(long id);
-
-    boolean vesselTypeExists(long id);
 
 }

@@ -60,9 +60,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/users").authenticated()
                 .antMatchers(HttpMethod.GET, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/**").authenticated()
+
+                .regexMatchers(HttpMethod.POST, "/(?!ids).+").authenticated()
+                .antMatchers(HttpMethod.POST, "/ids").permitAll()
+
                 .antMatchers(HttpMethod.PUT, "/**").authenticated()
-                .antMatchers(HttpMethod.PATCH, "/**").authenticated()
+//                .antMatchers(HttpMethod.PATCH, "/**").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/**").authenticated()
                 .anyRequest().permitAll()
                 .and()

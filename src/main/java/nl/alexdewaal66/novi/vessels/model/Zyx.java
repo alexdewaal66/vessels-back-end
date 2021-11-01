@@ -1,11 +1,25 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
-public class Zyx {
+public class Zyx implements GenericEntity<Zyx>{
+
+    @Override @JsonIgnore @Transient
+    public String getEntityName() {
+        return "Zyx";
+    }
+
+    @Override @JsonIgnore @Transient
+    public List<String> getTextProperties() {
+        return Arrays.asList("name", "description");
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +35,6 @@ public class Zyx {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -29,7 +42,6 @@ public class Zyx {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -37,8 +49,16 @@ public class Zyx {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Zyx{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

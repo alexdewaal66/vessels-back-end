@@ -12,16 +12,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+
 import nl.alexdewaal66.novi.vessels.model.*;
+import org.springframework.transaction.annotation.Transactional;
 
 //@Service
-public class GenericServiceImpl<T extends GenericEntity>
+public class GenericServiceImpl<T extends GenericEntity<T>>
         implements GenericService<T> {
 
     private final GenericRepository<T> repository;
 
     // GenericRepository<> is not to be a bean by design, error in IntelliJ is erroneous
-    @SuppressWarnings(value="SpringJavaInjectionPointsAutowiringInspection")
+    @SuppressWarnings(value = "SpringJavaInjectionPointsAutowiringInspection")
     public GenericServiceImpl(GenericRepository<T> repository) {
         this.repository = repository;
     }
@@ -70,15 +72,29 @@ public class GenericServiceImpl<T extends GenericEntity>
 
     @Override
     public Long create(T item) {
-        item.setId(0L); // protects from overwriting existing instance
+        System.out.println("» GenericServiceImpl » create()"
+                + "\n\t item=" + item.toString());
+        item.setId(null); // protects from overwriting existing instance
+        System.out.println("» GenericServiceImpl » create()"
+                + "\n\t item=" + item.toString());
+//        T copy = item.shallowCopy();
+//        System.out.println("» GenericServiceImpl » create()"
+//                + "\n\t copy=" + copy.toString());
+//        T newItem = repository.save(copy);
         T newItem = repository.save(item);
+        System.out.println("» GenericServiceImpl » create()"
+                + "\n\t newItem=" + newItem.toString());
         return newItem.getId();
     }
 
     @Override
     public void update(Long id, T newItem) {
         if (exists(id)) {
+            System.out.println("» GenericServiceImpl » update() *before* setId()"
+                    + "\n\t newItem=" + newItem.toString());
             newItem.setId(id);
+            System.out.println("» GenericServiceImpl » update() *after* setId()"
+                    + "\n\t newItem=" + newItem.toString());
             repository.save(newItem);
         } else {
             System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", newItem.getEntityName(), id);

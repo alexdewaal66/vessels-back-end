@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @NoRepositoryBean
-public interface GenericRepository<T extends GenericEntity> extends JpaRepository<T, Long> {
+public interface GenericRepository<T extends GenericEntity<T>> extends JpaRepository<T, Long> {
     Collection<ProjectId> findAllBy();
 }

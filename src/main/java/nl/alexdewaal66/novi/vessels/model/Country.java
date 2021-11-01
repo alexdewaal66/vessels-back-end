@@ -1,10 +1,34 @@
 package nl.alexdewaal66.novi.vessels.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
-public class Country {
+public class Country implements GenericEntity<Country>{
+//    @Override
+//    public Country shallowCopy() {
+//        Country copy = new Country();
+//        copy.shortNameNL = this.shortNameNL;
+//        copy.shortNameEN = this.shortNameEN;
+//        copy.alpha2Code = this.alpha2Code;
+//        copy.alpha3Code = this.alpha3Code;
+//        copy.numericCode = this.numericCode;
+//        return copy;
+//    }
+
+    @Override @JsonIgnore @Transient
+    public String getEntityName() {
+        return "Country";
+    }
+
+    @Override @JsonIgnore @Transient
+    public List<String> getTextProperties() {
+        return Arrays.asList("shortNameNL", "shortNameEN");
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

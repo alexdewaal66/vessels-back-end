@@ -15,12 +15,14 @@ public interface GenericService<T extends GenericEntity> {
 
     T getById(Long id);
 
+    //    todo: List =>> Collection
     List<T> getByIds(List<Long> ids);
 
     Collection<T> getAll();
 
     T findOneByExample(Match<T> match);
 
+    //    todo: List =>> Collection
     List<T> findAllByExample(Match<T> match);
 
     Long create(T item);
