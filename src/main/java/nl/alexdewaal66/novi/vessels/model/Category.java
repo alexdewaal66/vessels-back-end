@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -28,24 +29,33 @@ public class Category implements GenericEntity<Category> {
 
     private String catName;
 
-    @Column(name = "parent_id")
-    private Long parentId;
+//    @Column(name = "parent_id")
+//    private Long parentId;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @ManyToOne
+    @JoinColumn(name = "parent_category_id")
+    private ParentCategory parentCategory;
+
+    @Override public Long getId() { return id; }
+    @Override public void setId(Long id) { this.id = id; }
 
     public String getCatName() { return catName; }
     public void setCatName(String catName) { this.catName = catName; }
 
-    public Long getParentId() { return parentId; }
-    public void setParentId(Long parentId) { this.parentId = parentId; }
+//    public Long getParentId() { return parentId; }
+//    public void setParentId(Long parentId) { this.parentId = parentId; }
+
+    public ParentCategory getParentCategory() { return parentCategory; }
+    public void setParentCategory(ParentCategory parentCategory) {
+        this.parentCategory = parentCategory;
+    }
 
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
                 ", catName='" + catName + '\'' +
-                ", parentId=" + parentId +
+                ", parentCategory=" + parentCategory +
                 '}';
     }
 }

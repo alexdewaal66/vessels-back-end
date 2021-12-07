@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -10,10 +11,12 @@ public class Authority implements Serializable {
 
     @Id
     @Column(nullable = false)
+    @Size(max = 100)
     private String username;
 
     @Id
     @Column(nullable = false)
+    @Size(max = 100)
     private String role;
 
     public Authority() {}

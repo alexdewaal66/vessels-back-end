@@ -1,4 +1,4 @@
-package nl.alexdewaal66.novi.vessels.model;
+package nl.alexdewaal66.novi.vessels.generics;
 
 import nl.alexdewaal66.novi.vessels.utils.Property;
 import org.aspectj.apache.bcel.generic.RET;

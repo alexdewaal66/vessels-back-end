@@ -1,18 +1,15 @@
 package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
+import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.VesselType;
-import nl.alexdewaal66.novi.vessels.repository.GenericRepository;
+import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
 import nl.alexdewaal66.novi.vessels.repository.VesselTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-
 @Service
-public class VesselTypeServiceImpl extends GenericServiceImpl<VesselType>  implements VesselTypeService{
+public class VesselTypeServiceImpl extends GenericServiceImpl<VesselType> implements VesselTypeService{
 
     @Autowired
     private VesselTypeRepository vesselTypeRepository;

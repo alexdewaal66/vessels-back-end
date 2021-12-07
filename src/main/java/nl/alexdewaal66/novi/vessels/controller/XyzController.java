@@ -1,9 +1,6 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
-import nl.alexdewaal66.novi.vessels.repository.XyzRepository;
-import nl.alexdewaal66.novi.vessels.service.GenericService;
-import nl.alexdewaal66.novi.vessels.service.GenericServiceImpl;
-import nl.alexdewaal66.novi.vessels.service.XyzService;
+import nl.alexdewaal66.novi.vessels.generics.GenericService;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

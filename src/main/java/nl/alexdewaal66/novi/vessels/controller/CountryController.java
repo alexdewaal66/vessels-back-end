@@ -1,8 +1,9 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
+import nl.alexdewaal66.novi.vessels.generics.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Country;
 import nl.alexdewaal66.novi.vessels.service.CountryService;
-import nl.alexdewaal66.novi.vessels.service.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

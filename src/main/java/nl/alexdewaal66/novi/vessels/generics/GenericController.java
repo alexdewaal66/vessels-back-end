@@ -1,8 +1,7 @@
-package nl.alexdewaal66.novi.vessels.controller;
+package nl.alexdewaal66.novi.vessels.generics;
 
-import nl.alexdewaal66.novi.vessels.model.GenericEntity;
-import nl.alexdewaal66.novi.vessels.model.Xyz;
-import nl.alexdewaal66.novi.vessels.service.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

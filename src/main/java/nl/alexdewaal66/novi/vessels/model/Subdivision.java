@@ -1,14 +1,29 @@
 package nl.alexdewaal66.novi.vessels.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
-public class Subdivision {
+public class Subdivision implements GenericEntity<Subdivision> {
+
+    @Override @JsonIgnore @Transient
+    public String getEntityName() {
+        return "Subdivision";
+    }
+
+    @Override @JsonIgnore @Transient
+    public List<String> getTextProperties() {
+        return Arrays.asList("alpha2Code", "subdivisionCode", "name", "type");
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Size(max = 2)
     private String alpha2Code;
@@ -25,18 +40,16 @@ public class Subdivision {
     @Column(name = "subdivision_type")
     private String type;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
-
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public String getAlpha2Code() {
         return alpha2Code;
     }
-
     public void setAlpha2Code(String alpha2Code) {
         this.alpha2Code = alpha2Code;
     }
@@ -44,7 +57,6 @@ public class Subdivision {
     public String getSubdivisionCode() {
         return subdivisionCode;
     }
-
     public void setSubdivisionCode(String code) {
         this.subdivisionCode = code;
     }
@@ -52,7 +64,6 @@ public class Subdivision {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -60,7 +71,6 @@ public class Subdivision {
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }

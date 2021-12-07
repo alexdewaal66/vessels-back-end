@@ -1,10 +1,9 @@
-package nl.alexdewaal66.novi.vessels.repository;
+package nl.alexdewaal66.novi.vessels.generics;
 
-import nl.alexdewaal66.novi.vessels.model.GenericEntity;
-import nl.alexdewaal66.novi.vessels.model.ProjectId;
+import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import nl.alexdewaal66.novi.vessels.generics.ProjectId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 

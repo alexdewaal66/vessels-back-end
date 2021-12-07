@@ -1,20 +1,13 @@
-package nl.alexdewaal66.novi.vessels.service;
+package nl.alexdewaal66.novi.vessels.generics;
 
 import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
-import nl.alexdewaal66.novi.vessels.model.GenericEntity;
-import nl.alexdewaal66.novi.vessels.model.ProjectId;
-import nl.alexdewaal66.novi.vessels.repository.GenericRepository;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 import nl.alexdewaal66.novi.vessels.utils.Matcher;
 import org.springframework.data.domain.Example;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
-
-import nl.alexdewaal66.novi.vessels.model.*;
-import org.springframework.transaction.annotation.Transactional;
 
 //@Service
 public class GenericServiceImpl<T extends GenericEntity<T>>

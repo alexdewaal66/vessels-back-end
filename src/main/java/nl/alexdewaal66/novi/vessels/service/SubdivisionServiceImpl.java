@@ -1,13 +1,11 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.model.ProjectId;
-import nl.alexdewaal66.novi.vessels.model.Xyz;
+import nl.alexdewaal66.novi.vessels.generics.ProjectId;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 import nl.alexdewaal66.novi.vessels.utils.Matcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-import nl.alexdewaal66.novi.vessels.exceptions.IncompleteRecordException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.model.Subdivision;
 import nl.alexdewaal66.novi.vessels.repository.SubdivisionRepository;

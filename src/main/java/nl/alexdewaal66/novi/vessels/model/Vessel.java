@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import nl.alexdewaal66.novi.vessels.utils.Property;
 
 import javax.persistence.*;
@@ -12,16 +13,13 @@ import java.util.List;
 
 @Entity
 public class Vessel implements GenericEntity<Vessel> {
-    @Override
-    @JsonIgnore
-    @Transient
+
+    @Override @JsonIgnore @Transient
     public String getEntityName() {
         return "Vessel";
     }
 
-    @Override
-    @JsonIgnore
-    @Transient
+    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("hullNumber", "builder");
     }
@@ -132,6 +130,7 @@ public class Vessel implements GenericEntity<Vessel> {
 
     public Date getEndDate() { return endDate; }
     public void setEndDate(Date endDate) { this.endDate = endDate; }
+
     @Override
     public String toString() {
         return "Vessel{" +

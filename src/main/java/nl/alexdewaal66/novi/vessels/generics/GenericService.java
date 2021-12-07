@@ -1,14 +1,12 @@
-package nl.alexdewaal66.novi.vessels.service;
+package nl.alexdewaal66.novi.vessels.generics;
 
-import nl.alexdewaal66.novi.vessels.model.GenericEntity;
-import nl.alexdewaal66.novi.vessels.model.ProjectId;
-import nl.alexdewaal66.novi.vessels.repository.GenericRepository;
+import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import nl.alexdewaal66.novi.vessels.generics.ProjectId;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 
 import java.util.Collection;
 import java.util.List;
 
-//public interface GenericService<T extends GenericEntity, R extends GenericRepository<T>> {
 public interface GenericService<T extends GenericEntity> {
 
     Collection<ProjectId> getAllIds();

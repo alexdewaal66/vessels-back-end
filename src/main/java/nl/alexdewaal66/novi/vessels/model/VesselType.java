@@ -2,10 +2,7 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.*;
 //import nl.alexdewaal66.novi.vessels.config.SpringConfiguration;
-import nl.alexdewaal66.novi.vessels.repository.VesselTypeRepository;
-import nl.alexdewaal66.novi.vessels.service.VesselTypeService;
-import nl.alexdewaal66.novi.vessels.service.VesselTypeServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
