@@ -13,8 +13,7 @@ import java.util.Set;
 
 @Entity
 public class VesselType implements GenericEntity<VesselType> {
-    public VesselType() {
-    }
+    public VesselType() {}
 
     public VesselType shallowCopy() {
         VesselType copy = new VesselType();
@@ -32,16 +31,7 @@ public class VesselType implements GenericEntity<VesselType> {
         return copy;
     }
 
-    @Override
-    @JsonIgnore
-    @Transient
-    public String getEntityName() {
-        return "VesselType";
-    }
-
-    @Override
-    @JsonIgnore
-    @Transient
+    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("nameNL", "nameEN", "descNL", "descEN");
     }
@@ -85,7 +75,6 @@ public class VesselType implements GenericEntity<VesselType> {
     @PositiveOrZero(message = "Negative draft not allowed")
     private Double draft;
 
-    //    @JsonIgnore
 //    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
     @JoinColumn(name = "super_type_id", nullable = true)
@@ -97,7 +86,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -105,7 +93,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public String getNameNL() {
         return nameNL;
     }
-
     public void setNameNL(String nameNL) {
         this.nameNL = nameNL;
     }
@@ -113,7 +100,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public String getNameEN() {
         return nameEN;
     }
-
     public void setNameEN(String nameEN) {
         this.nameEN = nameEN;
     }
@@ -121,7 +107,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public String getDescNL() {
         return descNL;
     }
-
     public void setDescNL(String descNl) {
         this.descNL = descNl;
     }
@@ -129,7 +114,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public String getDescEN() {
         return descEN;
     }
-
     public void setDescEN(String descEn) {
         this.descEN = descEn;
     }
@@ -137,7 +121,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public Integer getTonnageMin() {
         return tonnageMin;
     }
-
     public void setTonnageMin(Integer tonnageMin) {
         this.tonnageMin = tonnageMin;
     }
@@ -145,7 +128,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public Integer getTonnageMax() {
         return tonnageMax;
     }
-
     public void setTonnageMax(Integer tonnageMax) {
         this.tonnageMax = tonnageMax;
     }
@@ -153,7 +135,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public Double getLength() {
         return length;
     }
-
     public void setLength(Double length) {
         this.length = length;
     }
@@ -161,7 +142,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public Double getBeam() {
         return beam;
     }
-
     public void setBeam(Double beam) {
         this.beam = beam;
     }
@@ -169,7 +149,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public Double getHeight() {
         return height;
     }
-
     public void setHeight(Double height) {
         this.height = height;
     }
@@ -177,7 +156,6 @@ public class VesselType implements GenericEntity<VesselType> {
     public Double getDraft() {
         return draft;
     }
-
     public void setDraft(Double draft) {
         this.draft = draft;
     }

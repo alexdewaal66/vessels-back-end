@@ -15,13 +15,6 @@ public class Address implements GenericEntity<Address> {
     @Override
     @JsonIgnore
     @Transient
-    public String getEntityName() {
-        return "Address";
-    }
-
-    @Override
-    @JsonIgnore
-    @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("address1", "address2", "city", "postalCode");
     }
@@ -54,6 +47,7 @@ public class Address implements GenericEntity<Address> {
     private String postalCode;
 
     @ManyToOne
+    @JoinColumn(name = "country_id")
     private Country country;
 
     @Override

@@ -1,5 +1,7 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
+import nl.alexdewaal66.novi.vessels.generics.GenericController;
+import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,25 +14,13 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/un_locode")
 @CrossOrigin(origins = "*")
-public class UNLocodeController {
+public class UNLocodeController extends GenericController<UNLocode> {
 
     @Autowired
     private UNLocodeService unLocodeService;
-
-    @GetMapping(value = "/ids")
-    public ResponseEntity<Object> getUNLocodeIds() {
-        return ResponseEntity.ok().body(unLocodeService.getAllIds());
-    }
-
-    @GetMapping(value = "")
-    public ResponseEntity<Object> getUNLocodes() {
-        return ResponseEntity.ok().body(unLocodeService.getUNLocodes());
-    }
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Object> getUNLocode(@PathVariable("id") long id) {
-        UNLocode unLocode = unLocodeService.getUNLocodeById(id);
-        return ResponseEntity.ok().body(unLocode);
+    
+    public UNLocodeController(GenericServiceImpl<UNLocode> service) {
+        super(service);
     }
 
     @GetMapping(value = "/find")
@@ -41,10 +31,4 @@ public class UNLocodeController {
                 .getUNLocodeByCodes(alpha2Code, locationCode)
         );
     }
-
-    @PostMapping(value = "/ids")
-    public ResponseEntity<Object> getUNLocodesByIds(@RequestBody List<Long> ids) {
-        return ResponseEntity.ok().body(unLocodeService.getByIds(ids));
-    }
-
 }

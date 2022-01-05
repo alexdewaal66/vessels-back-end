@@ -24,7 +24,7 @@ public abstract class GenericController<T extends GenericEntity<T>> {
     }
 
     @GetMapping(value = "")
-    public ResponseEntity<Object> get() {
+    public ResponseEntity<Object> getAll() {
         return ResponseEntity.ok().body(service.getAll());
     }
 
@@ -35,7 +35,7 @@ public abstract class GenericController<T extends GenericEntity<T>> {
 
     @PostMapping(value = "/ids")
     public ResponseEntity<Object> getByIds(@RequestBody List<Long> ids) {
-        System.out.println("GenericController » getByIds \n\t ids=" + ids);
+//        System.out.println("GenericController » getByIds \n\t ids=" + ids);
         return ResponseEntity.ok().body(service.getByIds(ids));
     }
 
@@ -58,7 +58,7 @@ public abstract class GenericController<T extends GenericEntity<T>> {
         long newId = service.create(item);
         System.out.println("» GenericController » create()"
                 + "\n\tid=" + newId);
-        return new ResponseEntity<>(String.format("%s %d created", item.getEntityName(), newId), HttpStatus.CREATED);
+        return new ResponseEntity<>(String.format("%s %d created", item.getClass().getSimpleName(), newId), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")

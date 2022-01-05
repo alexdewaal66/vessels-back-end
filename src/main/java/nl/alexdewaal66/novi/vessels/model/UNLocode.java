@@ -1,17 +1,29 @@
 package nl.alexdewaal66.novi.vessels.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Arrays;
+import java.util.List;
 
 // official column explanations below class definition
 @Entity
 @Table(name = "un_locode")
-public class UNLocode {
+public class UNLocode implements GenericEntity<UNLocode> {
+
+    @Override @JsonIgnore @Transient
+    public List<String> getTextProperties() {
+        return Arrays.asList("change", "alpha2Code", "locationCode", "nameDiacritics",
+                "nameWoDiacritics", "subdivisionCode", "functionClassifier", "status", "updateYear",
+                "iata", "coordinates", "remarks");
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Size(max = 3)
     private String change;
@@ -49,109 +61,46 @@ public class UNLocode {
     @Size(max = 100)
     private String remarks;
 
-    public long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    public String getChange() { return change; }
+    public void setChange(String change) { this.change = change; }
 
-    public String getChange() {
-        return change;
-    }
+    public String getAlpha2Code() { return alpha2Code; }
+    public void setAlpha2Code(String alpha2Code) { this.alpha2Code = alpha2Code; }
 
-    public void setChange(String change) {
-        this.change = change;
-    }
+    public String getLocationCode() { return locationCode; }
+    public void setLocationCode(String locationCode) { this.locationCode = locationCode; }
 
-    public String getAlpha2Code() {
-        return alpha2Code;
-    }
+    public String getNameDiacritics() { return nameDiacritics; }
+    public void setNameDiacritics(String nameDiacritics) { this.nameDiacritics = nameDiacritics; }
 
-    public void setAlpha2Code(String alpha2Code) {
-        this.alpha2Code = alpha2Code;
-    }
+    public String getNameWoDiacritics() { return nameWoDiacritics; }
+    public void setNameWoDiacritics(String nameWoDiacritics) { this.nameWoDiacritics = nameWoDiacritics; }
 
-    public String getLocationCode() {
-        return locationCode;
-    }
+    public String getSubdivisionCode() { return subdivisionCode; }
+    public void setSubdivisionCode(String subdivisionCode) { this.subdivisionCode = subdivisionCode; }
 
-    public void setLocationCode(String locationCode) {
-        this.locationCode = locationCode;
-    }
-
-    public String getNameDiacritics() {
-        return nameDiacritics;
-    }
-
-    public void setNameDiacritics(String nameDiacritics) {
-        this.nameDiacritics = nameDiacritics;
-    }
-
-    public String getNameWoDiacritics() {
-        return nameWoDiacritics;
-    }
-
-    public void setNameWoDiacritics(String nameWoDiacritics) {
-        this.nameWoDiacritics = nameWoDiacritics;
-    }
-
-    public String getSubdivisionCode() {
-        return subdivisionCode;
-    }
-
-    public void setSubdivisionCode(String subdivisionCode) {
-        this.subdivisionCode = subdivisionCode;
-    }
-
-    public String getFunctionClassifier() {
-        return functionClassifier;
-    }
-
+    public String getFunctionClassifier() { return functionClassifier; }
     public void setFunctionClassifier(String functionClassifier) {
         this.functionClassifier = functionClassifier;
     }
 
-    public String getStatus() {
-        return status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getUpdateYear() { return updateYear; }
+    public void setUpdateYear(String updateYear) { this.updateYear = updateYear; }
 
-    public String getUpdateYear() {
-        return updateYear;
-    }
+    public String getIata() { return iata; }
+    public void setIata(String iata) { this.iata = iata; }
 
-    public void setUpdateYear(String updateYear) {
-        this.updateYear = updateYear;
-    }
+    public String getCoordinates() { return coordinates; }
+    public void setCoordinates(String coordinates) { this.coordinates = coordinates; }
 
-    public String getIata() {
-        return iata;
-    }
-
-    public void setIata(String iata) {
-        this.iata = iata;
-    }
-
-    public String getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(String coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
+    public String getRemarks() { return remarks; }
+    public void setRemarks(String remarks) { this.remarks = remarks; }
 
     @Override
     public String toString() {
@@ -223,7 +172,7 @@ GB LHR London-Heathrow Apt
 
 CL ULC Santiago-Los Cerrillos Apt
 
-The sublocation name is also listed in its proper alphabetic name order place, followed by an oblique stroke (slash) (/) and the name of the main place to which it belongs, e.g.:
+The sublocation name is also listed in its proper alphabetic name order place, followed by an oblique stroke (slash) (/) and the name of the main place to which it beLongs, e.g.:
 
 GB LHR Heathrow Apt/London
 
@@ -286,14 +235,14 @@ The IATA code for the location if different from location code in column LOCODE 
 
 1.10 Column "Coordinates"
 
-This column contains the geographical coordinates (latitude/longitude) of the location, if there is any.
+This column contains the geographical coordinates (latitude/Longitude) of the location, if there is any.
 
 In order to avoid unnecessary use of non-standard characters and space, the following standard presentation is used:
 
-0000lat 00000long
+0000lat 00000Long
 
-(lat - Latitude: N or S ; long – Longitude: W or E, only one digit, capital letter)
-Where the last two rightmost digits refer to minutes and the first two or three digits refer to the degrees for latitude and longitude respectively. In addition, you must specify N or S for latitude and W or E for longitude, as appropriate.
+(lat - Latitude: N or S ; Long – Longitude: W or E, only one digit, capital letter)
+Where the last two rightmost digits refer to minutes and the first two or three digits refer to the degrees for latitude and Longitude respectively. In addition, you must specify N or S for latitude and W or E for Longitude, as appropriate.
 
 1.11 Column "Remarks"
 

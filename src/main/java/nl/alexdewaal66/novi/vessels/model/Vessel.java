@@ -15,16 +15,11 @@ import java.util.List;
 public class Vessel implements GenericEntity<Vessel> {
 
     @Override @JsonIgnore @Transient
-    public String getEntityName() {
-        return "Vessel";
-    }
-
-    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("hullNumber", "builder");
     }
 
-    private static Object[][] propertyTupels = {
+    private static final Object[][] propertyTupels = {
             {"id", Long.class},
             {"hull", Hull.class},
             {"name", String.class},

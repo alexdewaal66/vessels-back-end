@@ -11,12 +11,8 @@ import java.util.List;
 @Entity
 public class Xyz implements GenericEntity<Xyz> {
 
-    @Override
-    @JsonIgnore
-    public String getEntityName() { return "Xyz"; }
 
-    @Override
-    @JsonIgnore
+    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("xyzString", "name", "description");
     }

@@ -12,11 +12,6 @@ import java.util.List;
 public class Subdivision implements GenericEntity<Subdivision> {
 
     @Override @JsonIgnore @Transient
-    public String getEntityName() {
-        return "Subdivision";
-    }
-
-    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("alpha2Code", "subdivisionCode", "name", "type");
     }

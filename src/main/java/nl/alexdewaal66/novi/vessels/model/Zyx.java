@@ -13,11 +13,6 @@ import java.util.List;
 public class Zyx implements GenericEntity<Zyx> {
 
     @Override @JsonIgnore @Transient
-    public String getEntityName() {
-        return "Zyx";
-    }
-
-    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("name", "description");
     }

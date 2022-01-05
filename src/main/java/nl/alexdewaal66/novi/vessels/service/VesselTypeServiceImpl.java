@@ -34,7 +34,7 @@ public class VesselTypeServiceImpl extends GenericServiceImpl<VesselType> implem
         Long superTypeId = item.getSuperType().getId();
             System.out.println("» VesselTypeServiceImpl » create() *after* getId(), *before* getOne()"
                 + "\n\t superTypeId = " + superTypeId);
-        VesselType superType = vesselTypeRepository.getOne(superTypeId);
+        VesselType superType = repository.getOne(superTypeId);
             System.out.println("» VesselTypeServiceImpl » create() *after* getId(), *after* getOne()"
                 + "\n\t superType = " + superType);
         item.setSuperType(superType);

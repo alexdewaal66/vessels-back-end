@@ -16,13 +16,6 @@ public class Hull implements GenericEntity<Hull> {
     @Override
     @JsonIgnore
     @Transient
-    public String getEntityName() {
-        return "Hull";
-    }
-
-    @Override
-    @JsonIgnore
-    @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("hullNumber", "builder");
     }

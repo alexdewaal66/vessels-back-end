@@ -11,11 +11,6 @@ import java.util.List;
 public class Country implements GenericEntity<Country> {
 
     @Override @JsonIgnore @Transient
-    public String getEntityName() {
-        return "Country";
-    }
-
-    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("shortNameNL", "shortNameEN");
     }

@@ -8,10 +8,6 @@ import java.util.List;
 
 public interface GenericEntity<T> {
 
-//    T shallowCopy();
-
-    String getEntityName();
-
     List<String> getTextProperties();
 
 //    List<Property> getProperties();

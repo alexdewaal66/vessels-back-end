@@ -2,6 +2,7 @@ package nl.alexdewaal66.novi.vessels.generics;
 
 import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
+import nl.alexdewaal66.novi.vessels.utils.Console;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 import nl.alexdewaal66.novi.vessels.utils.Matcher;
 import org.springframework.data.domain.Example;
@@ -13,9 +14,9 @@ import java.util.List;
 public class GenericServiceImpl<T extends GenericEntity<T>>
         implements GenericService<T> {
 
-    private final GenericRepository<T> repository;
+    protected final GenericRepository<T> repository;
 
-    // GenericRepository<> is not to be a bean by design, error in IntelliJ is erroneous
+    // GenericRepository<> is not to be a bean by design, error reported by IntelliJ is erroneous
     @SuppressWarnings(value = "SpringJavaInjectionPointsAutowiringInspection")
     public GenericServiceImpl(GenericRepository<T> repository) {
         this.repository = repository;
@@ -47,7 +48,7 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
         String mode = match.getMode();
         System.out.println("GenericServiceImpl » findOneByExample()" +
                 "\n\tmatch = " + match +
-                "\n\tgetEntityName() = " + probe.getEntityName() +
+                "\n\tgetEntityName() = " + probe.getClass().getSimpleName() +
                 "\n\tgetTextProperties() = " + probe.getTextProperties());
         Example<T> example = Example.of(probe, Matcher.build(mode, probe.getTextProperties()));
         return repository.findOne(example)
@@ -70,10 +71,7 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
         item.setId(null); // protects from overwriting existing instance
         System.out.println("» GenericServiceImpl » create()"
                 + "\n\t item=" + item.toString());
-//        T copy = item.shallowCopy();
-//        System.out.println("» GenericServiceImpl » create()"
-//                + "\n\t copy=" + copy.toString());
-//        T newItem = repository.save(copy);
+        T copy = item;
         T newItem = repository.save(item);
         System.out.println("» GenericServiceImpl » create()"
                 + "\n\t newItem=" + newItem.toString());
@@ -83,15 +81,15 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     @Override
     public void update(Long id, T newItem) {
         if (exists(id)) {
-            System.out.println("» GenericServiceImpl » update() *before* setId()"
-                    + "\n\t newItem=" + newItem.toString());
+            String className = newItem.getClass().getSimpleName();
+            String path = "GenericServiceImpl<" + className + "> » update() ";
+//            Console.logv(path + "*before* setId()" , "newItem=" + newItem);
             newItem.setId(id);
-            System.out.println("» GenericServiceImpl » update() *after* setId()"
-                    + "\n\t newItem=" + newItem.toString());
+            Console.logv(path + "*after* setId()" , "newItem=" + newItem);
             repository.save(newItem);
         } else {
-            System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", newItem.getEntityName(), id);
-            throw new RecordNotFoundException(newItem.getEntityName(), id);
+            System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", newItem.getClass().getSimpleName(), id);
+            throw new RecordNotFoundException(newItem.getClass().getSimpleName(), id);
         }
     }
 

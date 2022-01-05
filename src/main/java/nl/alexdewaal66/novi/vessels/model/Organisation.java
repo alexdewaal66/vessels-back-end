@@ -13,16 +13,8 @@ import java.util.List;
 public class Organisation implements GenericEntity<Organisation> {
     public Organisation() {
     }
-    @Override
-    @JsonIgnore
-    @Transient
-    public String getEntityName() {
-        return "Organisation";
-    }
 
-    @Override
-    @JsonIgnore
-    @Transient
+    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("shortName", "longName", "description", "url", "email");
     }

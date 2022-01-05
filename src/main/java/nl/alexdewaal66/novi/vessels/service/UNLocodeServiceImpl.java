@@ -1,5 +1,7 @@
 package nl.alexdewaal66.novi.vessels.service;
 
+import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
+import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import nl.alexdewaal66.novi.vessels.exceptions.IncompleteRecordException;
@@ -11,33 +13,13 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class UNLocodeServiceImpl implements UNLocodeService{
+public class UNLocodeServiceImpl extends GenericServiceImpl<UNLocode> implements UNLocodeService{
 
     @Autowired
     private UNLocodeRepository unLocodeRepository;
 
-    @Override
-    public Collection<Long> getAllIds() {
-        return unLocodeRepository.getAllIds();
-    }
-
-    @Override
-    public Collection<UNLocode> getUNLocodes() {
-        return unLocodeRepository.findAll();
-    }
-
-    @Override
-    public List<UNLocode> getByIds(List<Long> ids) {
-        return unLocodeRepository.findAllById(ids);
-    }
-
-    @Override
-    public UNLocode getUNLocodeById(long id) {
-        if (unLocodeExists(id)) {
-            return unLocodeRepository.findById(id).orElse(null);
-        } else {
-            throw new RecordNotFoundException("UNLocode", id);
-        }
+    public UNLocodeServiceImpl(GenericRepository<UNLocode> repository) {
+        super(repository);
     }
 
     @Override
@@ -59,10 +41,4 @@ public class UNLocodeServiceImpl implements UNLocodeService{
             throw new RecordNotFoundException();
         }
     }
-
-    @Override
-    public boolean unLocodeExists(long id) {
-        return unLocodeRepository.existsById(id);
-    }
-
 }

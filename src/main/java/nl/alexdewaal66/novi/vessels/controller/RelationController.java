@@ -2,17 +2,14 @@ package nl.alexdewaal66.novi.vessels.controller;
 
 import nl.alexdewaal66.novi.vessels.generics.GenericController;
 import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.model.Relation;
 import org.springframework.web.bind.annotation.*;
 
-import nl.alexdewaal66.novi.vessels.model.VesselType;
-
 @RestController
-@RequestMapping(value = "/vesseltypes")
+@RequestMapping(value = "/relations")
 @CrossOrigin(origins = "*")
-public class VesselTypeController extends GenericController<VesselType> {
-
-    public VesselTypeController(GenericServiceImpl<VesselType> service) {
+public class RelationController extends GenericController<Relation> {
+    public RelationController(GenericServiceImpl<Relation> service) {
         super(service);
     }
-
 }
