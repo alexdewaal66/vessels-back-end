@@ -6,7 +6,4 @@ import nl.alexdewaal66.novi.vessels.model.XyzSummaryProjection;
 
 import java.util.Collection;
 
-public interface XyzService extends GenericService2<Xyz> {
-
-//        Collection<XyzSummaryProjection> getAllSummaries();
-}
+public interface XyzService extends GenericService2<Xyz> {}

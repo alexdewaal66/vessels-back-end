@@ -9,5 +9,7 @@ import java.util.Collection;
 public interface ZyxRepository extends GenericRepository2<Zyx> {
     Zyx findByName(String name);
 
-    Collection<ZyxSummaryInterface> findAllBy();
+    Collection<ZyxSummaryInterface> getAllBy();
+
+    Collection<ZyxSummaryInterface> getAllByIdIn(Collection<Long> ids);
 }

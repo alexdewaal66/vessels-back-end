@@ -9,6 +9,4 @@ import java.util.Collection;
 public interface ZyxService extends GenericService2<Zyx> {
 
     Zyx getZyxByName(String Name);
-
-//    Collection<ZyxSummaryProjection> getSummaries();
 }

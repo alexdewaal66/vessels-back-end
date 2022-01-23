@@ -2,29 +2,20 @@ package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.generics2.GenericServiceImpl2;
 import nl.alexdewaal66.novi.vessels.model.Xyz;
-import nl.alexdewaal66.novi.vessels.model.XyzSummaryProjection;
 import nl.alexdewaal66.novi.vessels.repository.XyzRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
 
 @Service
 public class XyzServiceImpl
         extends GenericServiceImpl2<Xyz>
         implements XyzService {
 
-    @Autowired
-    private XyzRepository xyzRepository;
+//    @Autowired
+//    private XyzRepository xyzRepository;
 
     public XyzServiceImpl(XyzRepository repository) {
-        super(
-//                XyzSummaryProjection.class,
-                repository);
+        super(repository);
     }
 
-//    @Override
-//    public Collection<XyzSummaryProjection> getAllSummaries() {
-//        return xyzRepository.findAllBy();
-//    }
 }

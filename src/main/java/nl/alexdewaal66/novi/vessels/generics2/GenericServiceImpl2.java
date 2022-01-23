@@ -11,20 +11,14 @@ import org.springframework.data.domain.Example;
 import java.util.Collection;
 import java.util.List;
 
-//@Service
 public class GenericServiceImpl2<T extends GenericEntity2<T>>
         implements GenericService2<T> {
-
-//    final Class<ClassSummaryProjection2<T>> projectionClass;
 
     protected final GenericRepository2<T> repository;
 
     // GenericRepository2<> is not to be a bean by design, error reported by IntelliJ is erroneous
     @SuppressWarnings(value = "SpringJavaInjectionPointsAutowiringInspection")
-    public GenericServiceImpl2(
-//            Class<? extends ClassSummaryProjection2<T>> projectionClass,
-            GenericRepository2<T> repository) {
-//        this.projectionClass = (Class<ClassSummaryProjection2<T>>) projectionClass;
+    public GenericServiceImpl2(GenericRepository2<T> repository) {
         this.repository = repository;
     }
 
@@ -44,17 +38,13 @@ public class GenericServiceImpl2<T extends GenericEntity2<T>>
         return repository.findById(id).orElseThrow(RecordNotFoundException::new);
     }
 
-//    public Collection<ClassSummaryProjection2<T>> getSummariesByIds(List<Long> ids) {
-//        return repository.findAllByIdIn(ids, projectionClass);
-//    }
+    public Collection<InterfaceSummaryProjection<T>> getSummariesByIds(List<Long> ids) {
+        return (Collection<InterfaceSummaryProjection<T>>) repository.getAllByIdIn(ids);
+    }
 
-    //    @Override
-//    public Collection<ClassSummaryProjection2<T>> getAllSummaries() {
-//        return repository.findAllBy();
-//    }
     @Override
     public Collection<InterfaceSummaryProjection<T>> getAllSummaries() {
-        return (Collection<InterfaceSummaryProjection<T>>) repository.findAllBy();
+        return (Collection<InterfaceSummaryProjection<T>>) repository.getAllBy();
     }
 
 

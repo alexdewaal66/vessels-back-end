@@ -43,11 +43,11 @@ public abstract class GenericController2<T extends GenericEntity2<T>> {
         return ResponseEntity.ok().body(service.getAllSummaries());
     }
 
-//    @PostMapping(value = "/summaries/ids")
-//    public ResponseEntity<Object> getSummariesByIds(@RequestBody List<Long> ids) {
-////        System.out.println("GenericController2 » getSummariesByIds \n\t ids=" + ids);
-//        return ResponseEntity.ok().body(service.getSummariesByIds(ids));
-//    }
+    @PostMapping(value = "/summaries")
+    public ResponseEntity<Object> getSummariesByIds(@RequestBody List<Long> ids) {
+//        System.out.println("GenericController2 » getSummariesByIds \n\t ids=" + ids);
+        return ResponseEntity.ok().body(service.getSummariesByIds(ids));
+    }
 
     @PostMapping(value = "/findall")
     public ResponseEntity<Object> findItemsByExample(@RequestBody Match<T> match) {
