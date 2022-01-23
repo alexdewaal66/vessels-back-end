@@ -10,6 +10,9 @@ import java.util.Collection;
 @NoRepositoryBean
 public interface GenericRepository2<T extends GenericEntity2<T>> extends JpaRepository<T, Long> {
     Collection<IdProjection> findBy();
+
 //    <X> Collection<X> findAllByIdIn(Collection<Long> ids, Class<X> type);
-    <X> Collection<X> findAllBy();
+//    <X> Collection<X> findAllBy();
+
+    Collection<? extends InterfaceSummaryProjection<T>> findAllBy();
 }

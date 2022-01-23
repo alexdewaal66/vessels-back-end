@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.generics2;
 
 //import nl.alexdewaal66.novi.vessels.generics.Summary;
+
 import nl.alexdewaal66.novi.vessels.generics.IdProjection;
 import nl.alexdewaal66.novi.vessels.generics2.GenericEntity2;
 import nl.alexdewaal66.novi.vessels.utils.Match;
@@ -15,8 +16,9 @@ public interface GenericService2<T extends GenericEntity2<T>> {
     T getById(Long id);
     List<T> getByIds(List<Long> ids);
 
-//    Collection<ClassSummaryProjection2<T>> getSummariesByIds(List<Long> ids);
-    Collection<ClassSummaryProjection2<T>> getAllSummaries();
+    //    Collection<ClassSummaryProjection2<T>> getSummariesByIds(List<Long> ids);
+//    Collection<ClassSummaryProjection2<T>> getAllSummaries();
+    Collection<InterfaceSummaryProjection<T>> getAllSummaries();
 
     Collection<T> getAll();
 

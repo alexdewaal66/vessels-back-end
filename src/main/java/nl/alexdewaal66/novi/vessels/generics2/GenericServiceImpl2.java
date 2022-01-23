@@ -15,14 +15,16 @@ import java.util.List;
 public class GenericServiceImpl2<T extends GenericEntity2<T>>
         implements GenericService2<T> {
 
-    final Class<ClassSummaryProjection2<T>> projectionClass;
+//    final Class<ClassSummaryProjection2<T>> projectionClass;
 
     protected final GenericRepository2<T> repository;
 
     // GenericRepository2<> is not to be a bean by design, error reported by IntelliJ is erroneous
     @SuppressWarnings(value = "SpringJavaInjectionPointsAutowiringInspection")
-    public GenericServiceImpl2(Class<? extends ClassSummaryProjection2<T>> projectionClass, GenericRepository2<T> repository) {
-        this.projectionClass = (Class<ClassSummaryProjection2<T>>) projectionClass;
+    public GenericServiceImpl2(
+//            Class<? extends ClassSummaryProjection2<T>> projectionClass,
+            GenericRepository2<T> repository) {
+//        this.projectionClass = (Class<ClassSummaryProjection2<T>>) projectionClass;
         this.repository = repository;
     }
 
@@ -46,9 +48,13 @@ public class GenericServiceImpl2<T extends GenericEntity2<T>>
 //        return repository.findAllByIdIn(ids, projectionClass);
 //    }
 
+    //    @Override
+//    public Collection<ClassSummaryProjection2<T>> getAllSummaries() {
+//        return repository.findAllBy();
+//    }
     @Override
-    public Collection<ClassSummaryProjection2<T>> getAllSummaries() {
-        return repository.findAllBy();
+    public Collection<InterfaceSummaryProjection<T>> getAllSummaries() {
+        return (Collection<InterfaceSummaryProjection<T>>) repository.findAllBy();
     }
 
 
@@ -99,7 +105,7 @@ public class GenericServiceImpl2<T extends GenericEntity2<T>>
             String path = "GenericServiceImpl2<" + className + "> » update() ";
 //            Console.logv(path + "*before* setId()" , "newItem=" + newItem);
             newItem.setId(id);
-            Console.logv(path + "*after* setId()" , "newItem=" + newItem);
+            Console.logv(path + "*after* setId()", "newItem=" + newItem);
             repository.save(newItem);
         } else {
             System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", newItem.getClass().getSimpleName(), id);

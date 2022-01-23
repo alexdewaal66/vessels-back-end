@@ -18,7 +18,9 @@ public class XyzServiceImpl
     private XyzRepository xyzRepository;
 
     public XyzServiceImpl(XyzRepository repository) {
-        super(XyzSummaryProjection.class, repository);
+        super(
+//                XyzSummaryProjection.class,
+                repository);
     }
 
 //    @Override

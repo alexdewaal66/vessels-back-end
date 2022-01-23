@@ -1,9 +1,10 @@
 package nl.alexdewaal66.novi.vessels.model;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import nl.alexdewaal66.novi.vessels.generics2.ClassSummaryProjection2;
 
-@Value
+@Data @AllArgsConstructor
 public class XyzSummaryProjection extends ClassSummaryProjection2<Xyz> {
 
     Long id;

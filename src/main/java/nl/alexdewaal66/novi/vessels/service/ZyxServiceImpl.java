@@ -17,7 +17,9 @@ public class ZyxServiceImpl extends GenericServiceImpl2<Zyx> implements ZyxServi
     private ZyxRepository zyxRepository;
 
     public ZyxServiceImpl(ZyxRepository repository) {
-        super(ZyxSummaryProjection.class, repository);
+        super(
+//                ZyxSummaryProjection.class,
+                repository);
     }
 
 
