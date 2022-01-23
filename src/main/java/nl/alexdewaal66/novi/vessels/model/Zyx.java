@@ -2,7 +2,7 @@ package nl.alexdewaal66.novi.vessels.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import nl.alexdewaal66.novi.vessels.generics2.GenericEntity2;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Zyx implements GenericEntity<Zyx> {
+public class Zyx implements GenericEntity2<Zyx> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {

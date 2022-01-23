@@ -4,6 +4,7 @@ import nl.alexdewaal66.novi.vessels.generics.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Country;
 import nl.alexdewaal66.novi.vessels.service.CountryService;
 import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.service.CountryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class CountryController extends GenericController<Country> {
     @Autowired
     CountryService countryService;
 
-    public CountryController(GenericServiceImpl<Country> service) {
+    public CountryController(CountryServiceImpl service) {
         super(service);
     }
 

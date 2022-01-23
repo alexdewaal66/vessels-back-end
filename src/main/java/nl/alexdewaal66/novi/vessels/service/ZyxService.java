@@ -1,10 +1,14 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericService;
+import nl.alexdewaal66.novi.vessels.generics2.GenericService2;
 import nl.alexdewaal66.novi.vessels.model.Zyx;
+import nl.alexdewaal66.novi.vessels.model.ZyxSummaryProjection;
 
-public interface ZyxService extends GenericService<Zyx> {
+import java.util.Collection;
+
+public interface ZyxService extends GenericService2<Zyx> {
 
     Zyx getZyxByName(String Name);
 
+//    Collection<ZyxSummaryProjection> getSummaries();
 }

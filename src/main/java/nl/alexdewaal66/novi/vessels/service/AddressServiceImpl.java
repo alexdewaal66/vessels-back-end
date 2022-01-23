@@ -1,17 +1,16 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericService;
 import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.Address;
-import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
+import nl.alexdewaal66.novi.vessels.repository.AddressRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AddressServiceImpl
-extends GenericServiceImpl<Address>
-implements GenericService<Address> {
+        extends GenericServiceImpl<Address>
+        implements AddressService {
 
-    public AddressServiceImpl(GenericRepository<Address> repository) {
+    public AddressServiceImpl(AddressRepository repository) {
         super(repository);
     }
 }

@@ -1,24 +1,21 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
 import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import nl.alexdewaal66.novi.vessels.exceptions.IncompleteRecordException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.model.UNLocode;
 import nl.alexdewaal66.novi.vessels.repository.UNLocodeRepository;
 
-import java.util.Collection;
-import java.util.List;
-
 @Service
-public class UNLocodeServiceImpl extends GenericServiceImpl<UNLocode> implements UNLocodeService{
+public class UNLocodeServiceImpl
+        extends GenericServiceImpl<UNLocode>
+        implements UNLocodeService{
 
     @Autowired
     private UNLocodeRepository unLocodeRepository;
 
-    public UNLocodeServiceImpl(GenericRepository<UNLocode> repository) {
+    public UNLocodeServiceImpl(UNLocodeRepository repository) {
         super(repository);
     }
 

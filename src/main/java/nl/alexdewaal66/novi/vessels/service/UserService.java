@@ -2,6 +2,7 @@ package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.model.Authority;
 import nl.alexdewaal66.novi.vessels.model.User;
+import nl.alexdewaal66.novi.vessels.model.UserSummaryProjection;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,6 +15,8 @@ public interface UserService {
 
     Collection<String> getAllIds();
     Collection<User> getUsers();
+    Collection<UserSummaryProjection> getUserSummaries();
+
     Optional<User> getUser(String username);
 
     List<User> getByIds(List<String> usernames);

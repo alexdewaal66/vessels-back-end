@@ -50,6 +50,11 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
+    @GetMapping(value = "/summaries")
+    public ResponseEntity<Object> getUserSummaries() {
+        return ResponseEntity.ok().body(userService.getUserSummaries());
+    }
+
     @GetMapping(value = "/{username}")
     public ResponseEntity<Object> getUser(@PathVariable("username") String username) {
         return ResponseEntity.ok().body(userService.getUser(username));

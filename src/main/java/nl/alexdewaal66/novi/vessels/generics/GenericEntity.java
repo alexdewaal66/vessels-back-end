@@ -13,6 +13,5 @@ public interface GenericEntity<T> {
 //    List<Property> getProperties();
 
     Long getId();
-
     void setId(Long id);
 }

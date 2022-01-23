@@ -19,17 +19,17 @@ public class Organisation implements GenericEntity<Organisation> {
         return Arrays.asList("shortName", "longName", "description", "url", "email");
     }
 
-    private static final Object[][] propertyTupels = {
-            {"id", Long.class},
-            {"shortName", String.class},
-            {"longName", String.class},
-            {"description", String.class},
-            {"url", String.class},
-            {"email", Country.class},
-            {"address", Address.class}
-    };
+//    private static final Object[][] propertyTupels = {
+//            {"id", Long.class},
+//            {"shortName", String.class},
+//            {"longName", String.class},
+//            {"description", String.class},
+//            {"url", String.class},
+//            {"email", Country.class},
+//            {"address", Address.class}
+//    };
 
-    static List<Property> properties = Property.makeList(propertyTupels);
+//    static List<Property> properties = Property.makeList(propertyTupels);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,30 +65,35 @@ public class Organisation implements GenericEntity<Organisation> {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
+
     public String getLongName() {
         return longName;
     }
     public void setLongName(String longName) {
         this.longName = longName;
     }
+
     public String getDescription() {
         return description;
     }
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getUrl() {
         return url;
     }
     public void setUrl(String url) {
         this.url = url;
     }
+
     public String getEmail() {
         return email;
     }
     public void setEmail(String email) {
         this.email = email;
     }
+
     public Address getAddress() {
         return address;
     }

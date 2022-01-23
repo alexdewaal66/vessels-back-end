@@ -15,13 +15,6 @@ public class Category implements GenericEntity<Category> {
         Console.logv("Category » Category()");
     }
 
-    public Category shallowCopy() {
-        Category copy = new Category();
-        copy.catName = this.catName;
-        copy.parent = this.parent;
-        return copy;
-    }
-
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("catName");
@@ -37,25 +30,16 @@ public class Category implements GenericEntity<Category> {
     @JoinColumn(name = "parent_category_id")
     private Category parent;
 
-    @Override public Long getId() { return id; }
-    @Override public void setId(Long id) {
-        Console.logv("Category » setId()", "id = " + id);
-        this.id = id;
-    }
+    @Override
+    public Long getId() { return id; }
+    @Override
+    public void setId(Long id) { this.id = id; }
 
     public String getCatName() { return catName; }
-    public void setCatName(String catName) {
-        Console.logv("Category » setCatName()",
-                "catName = " + catName);
-        this.catName = catName;
-    }
+    public void setCatName(String catName) { this.catName = catName; }
 
     public Category getParent() { return parent; }
-    public void setParent(Category parent) {
-        Console.logv("Category » setParentCategory()",
-                "parent = " + parent);
-        this.parent = parent;
-    }
+    public void setParent(Category parent) { this.parent = parent; }
 
     @Override
     public String toString() {

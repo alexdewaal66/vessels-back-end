@@ -2,7 +2,7 @@ package nl.alexdewaal66.novi.vessels.controller;
 
 import nl.alexdewaal66.novi.vessels.generics.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Vessel;
-import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.service.VesselServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class VesselController extends GenericController<Vessel> {
 
-    public VesselController(GenericServiceImpl<Vessel> service) {
+    public VesselController(VesselServiceImpl service) {
         super(service);
     }
 }

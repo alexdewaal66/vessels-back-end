@@ -2,7 +2,7 @@ package nl.alexdewaal66.novi.vessels.controller;
 
 import nl.alexdewaal66.novi.vessels.generics.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Organisation;
-import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.service.OrganisationServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/organisations")
 @CrossOrigin(origins = "*")
 public class OrganisationController extends GenericController<Organisation> {
-    public OrganisationController(GenericServiceImpl<Organisation> service) {
+    public OrganisationController(OrganisationServiceImpl service) {
         super(service);
     }
 }

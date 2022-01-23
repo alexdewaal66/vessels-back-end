@@ -1,15 +1,12 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
 import nl.alexdewaal66.novi.vessels.generics.GenericController;
-import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.Subdivision;
-import nl.alexdewaal66.novi.vessels.utils.Match;
+import nl.alexdewaal66.novi.vessels.service.SubdivisionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import nl.alexdewaal66.novi.vessels.service.SubdivisionService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/subdivisions")
@@ -18,7 +15,7 @@ public class SubdivisionController extends GenericController<Subdivision> {
 
     @Autowired
     private SubdivisionService subdivisionService;
-    public SubdivisionController(GenericServiceImpl<Subdivision> service) {
+    public SubdivisionController(SubdivisionServiceImpl service) {
         super(service);
     }
 

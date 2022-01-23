@@ -2,6 +2,7 @@ package nl.alexdewaal66.novi.vessels.generics;
 
 import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
+//import nl.alexdewaal66.novi.vessels.generics.Summary;
 import nl.alexdewaal66.novi.vessels.utils.Console;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 import nl.alexdewaal66.novi.vessels.utils.Matcher;
@@ -15,6 +16,7 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
         implements GenericService<T> {
 
     protected final GenericRepository<T> repository;
+//    public final Class<Summary<T>> typeParameterClass;
 
     // GenericRepository<> is not to be a bean by design, error reported by IntelliJ is erroneous
     @SuppressWarnings(value = "SpringJavaInjectionPointsAutowiringInspection")
@@ -23,9 +25,14 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     }
 
     @Override
-    public Collection<ProjectId> getAllIds() {
-        return repository.findAllBy();
+    public Collection<IdProjection> getAllIds() {
+        return repository.findBy();
     }
+
+//    @Override
+//    public List<Summary<T>> getSummariesByIds(List<Long> ids) {
+//        return repository.findById(ids, typeParameterClass);
+//    }
 
     @Override
     public T getById(Long id) {
@@ -66,15 +73,14 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
 
     @Override
     public Long create(T item) {
-        System.out.println("» GenericServiceImpl » create()"
-                + "\n\t item=" + item.toString());
+//        System.out.println("» GenericServiceImpl » create()"
+//                + "\n\t item=" + item.toString());
         item.setId(null); // protects from overwriting existing instance
-        System.out.println("» GenericServiceImpl » create()"
-                + "\n\t item=" + item.toString());
-        T copy = item;
+//        System.out.println("» GenericServiceImpl » create()"
+//                + "\n\t item=" + item.toString());
         T newItem = repository.save(item);
-        System.out.println("» GenericServiceImpl » create()"
-                + "\n\t newItem=" + newItem.toString());
+//        System.out.println("» GenericServiceImpl » create()"
+//                + "\n\t newItem=" + newItem.toString());
         return newItem.getId();
     }
 

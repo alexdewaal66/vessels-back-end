@@ -3,18 +3,19 @@ package nl.alexdewaal66.novi.vessels.service;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.VesselType;
-import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
 import nl.alexdewaal66.novi.vessels.repository.VesselTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VesselTypeServiceImpl extends GenericServiceImpl<VesselType> implements VesselTypeService{
+public class VesselTypeServiceImpl
+        extends GenericServiceImpl<VesselType>
+        implements VesselTypeService{
 
     @Autowired
     private VesselTypeRepository vesselTypeRepository;
 
-    public VesselTypeServiceImpl(GenericRepository<VesselType> repository) {
+    public VesselTypeServiceImpl(VesselTypeRepository repository) {
         super(repository);
     }
 
@@ -29,17 +30,9 @@ public class VesselTypeServiceImpl extends GenericServiceImpl<VesselType> implem
 
     @Override
     public Long create(VesselType item) {
-            System.out.println("» VesselTypeServiceImpl » create() *before* getId(), *before* getOne()"
-                + "\n\t item=" + item.toString());
         Long superTypeId = item.getSuperType().getId();
-            System.out.println("» VesselTypeServiceImpl » create() *after* getId(), *before* getOne()"
-                + "\n\t superTypeId = " + superTypeId);
         VesselType superType = repository.getOne(superTypeId);
-            System.out.println("» VesselTypeServiceImpl » create() *after* getId(), *after* getOne()"
-                + "\n\t superType = " + superType);
         item.setSuperType(superType);
-            System.out.println("» VesselTypeServiceImpl » create() *after* setSuperType()"
-                + "\n\t item=" + item.toString());
         return super.create(item);
     }
 

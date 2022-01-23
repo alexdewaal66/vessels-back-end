@@ -34,10 +34,6 @@ public class Vessel implements GenericEntity<Vessel> {
             {"startDate", Date.class},
             {"endDate", Date.class},
 //            {"XXXXXXXX", Object.class},
-//            {"XXXXXXXX", Object.class},
-//            {"XXXXXXXX", Object.class},
-//            {"XXXXXXXX", Object.class},
-//            {"XXXXXXXX", Object.class},
     };
 
     static List<Property> properties = Property.makeList(propertyTupels);
@@ -52,6 +48,9 @@ public class Vessel implements GenericEntity<Vessel> {
 
     @Column(name = "item_name")
     private String name;
+
+    @OneToOne
+    private Image image;
 
     @Size(max = 10)
     private String mmsi;
@@ -95,6 +94,9 @@ public class Vessel implements GenericEntity<Vessel> {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public Image getImage() { return image; }
+    public void setImage(Image image) { this.image = image; }
 
     public String getMmsi() { return mmsi; }
     public void setMmsi(String mmsi) { this.mmsi = mmsi; }

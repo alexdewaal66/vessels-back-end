@@ -8,6 +8,10 @@ import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+'id', 'nameNL', 'nameEN'
+ */
+
 @Entity
 public class RelationType implements GenericEntity<RelationType> {
 
@@ -15,7 +19,6 @@ public class RelationType implements GenericEntity<RelationType> {
     public List<String> getTextProperties() {
         return Arrays.asList("nameNL", "nameEN", "descNL", "descEN");
     }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -20,14 +20,14 @@ public class Hull implements GenericEntity<Hull> {
         return Arrays.asList("hullNumber", "builder");
     }
 
-    private static final Object[][] propertyTupels = {
-            {"id", Long.class},
-            {"hullNumber", String.class},
-            {"constructionDate", Date.class},
-            {"builder", String.class}
-    };
+//    private static final Object[][] propertyTupels = {
+//            {"id", Long.class},
+//            {"hullNumber", String.class},
+//            {"constructionDate", Date.class},
+//            {"builder", String.class}
+//    };
 
-    static List<Property> properties = Property.makeList(propertyTupels);
+//    static List<Property> properties = Property.makeList(propertyTupels);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

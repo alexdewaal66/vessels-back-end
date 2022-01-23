@@ -1,15 +1,16 @@
 package nl.alexdewaal66.novi.vessels.generics;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
-import nl.alexdewaal66.novi.vessels.generics.ProjectId;
+//import nl.alexdewaal66.novi.vessels.generics.Summary;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 
 import java.util.Collection;
 import java.util.List;
 
-public interface GenericService<T extends GenericEntity> {
+public interface GenericService<T extends GenericEntity<T>> {
 
-    Collection<ProjectId> getAllIds();
+    Collection<IdProjection> getAllIds();
+
+//    List<Summary<T>> getSummariesByIds(List<Long> ids);
 
     T getById(Long id);
 
