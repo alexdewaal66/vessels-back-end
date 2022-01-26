@@ -1,14 +1,14 @@
 package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
-import nl.alexdewaal66.novi.vessels.generics2.GenericServiceImpl2;
+import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.Zyx;
 import nl.alexdewaal66.novi.vessels.repository.ZyxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ZyxServiceImpl extends GenericServiceImpl2<Zyx> implements ZyxService {
+public class ZyxServiceImpl extends GenericServiceImpl<Zyx> implements ZyxService {
 
     @Autowired
     private ZyxRepository zyxRepository;

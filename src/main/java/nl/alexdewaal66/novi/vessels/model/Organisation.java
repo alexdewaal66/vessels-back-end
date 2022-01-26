@@ -2,7 +2,6 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
-import nl.alexdewaal66.novi.vessels.utils.Property;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;

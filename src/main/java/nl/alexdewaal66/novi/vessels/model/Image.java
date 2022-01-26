@@ -1,13 +1,15 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import nl.alexdewaal66.novi.vessels.repository.DBFileRepository;
+import nl.alexdewaal66.novi.vessels.utils.Console;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.List;
 
-@Entity
+@Entity @ToString
 public class Image implements GenericEntity<Image> {
 
     @Override
@@ -41,6 +43,26 @@ public class Image implements GenericEntity<Image> {
     public void setThumbnail(DBFile thumbnail) { this.thumbnail = thumbnail; }
 
     public Long getFullSizeId() { return fullSize.getId(); }
+    public void setFullSizeId(Long id) {
+        Console.logv("Image » setFullSizeId()", "id=" + id);
+//        if (id == null) {
+//            id = 0L;
+//        }
+        if (fullSize == null) {
+            fullSize = new DBFile();
+        }
+        fullSize.setId(id);
+    }
 
     public Long getThumbnailId() { return thumbnail.getId(); }
+    public void setThumbnailId(Long id) {
+        Console.logv("Image » setThumbnailId()", "id=" + id);
+//        if (id == null) {
+//            id = 0L;
+//        }
+        if (thumbnail == null) {
+            thumbnail = new DBFile();
+        }
+        thumbnail.setId(id);
+    }
 }

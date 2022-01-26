@@ -2,7 +2,6 @@ package nl.alexdewaal66.novi.vessels.generics;
 
 import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
-//import nl.alexdewaal66.novi.vessels.generics.Summary;
 import nl.alexdewaal66.novi.vessels.utils.Console;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 import nl.alexdewaal66.novi.vessels.utils.Matcher;
@@ -11,15 +10,12 @@ import org.springframework.data.domain.Example;
 import java.util.Collection;
 import java.util.List;
 
-//@Service
 public class GenericServiceImpl<T extends GenericEntity<T>>
         implements GenericService<T> {
 
     protected final GenericRepository<T> repository;
-//    public final Class<Summary<T>> typeParameterClass;
 
-    // GenericRepository<> is not to be a bean by design, error reported by IntelliJ is erroneous
-    @SuppressWarnings(value = "SpringJavaInjectionPointsAutowiringInspection")
+    // GenericRepository2<> is not to be a bean by design, error reported by IntelliJ is erroneous
     public GenericServiceImpl(GenericRepository<T> repository) {
         this.repository = repository;
     }
@@ -29,20 +25,26 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
         return repository.findBy();
     }
 
-//    @Override
-//    public List<Summary<T>> getSummariesByIds(List<Long> ids) {
-//        return repository.findById(ids, typeParameterClass);
-//    }
+    @Override
+    public List<T> getByIds(List<Long> ids) {
+        return repository.findAllById(ids);
+    }
+
 
     @Override
     public T getById(Long id) {
         return repository.findById(id).orElseThrow(RecordNotFoundException::new);
     }
 
-    @Override
-    public List<T> getByIds(List<Long> ids) {
-        return repository.findAllById(ids);
+    public Collection<SummaryProjection<T>> getSummariesByIds(List<Long> ids) {
+        return (Collection<SummaryProjection<T>>) repository.findSummariesByIdIn(ids);
     }
+
+    @Override
+    public Collection<SummaryProjection<T>> getAllSummaries() {
+        return (Collection<SummaryProjection<T>>) repository.findAllSummariesBy();
+    }
+
 
     @Override
     public Collection<T> getAll() {
@@ -53,7 +55,7 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     public T findOneByExample(Match<T> match) {
         T probe = match.getProbe();
         String mode = match.getMode();
-        System.out.println("GenericServiceImpl » findOneByExample()" +
+        System.out.println("GenericServiceImpl2 » findOneByExample()" +
                 "\n\tmatch = " + match +
                 "\n\tgetEntityName() = " + probe.getClass().getSimpleName() +
                 "\n\tgetTextProperties() = " + probe.getTextProperties());
@@ -66,20 +68,22 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     public List<T> findAllByExample(Match<T> match) {
         T probe = match.getProbe();
         String mode = match.getMode();
-        System.out.println("GenericServiceImpl » findAllByExample()\n\tmatch = " + match);
+        System.out.println("GenericServiceImpl2 » findAllByExample()\n\tmatch = " + match);
         Example<T> example = Example.of(probe, Matcher.build(mode, probe.getTextProperties()));
         return repository.findAll(example);
     }
 
     @Override
     public Long create(T item) {
-//        System.out.println("» GenericServiceImpl » create()"
-//                + "\n\t item=" + item.toString());
+        String className = item.getClass().getSimpleName();
+        if (className.equals("Image")) {
+            Console.logv("» GenericServiceImpl » create()", "item=" + item);
+        }
         item.setId(null); // protects from overwriting existing instance
-//        System.out.println("» GenericServiceImpl » create()"
+//        System.out.println("» GenericServiceImpl2 » create()"
 //                + "\n\t item=" + item.toString());
         T newItem = repository.save(item);
-//        System.out.println("» GenericServiceImpl » create()"
+//        System.out.println("» GenericServiceImpl2 » create()"
 //                + "\n\t newItem=" + newItem.toString());
         return newItem.getId();
     }
@@ -88,10 +92,10 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     public void update(Long id, T newItem) {
         if (exists(id)) {
             String className = newItem.getClass().getSimpleName();
-            String path = "GenericServiceImpl<" + className + "> » update() ";
+            String path = "GenericServiceImpl2<" + className + "> » update() ";
 //            Console.logv(path + "*before* setId()" , "newItem=" + newItem);
             newItem.setId(id);
-            Console.logv(path + "*after* setId()" , "newItem=" + newItem);
+            Console.logv(path + "*after* setId()", "newItem=" + newItem);
             repository.save(newItem);
         } else {
             System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", newItem.getClass().getSimpleName(), id);
@@ -113,14 +117,4 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
         return repository.existsById(id);
     }
 }
-
-
-
-
-
-
-
-
-
-
 

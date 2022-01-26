@@ -1,17 +1,15 @@
 package nl.alexdewaal66.novi.vessels.repository;
 
-import nl.alexdewaal66.novi.vessels.generics2.GenericRepository2;
+import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
 import nl.alexdewaal66.novi.vessels.model.Xyz;
-import nl.alexdewaal66.novi.vessels.model.XyzSummaryInterface;
-import nl.alexdewaal66.novi.vessels.model.XyzSummaryProjection;
-import nl.alexdewaal66.novi.vessels.model.ZyxSummaryInterface;
+import nl.alexdewaal66.novi.vessels.model.XyzSummary;
 
 import java.util.Collection;
 
-public interface XyzRepository extends GenericRepository2<Xyz> {
+public interface XyzRepository extends GenericRepository<Xyz> {
 
-    Collection<XyzSummaryInterface> getAllBy();
+    Collection<XyzSummary> findAllSummariesBy();
 
-    Collection<XyzSummaryInterface> getAllByIdIn(Collection<Long> ids);
+    Collection<XyzSummary> findSummariesByIdIn(Collection<Long> ids);
 
 }

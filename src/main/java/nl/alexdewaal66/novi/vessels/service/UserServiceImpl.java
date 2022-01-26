@@ -5,7 +5,7 @@ import nl.alexdewaal66.novi.vessels.exceptions.UsernameNotFoundException;
 import nl.alexdewaal66.novi.vessels.exceptions.UsernameExistsException;
 import nl.alexdewaal66.novi.vessels.model.Authority;
 import nl.alexdewaal66.novi.vessels.model.User;
-import nl.alexdewaal66.novi.vessels.model.UserSummaryProjection;
+import nl.alexdewaal66.novi.vessels.model.UserSummary;
 import nl.alexdewaal66.novi.vessels.repository.UserRepository;
 import nl.alexdewaal66.novi.vessels.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +40,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<UserSummaryProjection> getUserSummaries() {
-        return userRepository.findAllBy();
+    public Collection<UserSummary> getUserSummaries() {
+        return userRepository.findAllUserSummariesBy();
     }
 
     @Override

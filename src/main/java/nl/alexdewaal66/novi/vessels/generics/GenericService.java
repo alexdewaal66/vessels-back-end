@@ -1,6 +1,5 @@
 package nl.alexdewaal66.novi.vessels.generics;
 
-//import nl.alexdewaal66.novi.vessels.generics.Summary;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 
 import java.util.Collection;
@@ -10,12 +9,12 @@ public interface GenericService<T extends GenericEntity<T>> {
 
     Collection<IdProjection> getAllIds();
 
-//    List<Summary<T>> getSummariesByIds(List<Long> ids);
-
     T getById(Long id);
-
-    //    todo: List =>> Collection
     List<T> getByIds(List<Long> ids);
+
+    Collection<SummaryProjection<T>> getSummariesByIds(List<Long> ids);
+
+    Collection<SummaryProjection<T>> getAllSummaries();
 
     Collection<T> getAll();
 
@@ -32,3 +31,4 @@ public interface GenericService<T extends GenericEntity<T>> {
 
     boolean exists(Long id);
 }
+

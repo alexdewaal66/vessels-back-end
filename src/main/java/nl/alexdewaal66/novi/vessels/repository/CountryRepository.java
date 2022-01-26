@@ -2,6 +2,9 @@ package nl.alexdewaal66.novi.vessels.repository;
 
 import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
 import nl.alexdewaal66.novi.vessels.model.Country;
+import nl.alexdewaal66.novi.vessels.model.CountrySummary;
+
+import java.util.Collection;
 
 public interface CountryRepository extends GenericRepository<Country> {
 
@@ -11,4 +14,9 @@ public interface CountryRepository extends GenericRepository<Country> {
             String numericCode);
 
     Country findByShortNameENContainsOrShortNameNLContains(String nameEN, String nameNL);
+
+    Collection<CountrySummary> findAllSummariesBy();
+
+    Collection<CountrySummary> findSummariesByIdIn(Collection<Long> ids);
+
 }

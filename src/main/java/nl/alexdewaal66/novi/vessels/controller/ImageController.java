@@ -13,4 +13,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class ImageController extends GenericController<Image> {
 
     public ImageController(ImageServiceImpl service) { super(service); }
+
 }

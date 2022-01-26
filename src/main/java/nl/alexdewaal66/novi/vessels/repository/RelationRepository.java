@@ -2,5 +2,14 @@ package nl.alexdewaal66.novi.vessels.repository;
 
 import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
 import nl.alexdewaal66.novi.vessels.model.Relation;
+import nl.alexdewaal66.novi.vessels.model.RelationSummary;
 
-public interface RelationRepository extends GenericRepository<Relation> {}
+import java.util.Collection;
+
+public interface RelationRepository extends GenericRepository<Relation> {
+
+    Collection<RelationSummary> findAllSummariesBy();
+
+    Collection<RelationSummary> findSummariesByIdIn(Collection<Long> ids);
+
+}

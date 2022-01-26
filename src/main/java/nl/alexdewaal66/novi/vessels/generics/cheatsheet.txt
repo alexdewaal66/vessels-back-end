@@ -1,0 +1,9 @@
+in ...summary.java:
+
+    extends SummaryProjection<RELEVANT_ENTITY>
+
+in ...repository.java:
+
+    Collection<RELEVANT_ENTITY_SUMMARY> getAllBy();
+
+    Collection<RELEVANT_ENTITY_SUMMARY> getAllByIdIn(Collection<Long> ids);

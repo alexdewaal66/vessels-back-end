@@ -3,7 +3,6 @@ package nl.alexdewaal66.novi.vessels.controller;
 import nl.alexdewaal66.novi.vessels.generics.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Country;
 import nl.alexdewaal66.novi.vessels.service.CountryService;
-import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.service.CountryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +23,13 @@ public class CountryController extends GenericController<Country> {
 
     @GetMapping(value = "/name")
     public ResponseEntity<Object> getCountryByName(
-            @RequestParam(required = true, name = "name") String name) {
+            @RequestParam(name = "name") String name) {
         return ResponseEntity.ok().body(countryService.getCountryByName(name));
     }
 
     @GetMapping(value = "/code")
     public ResponseEntity<Object> getCountryByCode(
-            @RequestParam(required = true, name = "code") String code) {
+            @RequestParam(name = "code") String code) {
         return ResponseEntity.ok().body(countryService.getCountryByCode(code));
     }
 

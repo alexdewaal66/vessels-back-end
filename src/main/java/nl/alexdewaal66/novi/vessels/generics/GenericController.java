@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static nl.alexdewaal66.novi.vessels.utils.Console.*;
+
 public abstract class GenericController<T extends GenericEntity<T>> {
 
     private final GenericServiceImpl<T> service;
@@ -33,15 +35,18 @@ public abstract class GenericController<T extends GenericEntity<T>> {
 
     @PostMapping(value = "/ids")
     public ResponseEntity<Object> getByIds(@RequestBody List<Long> ids) {
-//        System.out.println("GenericController » getByIds \n\t ids=" + ids);
         return ResponseEntity.ok().body(service.getByIds(ids));
     }
 
-//    @PostMapping(value = "/summaries")
-//    public ResponseEntity<Object> getSummariesByIds(@RequestBody List<Long> ids) {
-////        System.out.println("GenericController » getSummariesByIds \n\t ids=" + ids);
-//        return ResponseEntity.ok().body(service.getSummariesByIds(ids));
-//    }
+    @GetMapping(value = "/summaries")
+    public ResponseEntity<Object> getAllSummaries() {
+        return ResponseEntity.ok().body(service.getAllSummaries());
+    }
+
+    @PostMapping(value = "/summaries")
+    public ResponseEntity<Object> getSummariesByIds(@RequestBody List<Long> ids) {
+        return ResponseEntity.ok().body(service.getSummariesByIds(ids));
+    }
 
     @PostMapping(value = "/findall")
     public ResponseEntity<Object> findItemsByExample(@RequestBody Match<T> match) {
@@ -57,10 +62,10 @@ public abstract class GenericController<T extends GenericEntity<T>> {
 
     @PostMapping(value = "")
     public ResponseEntity<Object> create(@RequestBody T item) {
-//        System.out.println("» GenericController » create()"
-//                + "\n\titem=" + item.toString());
+        logv(classCheck(item, "Image"),
+                "» GenericController2 » create()", p("item", item));
         Long newId = service.create(item);
-//        System.out.println("» GenericController » create()"
+//        System.out.println("» GenericController2 » create()"
 //                + "\n\tid=" + newId);
         return new ResponseEntity<>(String.format("%s %d created", item.getClass().getSimpleName(), newId), HttpStatus.CREATED);
     }
@@ -68,6 +73,8 @@ public abstract class GenericController<T extends GenericEntity<T>> {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> update(@PathVariable("id") Long id,
                                          @RequestBody T item) {
+        logv(classCheck(item, "Image"),
+                "» GenericController2 » update()", p("id", id), p("item", item));
         service.update(id, item);
         return ResponseEntity.noContent().build();
     }
