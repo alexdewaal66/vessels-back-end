@@ -13,7 +13,8 @@ import java.util.Set;
 
 @Entity
 public class VesselType implements GenericEntity<VesselType> {
-    public VesselType() {}
+    public VesselType() {
+    }
 
     public VesselType shallowCopy() {
         VesselType copy = new VesselType();
@@ -31,7 +32,9 @@ public class VesselType implements GenericEntity<VesselType> {
         return copy;
     }
 
-    @Override @JsonIgnore @Transient
+    @Override
+    @JsonIgnore
+    @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("nameNL", "nameEN", "descNL", "descEN");
     }
@@ -75,7 +78,7 @@ public class VesselType implements GenericEntity<VesselType> {
     @PositiveOrZero(message = "Negative draft not allowed")
     private Double draft;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
+    //    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
     @JoinColumn(name = "super_type_id", nullable = true)
     private VesselType superType;
@@ -163,22 +166,12 @@ public class VesselType implements GenericEntity<VesselType> {
     public VesselType getSuperType() {
         return superType;
     }
-
-    public void setSuperType(VesselType superType) {
-        this.superType = superType;
-    }
-//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-//    @JsonIdentityReference(alwaysAsId = true)
-//    @JsonProperty("superType")
-//    public void setSuperType(Long id) {
-//        this.superType = entityManager.getReference(VesselType.class, id);
-//    }
+    public void setSuperType(VesselType superType) { this.superType = superType; }
 
     @JsonIgnore
     public Set<VesselType> getSubTypes() {
         return subTypes;
     }
-
     public void setSubTypes(Set<VesselType> subTypes) {
         this.subTypes = subTypes;
     }

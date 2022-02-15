@@ -31,7 +31,7 @@ public class DBFileController {
         return ResponseEntity.ok().body(service.getAllIds());
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.ALL_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
     Resource download(@PathVariable("id") Long id) {
         byte[] file = service.getById(id).getContent();
 

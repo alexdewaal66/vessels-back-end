@@ -12,4 +12,6 @@ public interface GenericRepository<T extends GenericEntity<T>> extends JpaReposi
     Collection<? extends SummaryProjection<T>> findAllSummariesBy();
 
     Collection<? extends SummaryProjection<T>> findSummariesByIdIn(Collection<Long> ids);
+
+    SummaryProjection<T> findSummaryById(Long id);
 }

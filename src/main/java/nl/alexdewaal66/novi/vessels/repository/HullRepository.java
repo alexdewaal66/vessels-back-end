@@ -12,4 +12,6 @@ public interface HullRepository extends GenericRepository<Hull> {
 
     Collection<HullSummary> findSummariesByIdIn(Collection<Long> ids);
 
+    HullSummary findSummaryById(Long id);
+
 }

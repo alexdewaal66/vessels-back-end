@@ -9,7 +9,8 @@ import nl.alexdewaal66.novi.vessels.utils.Console;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity @ToString
+@Entity
+@ToString
 public class Image implements GenericEntity<Image> {
 
     @Override
@@ -31,38 +32,58 @@ public class Image implements GenericEntity<Image> {
     @OneToOne
     private DBFile thumbnail;
 
+    @Column(name = "full_size_copy")
+    private Long fullSizeId;
+
+    @Column(name = "thumbnail_copy")
+    private Long thumbnailId;
+
     @Override
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
     @Override
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public DBFile getFullSize() { return fullSize; }
-    public void setFullSize(DBFile fullSize) { this.fullSize = fullSize; }
+    public DBFile getFullSize() {
+        return fullSize;
+    }
+    public void setFullSize(DBFile fullSize) {
+        this.fullSize = fullSize;
+        this.fullSizeId = fullSize.getId();
+    }
 
-    public DBFile getThumbnail() { return thumbnail; }
-    public void setThumbnail(DBFile thumbnail) { this.thumbnail = thumbnail; }
+    public DBFile getThumbnail() {
+        return thumbnail;
+    }
+    public void setThumbnail(DBFile thumbnail) {
+        this.thumbnail = thumbnail;
+        this.thumbnailId = thumbnail.getId();
+    }
 
-    public Long getFullSizeId() { return fullSize.getId(); }
+    public Long getFullSizeId() {
+        return fullSizeId;
+    }
     public void setFullSizeId(Long id) {
         Console.logv("Image » setFullSizeId()", "id=" + id);
-//        if (id == null) {
-//            id = 0L;
-//        }
         if (fullSize == null) {
             fullSize = new DBFile();
         }
         fullSize.setId(id);
+        fullSizeId = id;
     }
 
-    public Long getThumbnailId() { return thumbnail.getId(); }
+    public Long getThumbnailId() {
+        return thumbnailId;
+    }
     public void setThumbnailId(Long id) {
         Console.logv("Image » setThumbnailId()", "id=" + id);
-//        if (id == null) {
-//            id = 0L;
-//        }
         if (thumbnail == null) {
             thumbnail = new DBFile();
         }
         thumbnail.setId(id);
+        thumbnailId = id;
     }
 }

@@ -1,6 +1,14 @@
 INSERT INTO vessel_type (super_type_id, name_nl, name_en, desc_nl, desc_en,
                          tonnage_min, tonnage_max, length, beam, height, draft)
-VALUES (null, null, 'vessel', null, 'root category', null, null, null, null, null, null);
+VALUES (null, 'vaartuig', 'vessel', 'hoofd categorie', 'root category', null, null, null, null, null, null);
+
+INSERT INTO vessel_type (super_type_id,
+                         name_nl, name_en, desc_nl, desc_en,
+                         tonnage_min, tonnage_max, length, beam, height, draft)
+VALUES ((SELECT id FROM vessel_type WHERE name_en = 'vessel'),
+        null, 'passenger ship', null,
+        'a ship whose primary function is to carry passengers. The category does not include cargo vessels which have accommodations for limited numbers of passengers, such as the formerly ubiquitous twelve-passenger freighters in which the transport of passengers is secondary to the carriage of freight',
+        null, null, null, null, null, null);
 
 INSERT INTO vessel_type (super_type_id,
                          name_nl, name_en, desc_nl, desc_en,
@@ -193,14 +201,6 @@ VALUES ((SELECT id FROM vessel_type WHERE name_en = 'liquid cargo'),
         'ULCC', 'ULCC', null, '(Ultra Large Crude Carrier), enormous supertankers between 320,000 and 550,000 DWT',
         320000, 550000, null,
         null, null, null);
-
-INSERT INTO vessel_type (super_type_id,
-                         name_nl, name_en, desc_nl, desc_en,
-                         tonnage_min, tonnage_max, length, beam, height, draft)
-VALUES ((SELECT id FROM vessel_type WHERE name_en = 'vessel'),
-        null, 'passenger ship', null,
-        'a ship whose primary function is to carry passengers. The category does not include cargo vessels which have accommodations for limited numbers of passengers, such as the formerly ubiquitous twelve-passenger freighters in which the transport of passengers is secondary to the carriage of freight',
-        null, null, null, null, null, null);
 
 INSERT INTO vessel_type (super_type_id,
                          name_nl, name_en, desc_nl, desc_en,

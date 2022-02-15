@@ -12,4 +12,6 @@ public interface ImageRepository extends GenericRepository<Image> {
 
     Collection<ImageSummary> findSummariesByIdIn(Collection<Long> ids);
 
+    ImageSummary findSummaryById(Long id);
+
 }

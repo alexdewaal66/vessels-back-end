@@ -7,13 +7,8 @@ public class MessageList {
 
     List<String> messages = new ArrayList<String>();
 
-    public List<String> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<String> messages) {
-        this.messages = messages;
-    }
+    public List<String> getMessages() { return messages; }
+    public void setMessages(List<String> messages) { this.messages = messages; }
 
     public MessageList addMessage(String message) {
         this.messages.add(message);

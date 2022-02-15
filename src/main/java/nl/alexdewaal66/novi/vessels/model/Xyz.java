@@ -37,6 +37,9 @@ public class Xyz implements GenericEntity<Xyz> {
     @ManyToOne
     private Zyx zyx;
 
+    @OneToOne
+    private Image image;
+
     @Override
     public Long getId() { return id; }
     @Override
@@ -56,6 +59,9 @@ public class Xyz implements GenericEntity<Xyz> {
 
     public Zyx getZyx() { return zyx; }
     public void setZyx(Zyx zyx) { this.zyx = zyx; }
+
+    public Image getImage() { return image; }
+    public void setImage(Image image) { this.image = image; }
 
     @Override
     public String toString() {

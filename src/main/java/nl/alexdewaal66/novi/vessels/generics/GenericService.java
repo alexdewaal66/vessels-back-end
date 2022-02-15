@@ -10,13 +10,14 @@ public interface GenericService<T extends GenericEntity<T>> {
     Collection<IdProjection> getAllIds();
 
     T getById(Long id);
-    List<T> getByIds(List<Long> ids);
+    SummaryProjection<T> getSummaryById(Long id);
 
+    List<T> getByIds(List<Long> ids);
     Collection<SummaryProjection<T>> getSummariesByIds(List<Long> ids);
 
+    Collection<T> getAll();
     Collection<SummaryProjection<T>> getAllSummaries();
 
-    Collection<T> getAll();
 
     T findOneByExample(Match<T> match);
 
@@ -24,6 +25,8 @@ public interface GenericService<T extends GenericEntity<T>> {
     List<T> findAllByExample(Match<T> match);
 
     Long create(T item);
+    IdContainer create1(T item);
+    SummaryProjection<T> create2(T item);
 
     void update(Long id, T newItem);
 

@@ -13,4 +13,5 @@ public class VesselServiceImpl
     public VesselServiceImpl(VesselRepository repository) {
         super(repository);
     }
+
 }

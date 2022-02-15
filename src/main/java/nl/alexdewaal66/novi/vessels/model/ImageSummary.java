@@ -5,5 +5,11 @@ import nl.alexdewaal66.novi.vessels.generics.SummaryProjection;
 public interface ImageSummary extends SummaryProjection<Image> {
 
     Long getId();
-    DBFile getThumbnail();
+
+    Long getThumbnailId();
+//    FileId getThumbnail();
+//
+//    interface FileId {
+//        Long getId();
+//    }
 }
