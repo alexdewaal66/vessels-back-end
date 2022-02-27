@@ -4,7 +4,6 @@ import nl.alexdewaal66.novi.vessels.generics.SummaryProjection;
 
 public interface VesselSummary extends SummaryProjection<Vessel> {
 
-    Long getId();
     String getName();
     ImgThumbnail getImage();
 

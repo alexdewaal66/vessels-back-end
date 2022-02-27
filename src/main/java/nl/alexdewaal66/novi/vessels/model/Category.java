@@ -3,8 +3,10 @@ package nl.alexdewaal66.novi.vessels.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import nl.alexdewaal66.novi.vessels.utils.Console;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,6 +30,16 @@ public class Category implements GenericEntity<Category> {
     @ManyToOne
     @JoinColumn(name = "parent_category_id")
     private Category parent;
+
+
+    @UpdateTimestamp
+    private Timestamp timestamp;
+
+    @Override
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
 
     @Override
     public Long getId() { return id; }

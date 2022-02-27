@@ -4,7 +4,6 @@ import nl.alexdewaal66.novi.vessels.generics.SummaryProjection;
 
 public interface UNLocodeSummary extends SummaryProjection<UNLocode> {
 
-    Long getId();
     String getAlpha2Code();
     String getLocationCode();
     String getNameWoDiacritics();

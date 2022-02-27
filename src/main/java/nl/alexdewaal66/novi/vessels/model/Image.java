@@ -5,8 +5,10 @@ import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import nl.alexdewaal66.novi.vessels.repository.DBFileRepository;
 import nl.alexdewaal66.novi.vessels.utils.Console;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -37,6 +39,14 @@ public class Image implements GenericEntity<Image> {
 
     @Column(name = "thumbnail_copy")
     private Long thumbnailId;
+
+    @UpdateTimestamp
+    private Timestamp timestamp;
+
+    @Override
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
 
     @Override
     public Long getId() {

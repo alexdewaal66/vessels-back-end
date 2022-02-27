@@ -2,6 +2,7 @@ package nl.alexdewaal66.novi.vessels.generics;
 
 import nl.alexdewaal66.novi.vessels.utils.Match;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public interface GenericService<T extends GenericEntity<T>> {
     Collection<T> getAll();
     Collection<SummaryProjection<T>> getAllSummaries();
 
+     Collection<T> getByTimestampAfter(Timestamp timestamp);
 
     T findOneByExample(Match<T> match);
 
@@ -26,7 +28,8 @@ public interface GenericService<T extends GenericEntity<T>> {
 
     Long create(T item);
     IdContainer create1(T item);
-    SummaryProjection<T> create2(T item);
+    //    SummaryProjection<T> create2(T item);
+    Object create2(T item);
 
     void update(Long id, T newItem);
 

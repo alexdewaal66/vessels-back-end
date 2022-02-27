@@ -2,8 +2,10 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +32,14 @@ public class Country implements GenericEntity<Country> {
     private String alpha3Code;
 
     private String numericCode;
+
+    @UpdateTimestamp
+    private Timestamp timestamp;
+
+    @Override
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

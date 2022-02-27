@@ -2,9 +2,11 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,6 +41,16 @@ public class Xyz implements GenericEntity<Xyz> {
 
     @OneToOne
     private Image image;
+
+
+    @UpdateTimestamp
+    private Timestamp timestamp;
+
+    @Override
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
 
     @Override
     public Long getId() { return id; }

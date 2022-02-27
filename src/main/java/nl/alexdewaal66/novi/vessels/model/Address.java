@@ -2,15 +2,16 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
 @Entity
 public class Address implements GenericEntity<Address> {
-
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("address1", "address2", "city", "postalCode");
@@ -51,6 +52,15 @@ public class Address implements GenericEntity<Address> {
     public Long getId() { return id; }
     @Override
     public void setId(Long id) { this.id = id; }
+
+
+    @UpdateTimestamp
+    private Timestamp timestamp;
+
+    @Override
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
 
     public String getAddress1() {
         return address1;

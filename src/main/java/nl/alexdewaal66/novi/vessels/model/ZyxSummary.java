@@ -4,6 +4,5 @@ import nl.alexdewaal66.novi.vessels.generics.SummaryProjection;
 
 public interface ZyxSummary extends SummaryProjection<Zyx> {
 
-    Long getId();
     String getName();
 }

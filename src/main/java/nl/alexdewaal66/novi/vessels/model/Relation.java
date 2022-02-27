@@ -2,8 +2,10 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -30,6 +32,16 @@ public class Relation implements GenericEntity<Relation> {
     @ManyToOne
     @JoinColumn(name = "organisation2_id")
     Organisation organisation2;
+
+
+    @UpdateTimestamp
+    private Timestamp timestamp;
+
+    @Override
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
 
     @Override
     public Long getId() { return id; }

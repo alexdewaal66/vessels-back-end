@@ -7,6 +7,9 @@ import nl.alexdewaal66.novi.vessels.utils.Match;
 import nl.alexdewaal66.novi.vessels.utils.Matcher;
 import org.springframework.data.domain.Example;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -52,6 +55,11 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     @Override
     public Collection<SummaryProjection<T>> getAllSummaries() {
         return (Collection<SummaryProjection<T>>) repository.findAllSummariesBy();
+    }
+
+    @Override
+    public Collection<T> getByTimestampAfter(Timestamp timestamp) {
+        return repository.findAllByTimestampAfter(timestamp);
     }
 
 
@@ -112,16 +120,21 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     }
 
     @Override
-    public SummaryProjection<T> create2(T item) {
-        String className = item.getClass().getSimpleName();
-        if (className.equals("Image")) {
-            Console.logv("» GenericServiceImpl » create()", "item=" + item);
+//    public SummaryProjection<T> create2(T item) {
+    public Object create2(T item) {
+        if (classCheck(item, "Xyz")) {
+            Console.logv("» GenericServiceImpl » create2()", "item=" + item);
         }
         item.setId(null); // protects from overwriting existing instance
         T newItem = repository.save(item);
-//        System.out.println("» GenericServiceImpl2 » create()"
-//                + "\n\t item=" + item.toString());
-        SummaryProjection<T> summary = repository.findSummaryById(newItem.getId());
+        if (classCheck(item, "Xyz")) {
+            Console.logv("» GenericServiceImpl » create2()", "newItem=" + newItem);
+        }
+//        SummaryProjection<T> summary = repository.findSummaryById(newItem.getId());
+        Collection<Long> ids = Arrays.asList(newItem.getId());
+        Collection<SummaryProjection<T>> summaryList = (Collection<SummaryProjection<T>>) repository.findSummariesByIdIn(ids);
+//        Object summary = repository.findSummaryById(newItem.getId());
+        Object summary = summaryList.iterator().next();
         return summary;
     }
 

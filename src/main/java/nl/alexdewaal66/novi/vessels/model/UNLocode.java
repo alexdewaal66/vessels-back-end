@@ -2,9 +2,11 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -59,6 +61,16 @@ public class UNLocode implements GenericEntity<UNLocode> {
 
     @Size(max = 100)
     private String remarks;
+
+
+    @UpdateTimestamp
+    private Timestamp timestamp;
+
+    @Override
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

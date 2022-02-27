@@ -2,9 +2,11 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,6 +41,16 @@ public class RelationType implements GenericEntity<RelationType> {
     @Size(max = 1000)
     @Column(name = "desc_en")
     private String descEN;
+
+
+    @UpdateTimestamp
+    private Timestamp timestamp;
+
+    @Override
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
 
     public Long getId() {
         return id;

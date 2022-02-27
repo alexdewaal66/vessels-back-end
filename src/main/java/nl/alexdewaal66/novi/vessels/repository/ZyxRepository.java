@@ -3,6 +3,7 @@ import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
 import nl.alexdewaal66.novi.vessels.model.Zyx;
 import nl.alexdewaal66.novi.vessels.model.ZyxSummary;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 public interface ZyxRepository extends GenericRepository<Zyx> {
@@ -11,4 +12,6 @@ public interface ZyxRepository extends GenericRepository<Zyx> {
     Collection<ZyxSummary> findAllSummariesBy();
 
     Collection<ZyxSummary> findSummariesByIdIn(Collection<Long> ids);
+
+//    Collection<Zyx> findAllByTimestampAfter(Timestamp timestamp);
 }
