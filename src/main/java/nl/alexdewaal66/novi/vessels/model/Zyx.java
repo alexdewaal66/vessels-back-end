@@ -2,6 +2,7 @@ package nl.alexdewaal66.novi.vessels.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,16 +13,16 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Zyx implements GenericEntity<Zyx> {
+public class Zyx extends BaseEntity implements GenericEntity<Zyx> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("name", "description");
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     @Size(max = 100)
     @Column(name = "item_name")
@@ -31,21 +32,12 @@ public class Zyx implements GenericEntity<Zyx> {
     private String description;
 
 
-    @UpdateTimestamp
-    private Timestamp timestamp;
-
-    @Override
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
+//    @UpdateTimestamp
+//    private Timestamp timestamp;
 
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() { return id; }
+//    public void setId(Long id) { this.id = id; }
 
     public String getName() {
         return name;
@@ -60,6 +52,9 @@ public class Zyx implements GenericEntity<Zyx> {
     public void setDescription(String description) {
         this.description = description;
     }
+
+//    @Override
+//    public Timestamp getTimestamp() { return timestamp; }
 
     @Override
     public String toString() {

@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,16 +12,16 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Subdivision implements GenericEntity<Subdivision> {
+public class Subdivision extends BaseEntity implements GenericEntity<Subdivision> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("alpha2Code", "subdivisionCode", "name", "type");
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     @Size(max = 2)
     private String alpha2Code;
@@ -38,21 +39,16 @@ public class Subdivision implements GenericEntity<Subdivision> {
     private String type;
 
 
-    @UpdateTimestamp
-    private Timestamp timestamp;
-
-    @Override
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
+//    @UpdateTimestamp
+//    private Timestamp timestamp;
 
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getAlpha2Code() {
         return alpha2Code;
@@ -81,6 +77,11 @@ public class Subdivision implements GenericEntity<Subdivision> {
     public void setType(String type) {
         this.type = type;
     }
+
+//    @Override
+//    public Timestamp getTimestamp() {
+//        return timestamp;
+//    }
 
     @Override
     public String toString() {

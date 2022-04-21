@@ -31,7 +31,7 @@ public interface GenericService<T extends GenericEntity<T>> {
     //    SummaryProjection<T> create2(T item);
     Object create2(T item);
 
-    void update(Long id, T newItem);
+    Object update(Long id, T newItem);
 
     void delete(Long id);
 

@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Organisation implements GenericEntity<Organisation> {
+public class Organisation extends BaseEntity implements GenericEntity<Organisation> {
     public Organisation() {
     }
 
@@ -32,9 +33,9 @@ public class Organisation implements GenericEntity<Organisation> {
 
 //    static List<Property> properties = Property.makeList(propertyTupels);
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     @Size(max = 50)
     private String shortName;
@@ -55,19 +56,14 @@ public class Organisation implements GenericEntity<Organisation> {
     private Address address;
 
 
-    @UpdateTimestamp
-    private Timestamp timestamp;
-
-    @Override
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
+//    @UpdateTimestamp
+//    private Timestamp timestamp;
 
 
-    @Override
-    public Long getId() { return id; }
-    @Override
-    public void setId(Long id) { this.id = id; }
+//    @Override
+//    public Long getId() { return id; }
+//    @Override
+//    public void setId(Long id) { this.id = id; }
 
     public String getShortName() {
         return shortName;
@@ -111,10 +107,16 @@ public class Organisation implements GenericEntity<Organisation> {
         this.address = address;
     }
 
+//    @Override
+//    public Timestamp getTimestamp() {
+//        return timestamp;
+//    }
+
     @Override
     public String toString() {
         return "Organisation{" +
                 "id=" + id +
+                ", timestamp=" + timestamp +
                 ", shortName='" + shortName + '\'' +
                 ", longName='" + longName + '\'' +
                 ", description='" + description + '\'' +

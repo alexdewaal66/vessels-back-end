@@ -2,6 +2,7 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
+import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import nl.alexdewaal66.novi.vessels.repository.DBFileRepository;
 import nl.alexdewaal66.novi.vessels.utils.Console;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Entity
 @ToString
-public class Image implements GenericEntity<Image> {
+public class Image extends BaseEntity implements GenericEntity<Image> {
 
     @Override
     @JsonIgnore
@@ -22,9 +23,6 @@ public class Image implements GenericEntity<Image> {
         return null;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @JsonIgnore
     @OneToOne
@@ -40,22 +38,6 @@ public class Image implements GenericEntity<Image> {
     @Column(name = "thumbnail_copy")
     private Long thumbnailId;
 
-    @UpdateTimestamp
-    private Timestamp timestamp;
-
-    @Override
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public DBFile getFullSize() {
         return fullSize;
@@ -77,7 +59,7 @@ public class Image implements GenericEntity<Image> {
         return fullSizeId;
     }
     public void setFullSizeId(Long id) {
-        Console.logv("Image » setFullSizeId()", "id=" + id);
+//        Console.logv("Image » setFullSizeId()", "id=" + id);
         if (fullSize == null) {
             fullSize = new DBFile();
         }
@@ -89,11 +71,12 @@ public class Image implements GenericEntity<Image> {
         return thumbnailId;
     }
     public void setThumbnailId(Long id) {
-        Console.logv("Image » setThumbnailId()", "id=" + id);
+//        Console.logv("Image » setThumbnailId()", "id=" + id);
         if (thumbnail == null) {
             thumbnail = new DBFile();
         }
         thumbnail.setId(id);
         thumbnailId = id;
     }
+
 }

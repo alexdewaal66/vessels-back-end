@@ -5,6 +5,7 @@ import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.VesselType;
 import nl.alexdewaal66.novi.vessels.repository.VesselTypeRepository;
+import nl.alexdewaal66.novi.vessels.utils.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,12 +18,16 @@ public class VesselTypeServiceImpl
         extends GenericServiceImpl<VesselType>
         implements VesselTypeService{
 
-    @Autowired
-    private VesselTypeRepository vesselTypeRepository;
-
     public VesselTypeServiceImpl(VesselTypeRepository repository) {
         super(repository);
     }
+
+    @Autowired
+    private VesselTypeRepository vesselTypeRepository;
+
+    @Autowired
+    private Authorization authorization;
+
 
     @Override
     public VesselType getVesselTypeByName(String nameEN, String nameNL) {
@@ -42,18 +47,13 @@ public class VesselTypeServiceImpl
     }
 
     @Override
-    public void update(Long id, VesselType newItem) {
-        if (id != 1L || id == 1L && checkRole("ADMIN")) {
-            super.update(id, newItem);
+    public Object update(Long id, VesselType newItem) {
+        if (id != 1L || authorization.checkRole("ADMIN")) {
+            return super.update(id, newItem);
         } else {
-            logv("VesselTypeServiceImpl.java » update() REJECTED", "id=" + id);
+//            logv("VesselTypeServiceImpl.java » update() REJECTED", "id=" + id);
             throw new BadRequestException("Can't update VesselType record #1");
         }
-    }
-
-    private boolean checkRole(String authName) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals(authName));
     }
 
 }

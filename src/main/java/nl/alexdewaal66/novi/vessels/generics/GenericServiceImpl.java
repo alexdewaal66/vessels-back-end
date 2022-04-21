@@ -1,14 +1,17 @@
 package nl.alexdewaal66.novi.vessels.generics;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.utils.Console;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 import nl.alexdewaal66.novi.vessels.utils.Matcher;
+import nl.alexdewaal66.novi.vessels.utils.Authorization;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -19,6 +22,9 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
         implements GenericService<T> {
 
     protected final GenericRepository<T> repository;
+
+    @Autowired
+    private Authorization authorization;
 
     // GenericRepository2<> is by design not to be a bean, error reported by IntelliJ is erroneous
     public GenericServiceImpl(GenericRepository<T> repository) {
@@ -88,10 +94,9 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     @Override
     public Long create(T item) {
         String className = item.getClass().getSimpleName();
-        if (className.equals("Image")) {
-            Console.logv("» GenericServiceImpl » create()", "item=" + item);
-        }
+//        Console.logv(className.equals("Image"), "» GenericServiceImpl » create()", "item=" + item);
         item.setId(null); // protects from overwriting existing instance
+        item.setOwner(authorization.getPrincipalName());
 //        System.out.println("» GenericServiceImpl2 » create()"
 //                + "\n\t item=" + item.toString());
         T newItem = repository.save(item);
@@ -103,15 +108,11 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     @Override
     public IdContainer create1(T item) {
         String className = item.getClass().getSimpleName();
-        if (className.equals("Image")) {
-            Console.logv("» GenericServiceImpl » create()", "item=" + item);
-        }
+//        Console.logv(className.equals("Image"), "» GenericServiceImpl » create()", "item=" + item);
         item.setId(null); // protects from overwriting existing instance
-        logv(classCheck(item, "Hull"),
-                "» GenericServiceImpl » create1()", pair("item", item));
+//        logv(classCheck(item, "Hull"), "» GenericServiceImpl » create1()", pair("item", item));
         T newItem = repository.save(item);
-        logv(classCheck(item, "Hull"),
-                "» GenericServiceImpl » create1()", pair("newItem", newItem));
+//        logv(classCheck(item, "Hull"), "» GenericServiceImpl » create1()", pair("newItem", newItem));
         IdContainer idItem = new IdContainer();
         idItem.setId(newItem.getId());
 //        System.out.println("» GenericServiceImpl2 » create()"
@@ -122,42 +123,65 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     @Override
 //    public SummaryProjection<T> create2(T item) {
     public Object create2(T item) {
-        if (classCheck(item, "Xyz")) {
-            Console.logv("» GenericServiceImpl » create2()", "item=" + item);
-        }
+//        Console.logv(classCheck(item, "Xyz"),"» GenericServiceImpl » create2()", "item=" + item);
         item.setId(null); // protects from overwriting existing instance
         T newItem = repository.save(item);
-        if (classCheck(item, "Xyz")) {
-            Console.logv("» GenericServiceImpl » create2()", "newItem=" + newItem);
-        }
+//        Console.logv(classCheck(item, "Xyz")"» GenericServiceImpl » create2()", "newItem=" + newItem);
 //        SummaryProjection<T> summary = repository.findSummaryById(newItem.getId());
         Collection<Long> ids = Arrays.asList(newItem.getId());
         Collection<SummaryProjection<T>> summaryList = (Collection<SummaryProjection<T>>) repository.findSummariesByIdIn(ids);
 //        Object summary = repository.findSummaryById(newItem.getId());
-        Object summary = summaryList.iterator().next();
-        return summary;
+        return summaryList.iterator().next();
     }
 
 
     @Override
-    public void update(Long id, T newItem) {
+    public Object update(Long id, T newItem) {
         if (exists(id)) {
-            String className = newItem.getClass().getSimpleName();
-            String path = "GenericServiceImpl2<" + className + "> » update() ";
+//            String className = newItem.getClass().getSimpleName();
+//            String path = "GenericServiceImpl<" + className + "> » update() ";
 //            Console.logv(path + "*before* setId()" , "newItem=" + newItem);
             newItem.setId(id);
-            Console.logv(path + "*after* setId()", "newItem=" + newItem);
-            repository.save(newItem);
+//            Console.logv(path + "*after* setId()", "newItem=" + newItem);
+            T oldItem = repository.getOne(id);
+            String owner = oldItem.getOwner();
+            if (authorization.isEligible(owner)) {
+                newItem.setOwner(owner);
+                newItem.setUpdater(authorization.getPrincipalName());
+                repository.save(newItem);
+                //todo: choose return value or skip entirely
+//                return new Object() {final boolean saved = true;};
+//                return "saved";
+                return new UpdateResponse(true, "");
+            } else {
+//                return new Object() {final boolean saved = false;final String reason = "not eligible";};
+//                return "not eligible";
+                return new UpdateResponse(false, "not eligible");
+            }
         } else {
             System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", newItem.getClass().getSimpleName(), id);
             throw new RecordNotFoundException(newItem.getClass().getSimpleName(), id);
         }
     }
 
+    @Getter
+    @AllArgsConstructor
+    private static class UpdateResponse {
+        private final boolean saved;
+        private final String reason;
+    }
+
     @Override
     public void delete(Long id) {
         if (exists(id)) {
-            repository.deleteById(id);
+            T oldItem = repository.getOne(id);
+            String owner = oldItem.getOwner();
+//            String className = oldItem.getClass().getSimpleName();
+//            String path = "GenericServiceImpl<" + className + "> » delete() ";
+//            Console.logv(path, "owner=" + owner, "principal=" + principal);
+            if (authorization.isEligible(owner)) {
+                repository.deleteById(id);
+            }
         } else {
             throw new RecordNotFoundException();
         }

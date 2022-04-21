@@ -36,4 +36,8 @@ public class Console {
     static public boolean classCheck(Object item, String className) {
         return item.getClass().getSimpleName().equals(className);
     }
+
+    static public boolean classCheck(Object item, Class claz) {
+        return item.getClass().getSimpleName().equals(claz.getSimpleName());
+    }
 }

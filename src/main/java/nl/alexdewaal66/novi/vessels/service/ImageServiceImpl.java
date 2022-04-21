@@ -42,46 +42,45 @@ public class ImageServiceImpl
 
     @Override
     public Long create(Image image) {
-        logv("» GenericServiceImpl » create() #1", "image" + image);
+//        logv("» GenericServiceImpl » create() #1", "image" + image);
         image.setId(null); // protects from overwriting existing instance
 //        DBFile fullSizeDBFile = fileService.getById(image.getFullSizeId());
         DBFile fullSizeDBFile = fileService.getById(image.getFullSizeId());
-        logv("» GenericServiceImpl » create() #2", "fullSizeDBFile" + fullSizeDBFile);
+//        logv("» GenericServiceImpl » create() #2", "fullSizeDBFile" + fullSizeDBFile);
         image.setFullSize(fullSizeDBFile);
         // shrink image and create shrunkenFile
         DBFile shrunkenFile = resizeImageFile(fullSizeDBFile);
-        logv("» GenericServiceImpl » create() #3", "shrunkenFile" + shrunkenFile);
+//        logv("» GenericServiceImpl » create() #3", "shrunkenFile" + shrunkenFile);
 //        Long thumbnailId = fileService.create(shrunkenFile) ;
 //        DBFile thumbnailDBFile = fileService.getById(thumbnailId);
         DBFile thumbnailDBFile = fileRepository.save(shrunkenFile) ;
-        logv("» GenericServiceImpl » create() #4", "thumbnailDBFile" + thumbnailDBFile);
+//        logv("» GenericServiceImpl » create() #4", "thumbnailDBFile" + thumbnailDBFile);
         image.setThumbnail(thumbnailDBFile);
-        logv("» GenericServiceImpl » create() #5", pair("image", image));
+//        logv("» GenericServiceImpl » create() #5", pair("image", image));
         Image newItem = repository.save(image);
 //        System.out.println("» GenericServiceImpl » create()" + "\n\t newItem=" + newItem.toString());
         return newItem.getId();
     }
 
     public ImageSummary create2(Image image) {
-        logv("» GenericServiceImpl » create() #1", "image" + image);
+//        logv("» GenericServiceImpl » create() #1", "image" + image);
         image.setId(null); // protects from overwriting existing instance
 //        DBFile fullSizeDBFile = fileService.getById(image.getFullSizeId());
         DBFile fullSizeDBFile = fileService.getById(image.getFullSizeId());
-        logv("» GenericServiceImpl » create() #2", "fullSizeDBFile" + fullSizeDBFile);
+//        logv("» GenericServiceImpl » create() #2", "fullSizeDBFile" + fullSizeDBFile);
         image.setFullSize(fullSizeDBFile);
         // shrink image and create shrunkenFile
         DBFile shrunkenFile = resizeImageFile(fullSizeDBFile);
-        logv("» GenericServiceImpl » create() #3", "shrunkenFile" + shrunkenFile);
+//        logv("» GenericServiceImpl » create() #3", "shrunkenFile" + shrunkenFile);
 //        Long thumbnailId = fileService.create(shrunkenFile) ;
 //        DBFile thumbnailDBFile = fileService.getById(thumbnailId);
         DBFile thumbnailDBFile = fileRepository.save(shrunkenFile) ;
-        logv("» GenericServiceImpl » create() #4", "thumbnailDBFile" + thumbnailDBFile);
+//        logv("» GenericServiceImpl » create() #4", "thumbnailDBFile" + thumbnailDBFile);
         image.setThumbnail(thumbnailDBFile);
-        logv("» GenericServiceImpl » create() #5", pair("image", image));
+//        logv("» GenericServiceImpl » create() #5", pair("image", image));
         Image newItem = repository.save(image);
 //        System.out.println("» GenericServiceImpl » create()" + "\n\t newItem=" + newItem.toString());
-        ImageSummary summary = (ImageSummary) repository.findSummaryById(newItem.getId());
-        return summary;
+        return (ImageSummary) repository.findSummaryById(newItem.getId());
     }
 
 

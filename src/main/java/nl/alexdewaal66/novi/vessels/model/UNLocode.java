@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,7 +14,7 @@ import java.util.List;
 // official column explanations below class definition
 @Entity
 @Table(name = "un_locode")
-public class UNLocode implements GenericEntity<UNLocode> {
+public class UNLocode extends BaseEntity implements GenericEntity<UNLocode> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
@@ -22,9 +23,9 @@ public class UNLocode implements GenericEntity<UNLocode> {
                 "iata", "coordinates", "remarks");
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     @Size(max = 3)
     private String change;
@@ -63,17 +64,12 @@ public class UNLocode implements GenericEntity<UNLocode> {
     private String remarks;
 
 
-    @UpdateTimestamp
-    private Timestamp timestamp;
-
-    @Override
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
+//    @UpdateTimestamp
+//    private Timestamp timestamp;
 
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+//    public Long getId() { return id; }
+//    public void setId(Long id) { this.id = id; }
 
     public String getChange() { return change; }
     public void setChange(String change) { this.change = change; }
@@ -112,6 +108,9 @@ public class UNLocode implements GenericEntity<UNLocode> {
 
     public String getRemarks() { return remarks; }
     public void setRemarks(String remarks) { this.remarks = remarks; }
+
+//    @Override
+//    public Timestamp getTimestamp() { return timestamp; }
 
     @Override
     public String toString() {

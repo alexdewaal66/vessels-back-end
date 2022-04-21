@@ -1,7 +1,9 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -11,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class DBFile implements GenericEntity<DBFile> {
+public class DBFile extends BaseEntity implements GenericEntity<DBFile> {
 
 //    public DBFile(String fileName, String fileType, byte[] content) {
 //        this.fileName = fileName;
@@ -25,9 +27,9 @@ public class DBFile implements GenericEntity<DBFile> {
         return Arrays.asList("fileName", "fileType");
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     @Size(max = 200)
     private String fileName;
@@ -35,20 +37,17 @@ public class DBFile implements GenericEntity<DBFile> {
     private String fileType;
 
     @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] content;
 
-    @UpdateTimestamp
-    private Timestamp timestamp;
+//    @UpdateTimestamp
+//    private Timestamp timestamp;
 
-    @Override
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
 
-    @Override
-    public Long getId() { return id; }
-    @Override
-    public void setId(Long id) { this.id = id; }
+//    @Override
+//    public Long getId() { return id; }
+//    @Override
+//    public void setId(Long id) { this.id = id; }
 
     public String getFileName() { return fileName; }
     public void setFileName(String fileName) { this.fileName = fileName; }
@@ -58,6 +57,9 @@ public class DBFile implements GenericEntity<DBFile> {
 
     public byte[] getContent() { return content; }
     public void setContent(byte[] content) { this.content = content; }
+
+//    @Override
+//    public Timestamp getTimestamp() { return timestamp; }
 
     @Override
     public String toString() {

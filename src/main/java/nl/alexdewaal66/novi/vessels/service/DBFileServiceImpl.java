@@ -23,7 +23,7 @@ public class DBFileServiceImpl
 
     public DBFile convertFile(MultipartFile mpFile) {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(mpFile.getOriginalFilename()));
-        Console.logv("--------------- \n DBFileServiceImpl » convertFile","mpFile = " + mpFile);
+//        Console.logv("--------------- \n DBFileServiceImpl » convertFile","mpFile = " + mpFile);
 
         try {
             if (fileName.contains("..")) {

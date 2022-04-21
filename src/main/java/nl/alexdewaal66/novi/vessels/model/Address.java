@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Address implements GenericEntity<Address> {
+public class Address extends BaseEntity implements GenericEntity<Address> {
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("address1", "address2", "city", "postalCode");
@@ -28,9 +29,9 @@ public class Address implements GenericEntity<Address> {
 
 //    static List<Property> properties = Property.makeList(propertyTupels);
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     @Size(max = 200)
     private String address1;
@@ -48,19 +49,13 @@ public class Address implements GenericEntity<Address> {
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @Override
-    public Long getId() { return id; }
-    @Override
-    public void setId(Long id) { this.id = id; }
+//    @UpdateTimestamp
+//    private Timestamp timestamp;
 
-
-    @UpdateTimestamp
-    private Timestamp timestamp;
-
-    @Override
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
+//    @Override
+//    public Long getId() { return id; }
+//    @Override
+//    public void setId(Long id) { this.id = id; }
 
     public String getAddress1() {
         return address1;
@@ -97,10 +92,16 @@ public class Address implements GenericEntity<Address> {
         this.country = country;
     }
 
+//    @Override
+//    public Timestamp getTimestamp() {
+//        return timestamp;
+//    }
+
     @Override
     public String toString() {
         return "Address{" +
                 "id=" + id +
+                ", timestamp=" + timestamp +
                 ", address1='" + address1 + '\'' +
                 ", address2='" + address2 + '\'' +
                 ", city='" + city + '\'' +

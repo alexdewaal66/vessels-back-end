@@ -21,7 +21,7 @@ public class DBFileController {
 
     @PostMapping
     public ResponseEntity<Object> upload(@RequestParam("file") MultipartFile mpFile) {
-        Console.logv("\n\n🛄🛄🛄🛄🛄🛄🛄🛄🛄 \n DBFileController » create", "mpFile = " + mpFile);
+//        Console.logv("\n\n🛄🛄🛄🛄🛄🛄🛄🛄🛄 \n DBFileController » create", "mpFile = " + mpFile);
         Long newId = service.create(mpFile);
         return new ResponseEntity<>(String.format("%s %d created", "file", newId), HttpStatus.CREATED);
     }

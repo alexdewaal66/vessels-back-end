@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Hull implements GenericEntity<Hull> {
+public class Hull extends BaseEntity implements GenericEntity<Hull> {
 
     @Override
     @JsonIgnore

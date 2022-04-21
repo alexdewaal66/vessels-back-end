@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import nl.alexdewaal66.novi.vessels.utils.Property;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Vessel implements GenericEntity<Vessel> {
+public class Vessel extends BaseEntity implements GenericEntity<Vessel> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
@@ -40,9 +41,9 @@ public class Vessel implements GenericEntity<Vessel> {
 
     static List<Property> properties = Property.makeList(propertyTupels);
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "hull_id")
@@ -86,20 +87,14 @@ public class Vessel implements GenericEntity<Vessel> {
     @Temporal(value = TemporalType.DATE)
     private Date endDate;
 
-
-    @UpdateTimestamp
-    private Timestamp timestamp;
-
-    @Override
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
+//    @UpdateTimestamp
+//    private Timestamp timestamp;
 
 
-    @Override
-    public Long getId() { return id; }
-    @Override
-    public void setId(Long id) { this.id = id; }
+//    @Override
+//    public Long getId() { return id; }
+//    @Override
+//    public void setId(Long id) { this.id = id; }
 
     public Hull getHull() { return hull; }
     public void setHull(Hull hull) { this.hull = hull; }
@@ -139,6 +134,9 @@ public class Vessel implements GenericEntity<Vessel> {
 
     public Date getEndDate() { return endDate; }
     public void setEndDate(Date endDate) { this.endDate = endDate; }
+
+//    @Override
+//    public Timestamp getTimestamp() { return timestamp; }
 
     @Override
     public String toString() {

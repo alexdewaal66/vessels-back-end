@@ -2,6 +2,7 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.*;
 //import nl.alexdewaal66.novi.vessels.config.SpringConfiguration;
+import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,24 +15,8 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class VesselType implements GenericEntity<VesselType> {
+public class VesselType extends BaseEntity implements GenericEntity<VesselType> {
     public VesselType() {
-    }
-
-    public VesselType shallowCopy() {
-        VesselType copy = new VesselType();
-        copy.nameNL = this.nameNL;
-        copy.nameEN = this.nameEN;
-        copy.descNL = this.descNL;
-        copy.descEN = this.descEN;
-        copy.tonnageMin = this.tonnageMin;
-        copy.tonnageMax = this.tonnageMax;
-        copy.length = this.length;
-        copy.beam = this.beam;
-        copy.height = this.height;
-        copy.draft = this.draft;
-        copy.superType = this.superType;
-        return copy;
     }
 
     @Override
@@ -41,10 +26,6 @@ public class VesselType implements GenericEntity<VesselType> {
         return Arrays.asList("nameNL", "nameEN", "descNL", "descEN");
     }
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Size(max = 100)
     @Column(name = "name_nl")
@@ -80,30 +61,13 @@ public class VesselType implements GenericEntity<VesselType> {
     @PositiveOrZero(message = "Negative draft not allowed")
     private Double draft;
 
-    //    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
-    @JoinColumn(name = "super_type_id", nullable = true)
+    @JoinColumn(name = "super_type_id")
     private VesselType superType;
 
     @OneToMany(mappedBy = "superType")
     private Set<VesselType> subTypes = new HashSet<>();
 
-
-    @UpdateTimestamp
-    private Timestamp timestamp;
-
-    @Override
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNameNL() {
         return nameNL;
@@ -184,6 +148,7 @@ public class VesselType implements GenericEntity<VesselType> {
     public Set<VesselType> getSubTypes() {
         return subTypes;
     }
+    @JsonIgnore
     public void setSubTypes(Set<VesselType> subTypes) {
         this.subTypes = subTypes;
     }
@@ -192,6 +157,9 @@ public class VesselType implements GenericEntity<VesselType> {
     public String toString() {
         return "VesselType{" +
                 "id=" + id +
+                ", timestamp=" + timestamp +
+                ", owner='" + owner + '\'' +
+                ", updater='" + updater + '\'' +
                 ", nameNL='" + nameNL + '\'' +
                 ", nameEN='" + nameEN + '\'' +
                 ", descNL='" + descNL + '\'' +
