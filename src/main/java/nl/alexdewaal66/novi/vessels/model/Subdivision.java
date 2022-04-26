@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity
+@Entity @ToString
 public class Subdivision extends BaseEntity implements GenericEntity<Subdivision> {
 
     @Override @JsonIgnore @Transient
@@ -19,9 +20,6 @@ public class Subdivision extends BaseEntity implements GenericEntity<Subdivision
         return Arrays.asList("alpha2Code", "subdivisionCode", "name", "type");
     }
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @Size(max = 2)
     private String alpha2Code;
@@ -38,17 +36,6 @@ public class Subdivision extends BaseEntity implements GenericEntity<Subdivision
     @Column(name = "subdivision_type")
     private String type;
 
-
-//    @UpdateTimestamp
-//    private Timestamp timestamp;
-
-
-//    public Long getId() {
-//        return id;
-//    }
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public String getAlpha2Code() {
         return alpha2Code;
@@ -78,19 +65,4 @@ public class Subdivision extends BaseEntity implements GenericEntity<Subdivision
         this.type = type;
     }
 
-//    @Override
-//    public Timestamp getTimestamp() {
-//        return timestamp;
-//    }
-
-    @Override
-    public String toString() {
-        return "Subdivision{" +
-                "id=" + id +
-                ", alpha2Code='" + alpha2Code + '\'' +
-                ", subdivisionCode='" + subdivisionCode + '\'' +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                '}';
-    }
 }

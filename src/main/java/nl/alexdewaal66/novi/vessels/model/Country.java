@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,17 +11,13 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity
+@Entity @ToString
 public class Country extends BaseEntity implements GenericEntity<Country> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("shortNameNL", "shortNameEN");
     }
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @Column(name = "short_name_nl")
     private String shortNameNL;
@@ -34,11 +31,6 @@ public class Country extends BaseEntity implements GenericEntity<Country> {
 
     private String numericCode;
 
-//    @UpdateTimestamp
-//    private Timestamp timestamp;
-
-//    public Long getId() { return id; }
-//    public void setId(Long id) { this.id = id; }
 
     public String getShortNameNL() { return shortNameNL; }
     public void setShortNameNL(String shortNameNL) { this.shortNameNL = shortNameNL; }
@@ -55,18 +47,4 @@ public class Country extends BaseEntity implements GenericEntity<Country> {
     public String getNumericCode() { return numericCode; }
     public void setNumericCode(String numericCode) { this.numericCode = numericCode; }
 
-//    @Override
-//    public Timestamp getTimestamp() { return timestamp; }
-
-    @Override
-    public String toString() {
-        return "Country{" +
-                "id=" + id +
-                ", shortNameNL='" + shortNameNL + '\'' +
-                ", shortNameEN='" + shortNameEN + '\'' +
-                ", alpha2Code='" + alpha2Code + '\'' +
-                ", alpha3Code='" + alpha3Code + '\'' +
-                ", numericCode='" + numericCode + '\'' +
-                '}';
-    }
 }

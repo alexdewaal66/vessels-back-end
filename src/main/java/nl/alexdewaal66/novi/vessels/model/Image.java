@@ -12,13 +12,10 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Entity
-@ToString
+@Entity @ToString
 public class Image extends BaseEntity implements GenericEntity<Image> {
 
-    @Override
-    @JsonIgnore
-    @Transient
+    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return null;
     }

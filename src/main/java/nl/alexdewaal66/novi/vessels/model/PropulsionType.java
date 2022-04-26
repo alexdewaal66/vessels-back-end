@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 
@@ -11,8 +12,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
+@Entity @ToString
 public class PropulsionType extends BaseEntity implements GenericEntity<PropulsionType> {
+
     @Override
     public List<String> getTextProperties() {
         return Arrays.asList("nameNL", "nameEN", "descNL", "descEN");
@@ -62,18 +64,4 @@ public class PropulsionType extends BaseEntity implements GenericEntity<Propulsi
     @JsonIgnore
     public void setSubTypes(Set<PropulsionType> subTypes) { this.subTypes = subTypes; }
 
-    @Override
-    public String toString() {
-        return "PropulsionType{" +
-                "id=" + id +
-                ", timestamp=" + timestamp +
-                ", owner='" + owner + '\'' +
-                ", updater='" + updater + '\'' +
-                ", nameNL='" + nameNL + '\'' +
-                ", nameEN='" + nameEN + '\'' +
-                ", descNL='" + descNL + '\'' +
-                ", descEN='" + descEN + '\'' +
-                ", superType=" + superType +
-                '}';
-    }
 }

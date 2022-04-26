@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,11 +12,7 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
-/*
-'id', 'nameNL', 'nameEN'
- */
-
-@Entity
+@Entity @ToString
 public class RelationType extends BaseEntity implements GenericEntity<RelationType> {
 
     @Override @JsonIgnore @Transient
@@ -23,9 +20,6 @@ public class RelationType extends BaseEntity implements GenericEntity<RelationTy
         return Arrays.asList("nameNL", "nameEN", "descNL", "descEN");
     }
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @Size(max = 100)
     @Column(name = "name_nl")
@@ -43,17 +37,6 @@ public class RelationType extends BaseEntity implements GenericEntity<RelationTy
     @Column(name = "desc_en")
     private String descEN;
 
-
-//    @UpdateTimestamp
-//    private Timestamp timestamp;
-
-
-//    public Long getId() {
-//        return id;
-//    }
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public String getNameNL() {
         return nameNL;
@@ -83,26 +66,4 @@ public class RelationType extends BaseEntity implements GenericEntity<RelationTy
         this.descEN = descEn;
     }
 
-//    @Override
-//    public Timestamp getTimestamp() {
-//        return timestamp;
-//    }
-//
-
-    @Override
-    public String toString() {
-        return "RelationType{" +
-                "id=" + id +
-                ", nameNL='" + nameNL + '\'' +
-                ", nameEN='" + nameEN + '\'' +
-                ", descNL='" + descNL + '\'' +
-                ", descEN='" + descEN + '\'' +
-                '}';
-    }
 }
-
-/*
-lidmaatschap / membership
-eigendom / ownership
-
- */

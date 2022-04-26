@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,28 +13,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+@Entity @ToString
 public class Hull extends BaseEntity implements GenericEntity<Hull> {
 
-    @Override
-    @JsonIgnore
-    @Transient
+    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("hullNumber", "builder");
     }
 
-//    private static final Object[][] propertyTupels = {
-//            {"id", Long.class},
-//            {"hullNumber", String.class},
-//            {"constructionDate", Date.class},
-//            {"builder", String.class}
-//    };
-
-//    static List<Property> properties = Property.makeList(propertyTupels);
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Size(max = 20)
     private String hullNumber;
@@ -42,21 +29,6 @@ public class Hull extends BaseEntity implements GenericEntity<Hull> {
     private Date constructionDate;
 
     private String builder; //todo =»» @ManyToOne Organisation
-
-    @UpdateTimestamp
-    private Timestamp timestamp;
-
-    @Override
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getHullNumber() {
         return hullNumber;
@@ -79,13 +51,4 @@ public class Hull extends BaseEntity implements GenericEntity<Hull> {
         this.builder = builder;
     }
 
-    @Override
-    public String toString() {
-        return "Hull{" +
-                "id=" + id +
-                ", hullNumber='" + hullNumber + '\'' +
-                ", constructionDate=" + constructionDate +
-                ", builder='" + builder + '\'' +
-                '}';
-    }
 }

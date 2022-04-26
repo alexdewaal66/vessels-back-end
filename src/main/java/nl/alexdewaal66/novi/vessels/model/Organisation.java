@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,31 +12,14 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity
+@Entity @ToString
 public class Organisation extends BaseEntity implements GenericEntity<Organisation> {
-    public Organisation() {
-    }
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("shortName", "longName", "description", "url", "email");
     }
 
-//    private static final Object[][] propertyTupels = {
-//            {"id", Long.class},
-//            {"shortName", String.class},
-//            {"longName", String.class},
-//            {"description", String.class},
-//            {"url", String.class},
-//            {"email", Country.class},
-//            {"address", Address.class}
-//    };
-
-//    static List<Property> properties = Property.makeList(propertyTupels);
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @Size(max = 50)
     private String shortName;
@@ -55,15 +39,6 @@ public class Organisation extends BaseEntity implements GenericEntity<Organisati
     @ManyToOne
     private Address address;
 
-
-//    @UpdateTimestamp
-//    private Timestamp timestamp;
-
-
-//    @Override
-//    public Long getId() { return id; }
-//    @Override
-//    public void setId(Long id) { this.id = id; }
 
     public String getShortName() {
         return shortName;
@@ -107,22 +82,4 @@ public class Organisation extends BaseEntity implements GenericEntity<Organisati
         this.address = address;
     }
 
-//    @Override
-//    public Timestamp getTimestamp() {
-//        return timestamp;
-//    }
-
-    @Override
-    public String toString() {
-        return "Organisation{" +
-                "id=" + id +
-                ", timestamp=" + timestamp +
-                ", shortName='" + shortName + '\'' +
-                ", longName='" + longName + '\'' +
-                ", description='" + description + '\'' +
-                ", url='" + url + '\'' +
-                ", email='" + email + '\'' +
-                ", address=" + address +
-                '}';
-    }
 }

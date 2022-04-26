@@ -1,9 +1,9 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -11,27 +11,12 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity
+@Entity @ToString
 public class Address extends BaseEntity implements GenericEntity<Address> {
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("address1", "address2", "city", "postalCode");
     }
-
-//    private static final Object[][] propertyTupels = {
-//            {"id", Long.class},
-//            {"address1", String.class},
-//            {"address2", String.class},
-//            {"city", String.class},
-//            {"postalCode", String.class},
-//            {"country", Country.class}
-//    };
-
-//    static List<Property> properties = Property.makeList(propertyTupels);
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @Size(max = 200)
     private String address1;
@@ -49,13 +34,6 @@ public class Address extends BaseEntity implements GenericEntity<Address> {
     @JoinColumn(name = "country_id")
     private Country country;
 
-//    @UpdateTimestamp
-//    private Timestamp timestamp;
-
-//    @Override
-//    public Long getId() { return id; }
-//    @Override
-//    public void setId(Long id) { this.id = id; }
 
     public String getAddress1() {
         return address1;
@@ -92,21 +70,4 @@ public class Address extends BaseEntity implements GenericEntity<Address> {
         this.country = country;
     }
 
-//    @Override
-//    public Timestamp getTimestamp() {
-//        return timestamp;
-//    }
-
-    @Override
-    public String toString() {
-        return "Address{" +
-                "id=" + id +
-                ", timestamp=" + timestamp +
-                ", address1='" + address1 + '\'' +
-                ", address2='" + address2 + '\'' +
-                ", city='" + city + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", country=" + country +
-                '}';
-    }
 }

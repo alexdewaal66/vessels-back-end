@@ -2,6 +2,7 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.*;
 //import nl.alexdewaal66.novi.vessels.config.SpringConfiguration;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,14 +15,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
+@Entity @ToString
 public class VesselType extends BaseEntity implements GenericEntity<VesselType> {
-    public VesselType() {
-    }
 
-    @Override
-    @JsonIgnore
-    @Transient
+    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("nameNL", "nameEN", "descNL", "descEN");
     }
@@ -153,25 +150,5 @@ public class VesselType extends BaseEntity implements GenericEntity<VesselType> 
         this.subTypes = subTypes;
     }
 
-    @Override
-    public String toString() {
-        return "VesselType{" +
-                "id=" + id +
-                ", timestamp=" + timestamp +
-                ", owner='" + owner + '\'' +
-                ", updater='" + updater + '\'' +
-                ", nameNL='" + nameNL + '\'' +
-                ", nameEN='" + nameEN + '\'' +
-                ", descNL='" + descNL + '\'' +
-                ", descEN='" + descEN + '\'' +
-                ", tonnageMin=" + tonnageMin +
-                ", tonnageMax=" + tonnageMax +
-                ", length=" + length +
-                ", beam=" + beam +
-                ", height=" + height +
-                ", draft=" + draft +
-                ", superType=" + superType +
-                '}';
-    }
 }
 

@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import nl.alexdewaal66.novi.vessels.utils.Property;
@@ -14,7 +15,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+@Entity @ToString
 public class Vessel extends BaseEntity implements GenericEntity<Vessel> {
 
     @Override @JsonIgnore @Transient
@@ -22,28 +23,6 @@ public class Vessel extends BaseEntity implements GenericEntity<Vessel> {
         return Arrays.asList("hullNumber", "builder");
     }
 
-    private static final Object[][] propertyTupels = {
-            {"id", Long.class},
-            {"hull", Hull.class},
-            {"name", String.class},
-            {"mmsi", String.class},
-            {"callSign", String.class},
-            {"vesselType", VesselType.class},
-            {"unLocode", UNLocode.class},
-            {"length", Double.class},
-            {"beam", Double.class},
-            {"draft", Double.class},
-            {"displacement", Double.class},
-            {"startDate", Date.class},
-            {"endDate", Date.class},
-//            {"XXXXXXXX", Object.class},
-    };
-
-    static List<Property> properties = Property.makeList(propertyTupels);
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "hull_id")
@@ -87,14 +66,6 @@ public class Vessel extends BaseEntity implements GenericEntity<Vessel> {
     @Temporal(value = TemporalType.DATE)
     private Date endDate;
 
-//    @UpdateTimestamp
-//    private Timestamp timestamp;
-
-
-//    @Override
-//    public Long getId() { return id; }
-//    @Override
-//    public void setId(Long id) { this.id = id; }
 
     public Hull getHull() { return hull; }
     public void setHull(Hull hull) { this.hull = hull; }
@@ -135,25 +106,4 @@ public class Vessel extends BaseEntity implements GenericEntity<Vessel> {
     public Date getEndDate() { return endDate; }
     public void setEndDate(Date endDate) { this.endDate = endDate; }
 
-//    @Override
-//    public Timestamp getTimestamp() { return timestamp; }
-
-    @Override
-    public String toString() {
-        return "Vessel{" +
-                "id=" + id +
-                ", hull=" + hull +
-                ", name='" + name + '\'' +
-                ", Mmsi='" + mmsi + '\'' +
-                ", callSign='" + callSign + '\'' +
-                ", vesselType=" + vesselType +
-                ", homePort=" + homePort +
-                ", length=" + length +
-                ", beam=" + beam +
-                ", draft=" + draft +
-                ", displacement=" + displacement +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
-    }
 }

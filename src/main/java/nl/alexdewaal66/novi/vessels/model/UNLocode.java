@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 // official column explanations below class definition
-@Entity
+@Entity @ToString
 @Table(name = "un_locode")
 public class UNLocode extends BaseEntity implements GenericEntity<UNLocode> {
 
@@ -23,9 +24,6 @@ public class UNLocode extends BaseEntity implements GenericEntity<UNLocode> {
                 "iata", "coordinates", "remarks");
     }
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @Size(max = 3)
     private String change;
@@ -63,13 +61,6 @@ public class UNLocode extends BaseEntity implements GenericEntity<UNLocode> {
     @Size(max = 100)
     private String remarks;
 
-
-//    @UpdateTimestamp
-//    private Timestamp timestamp;
-
-
-//    public Long getId() { return id; }
-//    public void setId(Long id) { this.id = id; }
 
     public String getChange() { return change; }
     public void setChange(String change) { this.change = change; }
@@ -109,27 +100,6 @@ public class UNLocode extends BaseEntity implements GenericEntity<UNLocode> {
     public String getRemarks() { return remarks; }
     public void setRemarks(String remarks) { this.remarks = remarks; }
 
-//    @Override
-//    public Timestamp getTimestamp() { return timestamp; }
-
-    @Override
-    public String toString() {
-        return "UNLocode{" +
-                "id=" + id +
-                ", change='" + change + '\'' +
-                ", alpha2Code='" + alpha2Code + '\'' +
-                ", locationCode='" + locationCode + '\'' +
-                ", nameDiacritics='" + nameDiacritics + '\'' +
-                ", nameWoDiacritics='" + nameWoDiacritics + '\'' +
-                ", subdivisionCode='" + subdivisionCode + '\'' +
-                ", functionClassifier='" + functionClassifier + '\'' +
-                ", status='" + status + '\'' +
-                ", updateYear='" + updateYear + '\'' +
-                ", iata='" + iata + '\'' +
-                ", coordinates='" + coordinates + '\'' +
-                ", remarks='" + remarks + '\'' +
-                '}';
-    }
 }
 
 /*

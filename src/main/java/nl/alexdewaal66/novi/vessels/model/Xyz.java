@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
 import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,18 +12,14 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity
+@Entity @ToString
 public class Xyz extends BaseEntity implements GenericEntity<Xyz> {
-
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("xyzString", "name", "description");
     }
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
 
     @Size(max = 200)
     private String xyzString;
@@ -44,15 +41,6 @@ public class Xyz extends BaseEntity implements GenericEntity<Xyz> {
     private Image image;
 
 
-//    @UpdateTimestamp
-//    private Timestamp timestamp;
-
-
-//    @Override
-//    public Long getId() { return id; }
-//    @Override
-//    public void setId(Long id) { this.id = id; }
-
     public String getXyzString() { return xyzString; }
     public void setXyzString(String xyz) { this.xyzString = xyz; }
 
@@ -71,17 +59,4 @@ public class Xyz extends BaseEntity implements GenericEntity<Xyz> {
     public Image getImage() { return image; }
     public void setImage(Image image) { this.image = image; }
 
-//    @Override
-//    public Timestamp getTimestamp() { return timestamp; }
-
-    @Override
-    public String toString() {
-        return "Xyz{" +
-                "id=" + id +
-                ", xyzString='" + xyzString + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", ratio=" + ratio +
-                '}';
-    }
 }
