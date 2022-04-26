@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @CrossOrigin(origins = "*")
 public class AuthenticationController {
 
@@ -29,7 +28,6 @@ public class AuthenticationController {
     @Autowired
     JwtUtil jwtUtil;
 
-    // TODO: WTF is this?
     @GetMapping(value = "/authenticated")
     public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
         return ResponseEntity.ok().body(principal);

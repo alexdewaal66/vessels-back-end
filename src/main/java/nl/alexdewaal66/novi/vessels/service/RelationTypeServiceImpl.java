@@ -18,7 +18,4 @@ public class RelationTypeServiceImpl
         super(repository);
     }
 
-//    public Collection<RelationTypeSummary> getSummariesByIds(List<Long> ids) {
-//        return relationTypeRepository.findAllById(ids);
-//    }
 }

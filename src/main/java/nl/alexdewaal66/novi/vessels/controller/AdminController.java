@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/admin")
-//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @CrossOrigin(origins = {"*"})
 public class AdminController {
 

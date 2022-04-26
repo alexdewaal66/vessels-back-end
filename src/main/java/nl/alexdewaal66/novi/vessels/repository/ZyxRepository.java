@@ -13,5 +13,4 @@ public interface ZyxRepository extends GenericRepository<Zyx> {
 
     Collection<ZyxSummary> findSummariesByIdIn(Collection<Long> ids);
 
-//    Collection<Zyx> findAllByTimestampAfter(Timestamp timestamp);
 }

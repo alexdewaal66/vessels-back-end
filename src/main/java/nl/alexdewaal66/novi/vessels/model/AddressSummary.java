@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 
 public interface AddressSummary extends SummaryProjection<Address> {
 
-    // 'id', 'address1', 'address2', 'city', 'country.alpha2Code'
     String getAddress1();
     String getAddress2();
     String getCity();

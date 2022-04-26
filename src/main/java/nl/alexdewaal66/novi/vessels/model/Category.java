@@ -34,5 +34,4 @@ public class Category extends BaseEntity implements GenericEntity<Category> {
     public Category getParent() { return parent; }
     public void setParent(Category parent) { this.parent = parent; }
 
-
 }

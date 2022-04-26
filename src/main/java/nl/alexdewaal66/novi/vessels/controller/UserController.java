@@ -15,7 +15,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/users")
-//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @CrossOrigin(origins = "*")
 public class UserController {
 
@@ -36,7 +35,6 @@ public class UserController {
 //
 //        return ResponseEntity.created(location).build();
 
-//        return new ResponseEntity<>(String.format("User %s created", newUsername), HttpStatus.CREATED);
         return ResponseEntity.status(HttpStatus.CREATED).body(messages);
     }
 

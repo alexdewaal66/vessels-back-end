@@ -54,7 +54,6 @@ public class Authorization {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             return auth.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
-//                    .collect(Collectors.toCollection(ArrayList::new));
                     .collect(Collectors.toSet());
         } else {
             Set<Authority> authoritySet = userService.getAuthorities(username);

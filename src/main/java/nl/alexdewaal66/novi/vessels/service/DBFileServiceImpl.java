@@ -23,7 +23,6 @@ public class DBFileServiceImpl
 
     public DBFile convertFile(MultipartFile mpFile) {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(mpFile.getOriginalFilename()));
-//        Console.logv("--------------- \n DBFileServiceImpl » convertFile","mpFile = " + mpFile);
 
         try {
             if (fileName.contains("..")) {
@@ -41,15 +40,10 @@ public class DBFileServiceImpl
         }
     }
 
-//    public DBFile getFile(Long fileId) {
-//        return repository.findById(fileId)
-//                .orElseThrow(() -> new RecordNotFoundException("File not found with id " + fileId));
-//    }
 
     public Long create(MultipartFile mpFile) {
         DBFile dbFile = repository.save(convertFile(mpFile));
         return dbFile.getId();
     }
 
-//    public void update(Long id, MultipartFile mp)
 }

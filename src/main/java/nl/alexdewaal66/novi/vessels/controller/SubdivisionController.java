@@ -24,7 +24,6 @@ public class SubdivisionController extends GenericController<Subdivision> {
     public ResponseEntity<Object> findSubdivision(
             @RequestParam(name = "alpha2code") String alpha2Code,
             @RequestParam(name = "subcode") String subdivisionCode) {
-        System.out.println("❌ alpha2Code=" + alpha2Code + ", subdivisionCode=" + subdivisionCode);
         return ResponseEntity.ok().body(subdivisionService
                 .findSubdivision(alpha2Code, subdivisionCode)
         );

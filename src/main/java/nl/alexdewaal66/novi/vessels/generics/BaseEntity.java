@@ -1,9 +1,11 @@
 package nl.alexdewaal66.novi.vessels.generics;
 
-import nl.alexdewaal66.novi.vessels.model.User;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.sql.Timestamp;
 
 @MappedSuperclass

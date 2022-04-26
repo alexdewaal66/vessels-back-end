@@ -7,8 +7,5 @@ public interface SubdivisionService extends GenericService<Subdivision> {
 
     Subdivision findSubdivision(String alpha2Code, String subdivisionCode);
 
-//    Optional<Subdivision> findSubdivisionByExample(Match<Subdivision> match);
-
-//    List<Subdivision> findSubdivisionsByExample(Match<Subdivision>  match);
 
 }

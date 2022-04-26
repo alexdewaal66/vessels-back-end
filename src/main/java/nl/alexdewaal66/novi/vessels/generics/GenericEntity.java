@@ -1,7 +1,5 @@
 package nl.alexdewaal66.novi.vessels.generics;
 
-import nl.alexdewaal66.novi.vessels.model.User;
-
 import java.sql.Timestamp;
 import java.util.List;
 

@@ -19,10 +19,4 @@ public class RelationTypeController extends GenericController<RelationType> {
         super(service);
     }
 
-//    @PostMapping(value = "/summaries")
-//    public ResponseEntity<Object> getSummariesByIds(@RequestBody List<Long> ids) {
-////        System.out.println("GenericController » getSummariesByIds \n\t ids=" + ids);
-//        return ResponseEntity.ok().body(service.getSummariesByIds(ids));
-//    }
-
 }

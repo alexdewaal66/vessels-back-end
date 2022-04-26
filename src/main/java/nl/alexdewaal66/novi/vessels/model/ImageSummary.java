@@ -7,9 +7,5 @@ public interface ImageSummary extends SummaryProjection<Image> {
     Long getId();
 
     Long getThumbnailId();
-//    FileId getThumbnail();
-//
-//    interface FileId {
-//        Long getId();
-//    }
+
 }
