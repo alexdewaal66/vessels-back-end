@@ -4,12 +4,12 @@ VALUES (
         (SELECT id FROM hull WHERE hull_number = 'IMO8516990'),
         'Sc Nordic', null, null,
         (SELECT id FROM vessel_type WHERE name_en = 'cargo'),
-        (SELECT id FROM un_locode WHERE name_wo_diacritics = '.FAROE ISLANDS'),
+        (SELECT id FROM un_locode WHERE name_diacritics = '.FAROE ISLANDS'),
         110, 18, 5.6, 4876, TO_DATE('1986', 'YYYY'), null, '2022-01-01'),
 
        ((SELECT id FROM hull WHERE hull_number = 'IMO9464883'),
         'Pacific Grebe', '235076847', '2CYN8', null,
-        (SELECT id FROM un_locode WHERE name_wo_diacritics = '.UNITED KINGDOM'),
+        (SELECT id FROM un_locode WHERE name_diacritics = '.UNITED KINGDOM'),
         104, 18, 5.8, 6840, TO_DATE('2010', 'YYYY'), null,
         '2022-01-01'),
 
