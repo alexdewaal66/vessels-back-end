@@ -8940,7 +8940,7 @@ VALUES
 --         (null,'IE','ARO','Alexandra Road Oil','Alexandra Road Oil',null,'1-------','AF','9508',null,null,null, '2022-01-01'),
 --         (null,'IE','ATN','Annacotty','Annacotty','LK','1----6--','RQ','907',null,'5224N 00818W',null, '2022-01-01'),
 --         (null,'IE','ARD','Ardmore','Ardmore','WD','1-3-----','RL','207',null,'5157N 00743W',null, '2022-01-01'),
---         (null,'IE','ARK','Arklow','Arklow',null,'1-------','AF','9508',null,null,null, '2022-01-01'),
+        (null,'IE','ARK','Arklow','Arklow',null,'1-------','AF','9508',null,null,null, '2022-01-01'),
 --         (null,'IE','ARH','Arklow Head (Ie009)','Arklow Head (Ie009)','WW','1-------','RQ','901',null,null,null, '2022-01-01'),
 --         (null,'IE','AUG','Aughinish Island','Aughinish Island',null,'1-------','AF','9508',null,null,null, '2022-01-01'),
 --         (null,'IE','BIF','B & I Ferryport','B & I Ferryport',null,'1-------','AF','9508',null,null,null, '2022-01-01'),

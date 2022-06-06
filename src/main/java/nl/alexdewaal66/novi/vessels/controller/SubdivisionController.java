@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericController;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Subdivision;
 import nl.alexdewaal66.novi.vessels.service.SubdivisionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

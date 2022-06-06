@@ -2,19 +2,16 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
-import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
 @Entity @ToString
-public class DBFile extends BaseEntity implements GenericEntity<DBFile> {
+public class DBFile extends BaseEntity<DBFile> {
 
     @Override @JsonIgnore
     @Transient
@@ -27,10 +24,9 @@ public class DBFile extends BaseEntity implements GenericEntity<DBFile> {
 
     private String fileType;
 
-    @Lob
+    @Lob @JsonIgnore
     @Type(type = "org.hibernate.type.ImageType")
     private byte[] content;
-
 
     public String getFileName() { return fileName; }
     public void setFileName(String fileName) { this.fileName = fileName; }
@@ -40,5 +36,6 @@ public class DBFile extends BaseEntity implements GenericEntity<DBFile> {
 
     public byte[] getContent() { return content; }
     public void setContent(byte[] content) { this.content = content; }
+
 
 }

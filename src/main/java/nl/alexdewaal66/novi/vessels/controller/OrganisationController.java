@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericController;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Organisation;
 import nl.alexdewaal66.novi.vessels.service.OrganisationServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;

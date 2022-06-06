@@ -1,9 +1,9 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
-import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@Entity @ToString
-public class Vessel extends BaseEntity implements GenericEntity<Vessel> {
+@Entity @ToString @NoArgsConstructor
+public class Vessel extends BaseEntity<Vessel> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
@@ -45,8 +45,9 @@ public class Vessel extends BaseEntity implements GenericEntity<Vessel> {
     @JoinColumn(name = "un_locode_id")
     private UNLocode homePort;
 
+    @Column(name = "length_oa")
     @Positive(message = "Length must be larger than zero")
-    private Double length; //LWL or LOA ?
+    private Double lengthOA; //LWL or LOA ?
 
     @Positive(message = "Beam must be larger than zero")
     private Double beam;
@@ -62,6 +63,72 @@ public class Vessel extends BaseEntity implements GenericEntity<Vessel> {
 
     @Temporal(value = TemporalType.DATE)
     private Date endDate;
+
+    /*
+
+    Length:
+        Length overall
+        Length between perpendiculars
+        Length at the waterline
+    Breadth:
+        Beam
+    Depth:
+        Draft
+        Moulded depth
+        Freeboard
+        Waterline (Plimsoll Line)
+    Height:
+        Air draft
+    Volume:
+        Worldwide:
+            Tonnage
+            Gross tonnage
+            Compensated gross tonnage
+            Net tonnage
+        Specialized:
+            Panama Canal/Universal Measurement System
+            Thames measurement tonnage
+        Archaic:
+            Gross register tonnage
+            Net register tonnage
+    Capacity:
+        Current:
+            Deadweight tonnage
+            Twenty-foot equivalent unit (Intermodal containers)
+        Archaic:
+            Builder's Old Measurement
+            Moorsom System
+    Weight:
+        Displacement
+        Loaded displacement
+        Standard displacement
+        Light displacement
+        Normal displacement
+    Stability:
+        Inclining test
+        List
+        Angle of loll
+        Metacentric height (GM)
+
+    Air draft
+    Beam Midl
+    Complement
+    Cube
+        Bale Cube
+        Grain Cube
+    Draft
+        Summer Load
+        Winter Load
+    DWT
+        Summer
+        Winter
+    DWAT
+    Gross Tonnage
+    Length BP
+    Length WL
+    Length OS
+    Net Tonnage
+     */
 
 
     public Hull getHull() { return hull; }
@@ -85,8 +152,8 @@ public class Vessel extends BaseEntity implements GenericEntity<Vessel> {
     public UNLocode getHomePort() { return homePort; }
     public void setHomePort(UNLocode homePort) { this.homePort = homePort; }
 
-    public Double getLength() { return length; }
-    public void setLength(Double length) { this.length = length; }
+    public Double getLengthOA() { return lengthOA; }
+    public void setLengthOA(Double length) { this.lengthOA = length; }
 
     public Double getBeam() { return beam; }
     public void setBeam(Double beam) { this.beam = beam; }

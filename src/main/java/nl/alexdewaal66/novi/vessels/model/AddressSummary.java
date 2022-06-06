@@ -1,8 +1,6 @@
 package nl.alexdewaal66.novi.vessels.model;
 
-import nl.alexdewaal66.novi.vessels.generics.SummaryProjection;
-
-import java.sql.Timestamp;
+import nl.alexdewaal66.novi.vessels.infrastructure.SummaryProjection;
 
 public interface AddressSummary extends SummaryProjection<Address> {
 

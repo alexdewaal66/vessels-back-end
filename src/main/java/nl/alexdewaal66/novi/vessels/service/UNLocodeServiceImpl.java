@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
@@ -16,7 +16,7 @@ public class UNLocodeServiceImpl
     private UNLocodeRepository unLocodeRepository;
 
     public UNLocodeServiceImpl(UNLocodeRepository repository) {
-        super(repository);
+        super(repository, "UNLocode");
     }
 
     @Override

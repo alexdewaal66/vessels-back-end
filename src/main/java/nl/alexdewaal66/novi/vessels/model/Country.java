@@ -2,17 +2,14 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
-import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
-import org.hibernate.annotations.UpdateTimestamp;
+import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
 @Entity @ToString
-public class Country extends BaseEntity implements GenericEntity<Country> {
+public class Country extends BaseEntity<Country> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {

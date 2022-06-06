@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.RelationType;
 import nl.alexdewaal66.novi.vessels.repository.RelationTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class RelationTypeServiceImpl
     private RelationTypeRepository relationTypeRepository;
 
     public RelationTypeServiceImpl(RelationTypeRepository repository) {
-        super(repository);
+        super(repository, "RelationType");
     }
 
 }

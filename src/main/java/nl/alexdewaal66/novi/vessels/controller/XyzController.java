@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericController;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericController;
 import nl.alexdewaal66.novi.vessels.service.XyzService;
 import nl.alexdewaal66.novi.vessels.service.XyzServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.Xyz;

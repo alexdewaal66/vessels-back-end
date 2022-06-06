@@ -1,4 +1,4 @@
-package nl.alexdewaal66.novi.vessels.generics;
+package nl.alexdewaal66.novi.vessels.infrastructure;
 
 import nl.alexdewaal66.novi.vessels.model.Hull;
 import nl.alexdewaal66.novi.vessels.utils.Match;
@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static nl.alexdewaal66.novi.vessels.utils.Console.*;
 
-public abstract class GenericController<T extends GenericEntity<T>> {
+public abstract class GenericController<T extends BaseEntity<T>> {
 
     private final GenericServiceImpl<T> service;
 
@@ -47,8 +46,10 @@ public abstract class GenericController<T extends GenericEntity<T>> {
     public ResponseEntity<Object> getByTimestampAfter(@PathVariable("since") Long milliseconds) {
 //        logv("\n GenericController » getByTimestampAfter()", "milliseconds=" + milliseconds);
         Instant instant = Instant.ofEpochMilli(milliseconds);
-        Timestamp time = Timestamp.from(instant);
-        Collection<T> result = service.getByTimestampAfter(time);
+        Timestamp timestamp = Timestamp.from(instant);
+        //----------------------
+
+        Mutations<T> result = service.getByTimestampAfter(timestamp);
 //        logv("\n GenericController » getByTimestampAfter()", "result=" + result);
         return ResponseEntity.ok().body(result);
     }

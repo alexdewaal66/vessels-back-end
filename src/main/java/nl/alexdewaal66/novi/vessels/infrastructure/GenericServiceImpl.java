@@ -1,10 +1,9 @@
-package nl.alexdewaal66.novi.vessels.generics;
+package nl.alexdewaal66.novi.vessels.infrastructure;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
-import nl.alexdewaal66.novi.vessels.utils.Console;
 import nl.alexdewaal66.novi.vessels.utils.Match;
 import nl.alexdewaal66.novi.vessels.utils.Matcher;
 import nl.alexdewaal66.novi.vessels.utils.Authorization;
@@ -16,19 +15,23 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static nl.alexdewaal66.novi.vessels.utils.Console.*;
-
-public class GenericServiceImpl<T extends GenericEntity<T>>
+public class GenericServiceImpl<T extends BaseEntity<T>>
         implements GenericService<T> {
 
     protected final GenericRepository<T> repository;
+
+    private final String entityName;
+
+    @Autowired
+    private DeletionService deletionService;
 
     @Autowired
     private Authorization authorization;
 
     // GenericRepository2<> is by design not to be a bean, error reported by IntelliJ is erroneous
-    public GenericServiceImpl(GenericRepository<T> repository) {
+    public GenericServiceImpl(GenericRepository<T> repository, String entityName) {
         this.repository = repository;
+        this.entityName = entityName.toLowerCase();
     }
 
     @Override
@@ -40,6 +43,7 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
     public T getById(Long id) {
         return repository.findById(id).orElseThrow(RecordNotFoundException::new);
     }
+
     @Override
     public SummaryProjection<T> getSummaryById(Long id) {
         return null;
@@ -63,11 +67,15 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
         return (Collection<SummaryProjection<T>>) repository.findAllSummariesBy();
     }
 
+    //---------------------------------------------------------------------------------
     @Override
-    public Collection<T> getByTimestampAfter(Timestamp timestamp) {
-        return repository.findAllByTimestampAfter(timestamp);
-    }
+    public Mutations<T> getByTimestampAfter(Timestamp timestamp) {
+        Collection<T> fresh = repository.findAllByTimestampAfter(timestamp);
 
+        Collection<Deletion> deletions = deletionService.findDeletions(this.entityName, timestamp);
+        return new Mutations<>(fresh, deletions);
+    }
+    //---------------------------------------------------------------------------------
 
     @Override
     public T findOneByExample(Match<T> match) {
@@ -176,10 +184,14 @@ public class GenericServiceImpl<T extends GenericEntity<T>>
         if (exists(id)) {
             T oldItem = repository.getOne(id);
             String owner = oldItem.getOwner();
-//            String className = oldItem.getClass().getSimpleName();
 //            String path = "GenericServiceImpl<" + className + "> » delete() ";
 //            Console.logv(path, "owner=" + owner, "principal=" + principal);
             if (authorization.isEligible(owner)) {
+                //todo: replace getSimpleName by getName ?
+                String className = oldItem.getClass().getSimpleName();
+                int dollarIndex = className.indexOf('$');
+                String entityName = className.substring(0, dollarIndex).toLowerCase();
+                deletionService.create(entityName, id);
                 repository.deleteById(id);
             }
         } else {

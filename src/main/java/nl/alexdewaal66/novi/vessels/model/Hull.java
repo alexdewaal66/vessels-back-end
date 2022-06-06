@@ -2,19 +2,16 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
-import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
-import org.hibernate.annotations.UpdateTimestamp;
+import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 @Entity @ToString
-public class Hull extends BaseEntity implements GenericEntity<Hull> {
+public class Hull extends BaseEntity<Hull> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {

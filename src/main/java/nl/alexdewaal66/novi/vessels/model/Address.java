@@ -2,17 +2,16 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
-import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
 @Entity @ToString
-public class Address extends BaseEntity implements GenericEntity<Address> {
+public class Address extends BaseEntity<Address> {
+
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("address1", "address2", "city", "postalCode");

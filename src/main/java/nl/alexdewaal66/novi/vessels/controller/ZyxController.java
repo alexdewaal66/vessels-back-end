@@ -1,5 +1,5 @@
 package nl.alexdewaal66.novi.vessels.controller;
-import nl.alexdewaal66.novi.vessels.generics.GenericController;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Zyx;
 import nl.alexdewaal66.novi.vessels.service.ZyxService;
 import nl.alexdewaal66.novi.vessels.service.ZyxServiceImpl;

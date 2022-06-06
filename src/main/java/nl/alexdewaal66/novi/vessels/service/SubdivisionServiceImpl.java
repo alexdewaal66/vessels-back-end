@@ -1,7 +1,7 @@
 package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
-import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.Subdivision;
 import nl.alexdewaal66.novi.vessels.repository.SubdivisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class SubdivisionServiceImpl extends GenericServiceImpl<Subdivision> impl
     @Autowired
     private SubdivisionRepository subdivisionRepository;
     public SubdivisionServiceImpl(SubdivisionRepository repository) {
-        super(repository);
+        super(repository, "Subdivision");
     }
 
     public Subdivision findSubdivision(String alpha2Code, String subdivisionCode) {

@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericController;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Image;
 import nl.alexdewaal66.novi.vessels.service.ImageServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;

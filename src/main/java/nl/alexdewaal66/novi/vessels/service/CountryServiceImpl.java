@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.Country;
 import nl.alexdewaal66.novi.vessels.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ public class CountryServiceImpl extends GenericServiceImpl<Country> implements C
     CountryRepository countryRepository;
 
     public CountryServiceImpl(CountryRepository repository) {
-        super(repository);
+        super(repository, "Country");
     }
 
 

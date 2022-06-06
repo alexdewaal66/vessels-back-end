@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.repository;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericRepository;
 import nl.alexdewaal66.novi.vessels.model.Country;
 import nl.alexdewaal66.novi.vessels.model.CountrySummary;
 

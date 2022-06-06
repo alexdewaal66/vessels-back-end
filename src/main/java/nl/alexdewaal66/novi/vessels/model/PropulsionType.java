@@ -2,8 +2,7 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
-import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
+import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity @ToString
-public class PropulsionType extends BaseEntity implements GenericEntity<PropulsionType> {
+public class PropulsionType extends BaseEntity<PropulsionType> {
 
     @Override
     public List<String> getTextProperties() {

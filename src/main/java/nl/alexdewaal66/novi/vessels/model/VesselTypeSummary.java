@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.model;
 
-import nl.alexdewaal66.novi.vessels.generics.SummaryProjection;
+import nl.alexdewaal66.novi.vessels.infrastructure.SummaryProjection;
 
 public interface VesselTypeSummary extends SummaryProjection<VesselType> {
 

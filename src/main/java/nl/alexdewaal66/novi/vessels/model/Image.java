@@ -2,18 +2,13 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
-import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
-import nl.alexdewaal66.novi.vessels.repository.DBFileRepository;
-import nl.alexdewaal66.novi.vessels.utils.Console;
-import org.hibernate.annotations.UpdateTimestamp;
+import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Entity @ToString
-public class Image extends BaseEntity implements GenericEntity<Image> {
+public class Image extends BaseEntity<Image> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {

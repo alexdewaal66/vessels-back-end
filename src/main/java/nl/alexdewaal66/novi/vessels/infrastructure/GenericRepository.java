@@ -1,4 +1,4 @@
-package nl.alexdewaal66.novi.vessels.generics;
+package nl.alexdewaal66.novi.vessels.infrastructure;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;

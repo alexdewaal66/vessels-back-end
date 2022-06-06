@@ -1,21 +1,19 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
-import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
-import org.hibernate.annotations.UpdateTimestamp;
+import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
 // official column explanations below class definition
-@Entity @ToString
+@Entity @ToString @NoArgsConstructor
 @Table(name = "un_locode")
-public class UNLocode extends BaseEntity implements GenericEntity<UNLocode> {
+public class UNLocode extends BaseEntity<UNLocode> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {

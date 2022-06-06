@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.DBFile;
 import nl.alexdewaal66.novi.vessels.model.Image;
 import nl.alexdewaal66.novi.vessels.model.ImageSummary;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import static nl.alexdewaal66.novi.vessels.utils.ImageHelper.resizeImage;
 
 import static nl.alexdewaal66.novi.vessels.utils.Console.logv;
-import static nl.alexdewaal66.novi.vessels.utils.Console.pair;
 
 @Service
 public class ImageServiceImpl
@@ -20,7 +19,7 @@ public class ImageServiceImpl
         implements ImageService {
 
     public ImageServiceImpl(ImageRepository repository) {
-        super(repository);
+        super(repository, "Image");
     }
 
     @Autowired

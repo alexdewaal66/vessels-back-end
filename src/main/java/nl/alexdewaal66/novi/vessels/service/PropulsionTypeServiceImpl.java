@@ -1,8 +1,8 @@
 package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
-import nl.alexdewaal66.novi.vessels.generics.GenericRepository;
-import nl.alexdewaal66.novi.vessels.generics.GenericServiceImpl;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericRepository;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.PropulsionType;
 import nl.alexdewaal66.novi.vessels.repository.PropulsionTypeRepository;
 import nl.alexdewaal66.novi.vessels.utils.Authorization;
@@ -17,7 +17,7 @@ extends GenericServiceImpl<PropulsionType>
 implements PropulsionTypeService {
 
     public PropulsionTypeServiceImpl(GenericRepository<PropulsionType> repository) {
-        super(repository);
+        super(repository, "PropulsionType");
     }
 
     @Autowired

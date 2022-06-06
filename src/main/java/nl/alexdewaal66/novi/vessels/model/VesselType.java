@@ -2,21 +2,19 @@ package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.*;
 //import nl.alexdewaal66.novi.vessels.config.SpringConfiguration;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
-import nl.alexdewaal66.novi.vessels.generics.BaseEntity;
-import nl.alexdewaal66.novi.vessels.generics.GenericEntity;
-import org.hibernate.annotations.UpdateTimestamp;
+import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity @ToString
-public class VesselType extends BaseEntity implements GenericEntity<VesselType> {
+@Entity @ToString @NoArgsConstructor
+public class VesselType extends BaseEntity<VesselType> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
@@ -46,8 +44,9 @@ public class VesselType extends BaseEntity implements GenericEntity<VesselType> 
     @PositiveOrZero(message = "Negative tonnage not allowed")
     private Integer tonnageMax;
 
+    @Column(name = "length_oa")
     @PositiveOrZero(message = "Negative length not allowed")
-    private Double length;
+    private Double lengthOA;
 
     @PositiveOrZero(message = "Negative beam not allowed")
     private Double beam;
@@ -108,11 +107,11 @@ public class VesselType extends BaseEntity implements GenericEntity<VesselType> 
         this.tonnageMax = tonnageMax;
     }
 
-    public Double getLength() {
-        return length;
+    public Double getLengthOA() {
+        return lengthOA;
     }
-    public void setLength(Double length) {
-        this.length = length;
+    public void setLengthOA(Double length) {
+        this.lengthOA = length;
     }
 
     public Double getBeam() {
