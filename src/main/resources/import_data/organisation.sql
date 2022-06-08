@@ -7,4 +7,10 @@ INSERT INTO organisation (short_name, long_name, description, email, url, addres
     null, 'kvnr@kvnr.nl', 'https://www.kvnr.nl/home', 3, '2022-01-01'),
 
 ('Arklow Shipping', 'Arklow Shipping Nederland B.V.',
-    null, 'info@arklowshipping.nl', 'https://www.asl.ie', 4, '2022-01-01');
+    null, 'info@arklowshipping.nl', 'https://www.asl.ie', 4, '2022-01-01'),
+
+('American Bureau of Shipping', null, 'classification society, abbrev:ABS',
+    'ABS-WorldHQ@eagle.org', 'https://www.eagle.org/', 9, '2022-01-01'),
+
+('Bureau Veritas', 'Bureau Veritas, SA', 'classification society, abbrev:BV',
+    'webcontact@bureauveritas.com', 'https://group.bureauveritas.com/', 10, '2022-01-01');

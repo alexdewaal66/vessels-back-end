@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = {"*"})
-public class BaseController {
+public class DefaultController {
 
     @GetMapping(value = "/")
     public String hello() {
-        return "Hello World";
+        return "This is the default controller for the Vessels back end";
     }
 
 }

@@ -1,9 +1,89 @@
-in ...summary.java:
 
-    extends SummaryProjection<RELEVANT_ENTITY>
+model/_ENTITY_NAME_.java
+------------------------
 
-in ...repository.java:
+        package nl.alexdewaal66.novi.vessels.model;
 
-    Collection<RELEVANT_ENTITY_SUMMARY> getAllBy();
+        import lombok.ToString;
+        import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
+        import javax.persistence.*;
 
-    Collection<RELEVANT_ENTITY_SUMMARY> getAllByIdIn(Collection<Long> ids);
+        @Entity @ToString
+        public class _ENTITY_NAME_ extends BaseEntity<_ENTITY_NAME_> {
+            @Override @JsonIgnore @Transient
+            public List<String> getTextProperties() {
+                return Arrays.asList(FIELDNAMES);
+            }
+        }
+
+model/_ENTITY_NAME_Summary.java
+-------------------------------
+
+        package nl.alexdewaal66.novi.vessels.model;
+
+        import nl.alexdewaal66.novi.vessels.infrastructure.SummaryProjection;
+
+        public interface _ENTITY_NAME_Summary extends SummaryProjection<_ENTITY_NAME_> {}
+
+
+repository/_ENTITY_NAME_Repository.java
+---------------------------------------
+
+        package nl.alexdewaal66.novi.vessels.repository;
+        import nl.alexdewaal66.novi.vessels.infrastructure.GenericRepository;
+        import nl.alexdewaal66.novi.vessels.model._ENTITY_NAME_;
+        import nl.alexdewaal66.novi.vessels.model._ENTITY_NAME_Summary;
+        import java.util.Collection;
+        
+        public interface _ENTITY_NAME_Repository extends GenericRepository<_ENTITY_NAME_> {
+            Collection<_ENTITY_NAME_Summary> findAllSummariesBy();
+            Collection<_ENTITY_NAME_Summary> findSummariesByIdIn(Collection<Long> ids);
+        }
+
+service/_ENTITY_NAME_Service.java
+---------------------------------
+    
+        package nl.alexdewaal66.novi.vessels.service;
+        
+        import nl.alexdewaal66.novi.vessels.infrastructure.GenericService;
+        import nl.alexdewaal66.novi.vessels.model._ENTITY_NAME_;
+        
+        public interface _ENTITY_NAME_Service extends GenericService<_ENTITY_NAME_> {}
+
+service/_ENTITY_NAME_ServiceImpl.java
+-------------------------------------
+    
+        package nl.alexdewaal66.novi.vessels.service;
+        import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
+        import nl.alexdewaal66.novi.vessels.model._ENTITY_NAME_;
+        import nl.alexdewaal66.novi.vessels.repository._ENTITY_NAME_Repository;
+        import org.springframework.stereotype.Service;
+        
+        @Service
+        public class _ENTITY_NAME_ServiceImpl
+                extends GenericServiceImpl<_ENTITY_NAME_> implements _ENTITY_NAME_Service {
+            public _ENTITY_NAME_ServiceImpl(_ENTITY_NAME_Repository repository) {
+                super(repository, "_ENTITY_NAME_");
+            }
+        }
+
+
+controller/_ENTITY_NAME_Controller
+----------------------------------
+
+        package nl.alexdewaal66.novi.vessels.controller;
+        import nl.alexdewaal66.novi.vessels.infrastructure.GenericController;
+        import nl.alexdewaal66.novi.vessels.model._ENTITY_NAME_;
+        import nl.alexdewaal66.novi.vessels.service._ENTITY_NAME_ServiceImpl;
+        import org.springframework.web.bind.annotation.CrossOrigin;
+        import org.springframework.web.bind.annotation.RequestMapping;
+        import org.springframework.web.bind.annotation.RestController;
+
+        @RestController
+        @RequestMapping(value = "/_ENTITY_NAME_s") //todo: correct plural
+        @CrossOrigin(origins = "*")
+        public class _ENTITY_NAME_Controller extends GenericController<_ENTITY_NAME_> {
+            public _ENTITY_NAME_Controller(_ENTITY_NAME_ServiceImpl service) {
+                super(service);
+            }
+        }

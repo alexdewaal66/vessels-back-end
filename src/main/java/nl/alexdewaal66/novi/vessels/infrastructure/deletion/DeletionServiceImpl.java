@@ -1,4 +1,4 @@
-package nl.alexdewaal66.novi.vessels.infrastructure;
+package nl.alexdewaal66.novi.vessels.infrastructure.deletion;
 
 import nl.alexdewaal66.novi.vessels.utils.Console;
 import org.springframework.beans.factory.annotation.Autowired;

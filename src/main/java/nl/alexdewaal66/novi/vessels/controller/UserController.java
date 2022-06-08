@@ -3,7 +3,7 @@ package nl.alexdewaal66.novi.vessels.controller;
 import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.model.User;
 import nl.alexdewaal66.novi.vessels.service.UserService;
-import nl.alexdewaal66.novi.vessels.utils.MessageList;
+import nl.alexdewaal66.novi.vessels.payload.MessageList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

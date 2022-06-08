@@ -1,4 +1,4 @@
-package nl.alexdewaal66.novi.vessels.infrastructure;
+package nl.alexdewaal66.novi.vessels.infrastructure.deletion;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,8 @@ public class DeletionController {
             @RequestParam(name="type") String entityName,
             @RequestParam(name= "time") String timeString
     ) {
-        System.out.println("\n\n DeletionController » deletions()" +
-                "\n entityName=" + entityName +
-                "\n time=" + timeString);
         long millis = Long.parseLong(timeString);
         Timestamp timestamp = new Timestamp(millis);
-        System.out.println("\n timestamp=" + timestamp);
         Collection<Deletion> result = deletionService.findDeletions(entityName, timestamp);
         return ResponseEntity.ok().body(result);
     }

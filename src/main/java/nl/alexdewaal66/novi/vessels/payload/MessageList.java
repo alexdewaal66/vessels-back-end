@@ -1,4 +1,4 @@
-package nl.alexdewaal66.novi.vessels.utils;
+package nl.alexdewaal66.novi.vessels.payload;
 
 import java.util.ArrayList;
 import java.util.List;

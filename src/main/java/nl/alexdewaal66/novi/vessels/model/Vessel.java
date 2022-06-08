@@ -28,6 +28,9 @@ public class Vessel extends BaseEntity<Vessel> {
     @Column(name = "item_name")
     private String name;
 
+    @Size(max = 5000)
+    private String description;
+
     @OneToOne
     private Image image;
 
@@ -136,6 +139,9 @@ public class Vessel extends BaseEntity<Vessel> {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public String getDescription() {return description;}
+    public void setDescription(String description) {this.description = description;}
 
     public Image getImage() { return image; }
     public void setImage(Image image) { this.image = image; }

@@ -1,4 +1,4 @@
-package nl.alexdewaal66.novi.vessels.infrastructure;
+package nl.alexdewaal66.novi.vessels.payload;
 
 import lombok.Data;
 

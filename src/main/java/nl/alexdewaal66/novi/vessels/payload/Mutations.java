@@ -1,4 +1,7 @@
-package nl.alexdewaal66.novi.vessels.infrastructure;
+package nl.alexdewaal66.novi.vessels.payload;
+
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericEntity;
+import nl.alexdewaal66.novi.vessels.infrastructure.deletion.Deletion;
 
 import java.util.Collection;
 

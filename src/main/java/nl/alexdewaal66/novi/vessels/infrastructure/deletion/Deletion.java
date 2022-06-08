@@ -1,4 +1,4 @@
-package nl.alexdewaal66.novi.vessels.infrastructure;
+package nl.alexdewaal66.novi.vessels.infrastructure.deletion;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
