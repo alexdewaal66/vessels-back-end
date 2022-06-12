@@ -1,7 +1,7 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
 import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
-import nl.alexdewaal66.novi.vessels.model.User;
+import nl.alexdewaal66.novi.vessels.model.EndUser;
 import nl.alexdewaal66.novi.vessels.service.UserService;
 import nl.alexdewaal66.novi.vessels.payload.MessageList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,9 @@ public class UserController {
     MessageList messages = new MessageList();
 
     @PostMapping(value = "")
-    public ResponseEntity<Object> createUser(@Valid() @RequestBody User user) {
-        System.out.println("» UserController - CreateUser: " + user.toString());
-        String newUsername = userService.createUser(user);
+    public ResponseEntity<Object> createUser(@Valid() @RequestBody EndUser endUser) {
+        System.out.println("» UserController - CreateUser: " + endUser.toString());
+        String newUsername = userService.createUser(endUser);
         messages.clear().addMessage("User " + newUsername + " created");
 
 //        URI location = ServletUriComponentsBuilder
@@ -64,8 +64,8 @@ public class UserController {
     }
 
     @PutMapping(value = "/{username}")
-    public ResponseEntity<Object> updateUser(@PathVariable("username") String username, @RequestBody User user) {
-        userService.updateUser(username, user);
+    public ResponseEntity<Object> updateUser(@PathVariable("username") String username, @RequestBody EndUser endUser) {
+        userService.updateUser(username, endUser);
         return ResponseEntity.noContent().build();
     }
 

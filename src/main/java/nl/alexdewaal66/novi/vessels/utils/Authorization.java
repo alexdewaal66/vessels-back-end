@@ -1,7 +1,6 @@
 package nl.alexdewaal66.novi.vessels.utils;
 
 import nl.alexdewaal66.novi.vessels.model.Authority;
-import nl.alexdewaal66.novi.vessels.model.User;
 import nl.alexdewaal66.novi.vessels.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -9,8 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 

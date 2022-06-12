@@ -1,7 +1,7 @@
 package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.model.Authority;
-import nl.alexdewaal66.novi.vessels.model.User;
+import nl.alexdewaal66.novi.vessels.model.EndUser;
 import nl.alexdewaal66.novi.vessels.model.UserSummary;
 
 import java.util.Collection;
@@ -11,17 +11,17 @@ import java.util.Set;
 
 public interface UserService {
 
-    String createUser(User user);
+    String createUser(EndUser endUser);
 
     Collection<String> getAllIds();
-    Collection<User> getUsers();
+    Collection<EndUser> getUsers();
     Collection<UserSummary> getUserSummaries();
 
-    Optional<User> getUser(String username);
+    Optional<EndUser> getUser(String username);
 
-    List<User> getByIds(List<String> usernames);
+    List<EndUser> getByIds(List<String> usernames);
 
-    void updateUser(String username, User user);
+    void updateUser(String username, EndUser endUser);
 
     void deleteUser(String username);
 

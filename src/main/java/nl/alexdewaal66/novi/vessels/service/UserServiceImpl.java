@@ -4,7 +4,7 @@ import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.exceptions.UsernameNotFoundException;
 import nl.alexdewaal66.novi.vessels.exceptions.UsernameExistsException;
 import nl.alexdewaal66.novi.vessels.model.Authority;
-import nl.alexdewaal66.novi.vessels.model.User;
+import nl.alexdewaal66.novi.vessels.model.EndUser;
 import nl.alexdewaal66.novi.vessels.model.UserSummary;
 import nl.alexdewaal66.novi.vessels.repository.UserRepository;
 import nl.alexdewaal66.novi.vessels.utils.RandomStringGenerator;
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<User> getUsers() {
+    public Collection<EndUser> getUsers() {
         return userRepository.findAll();
     }
 
@@ -42,12 +42,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUser(String username) {
+    public Optional<EndUser> getUser(String username) {
         return userRepository.findById(username);
     }
 
     @Override
-    public List<User> getByIds(List<String> usernames) {
+    public List<EndUser> getByIds(List<String> usernames) {
         return  userRepository.findAllById(usernames);
     }
 
@@ -58,14 +58,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String createUser(User user)
+    public String createUser(EndUser endUser)
     {
-        if (userRepository.existsById(user.getUsername())) throw new UsernameExistsException(user.getUsername());
+        if (userRepository.existsById(endUser.getUsername())) throw new UsernameExistsException(endUser.getUsername());
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
-        user.setApikey(randomString);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User newUser = userRepository.save(user);
-        return newUser.getUsername();
+        endUser.setApikey(randomString);
+        endUser.setPassword(passwordEncoder.encode(endUser.getPassword()));
+        EndUser newEndUser = userRepository.save(endUser);
+        return newEndUser.getUsername();
     }
 
     @Override
@@ -74,35 +74,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(String username, User newUser) {
+    public void updateUser(String username, EndUser newEndUser) {
         if (!userRepository.existsById(username)) throw new RecordNotFoundException();
-        User user = userRepository.findById(username).get();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        EndUser endUser = userRepository.findById(username).get();
+        endUser.setPassword(passwordEncoder.encode(endUser.getPassword()));
+        userRepository.save(endUser);
     }
 
     @Override
     public Set<Authority> getAuthorities(String username) {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
-        User user = userRepository.findById(username).get();
-        return user.getAuthorities();
+        EndUser endUser = userRepository.findById(username).get();
+        return endUser.getAuthorities();
     }
 
     @Override
     public void addAuthority(String username, String authority) {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
-        User user = userRepository.findById(username).get();
-        user.addAuthority(new Authority(username, authority));
-        userRepository.save(user);
+        EndUser endUser = userRepository.findById(username).get();
+        endUser.addAuthority(new Authority(username, authority));
+        userRepository.save(endUser);
     }
 
     @Override
     public void removeAuthority(String username, String authority) {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
-        User user = userRepository.findById(username).get();
-        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getRole().equalsIgnoreCase(authority)).findAny().get();
-        user.removeAuthority(authorityToRemove);
-        userRepository.save(user);
+        EndUser endUser = userRepository.findById(username).get();
+        Authority authorityToRemove = endUser.getAuthorities().stream().filter((a) -> a.getRole().equalsIgnoreCase(authority)).findAny().get();
+        endUser.removeAuthority(authorityToRemove);
+        userRepository.save(endUser);
     }
 
 

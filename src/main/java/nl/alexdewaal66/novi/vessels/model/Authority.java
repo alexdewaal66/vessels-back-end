@@ -9,6 +9,12 @@ import java.io.Serializable;
 @Table(name = "authorities")
 public class Authority implements Serializable {
 
+    public Authority() {}
+    public Authority(String username, String role) {
+        this.username = username;
+        this.role = role;
+    }
+
     @Id
     @Column(nullable = false)
     @Size(max = 100)
@@ -19,18 +25,11 @@ public class Authority implements Serializable {
     @Size(max = 100)
     private String role;
 
-    public Authority() {}
-    public Authority(String username, String role) {
-        this.username = username;
-        this.role = role;
-    }
-
-    public String getUsername() {
-        return username;
-    }
+    public String getUsername() {return username;}
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getRole() {
         return role;
     }
