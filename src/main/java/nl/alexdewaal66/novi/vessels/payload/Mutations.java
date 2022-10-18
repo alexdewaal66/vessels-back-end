@@ -7,17 +7,17 @@ import java.util.Collection;
 
 public class Mutations<T extends GenericEntity<T>> {
     Collection<T> fresh;
-    Collection<Deletion> deletions;
+    Collection<Deletion> deleted;
 
-    public Mutations(Collection<T> fresh, Collection<Deletion> deletions) {
+    public Mutations(Collection<T> fresh, Collection<Deletion> deleted) {
         this.fresh = fresh;
-        this.deletions = deletions;
+        this.deleted = deleted;
     }
 
     public Collection<T> getFresh() {return fresh;}
     public void setFresh(Collection<T> fresh) {this.fresh = fresh;}
     
-    public Collection<Deletion> getDeletions() {return deletions;}
-    public void setDeletions(Collection<Deletion> deletions) {
-        this.deletions = deletions;}
+    public Collection<Deletion> getDeleted() {return deleted;}
+    public void setDeleted(Collection<Deletion> deleted) {
+        this.deleted = deleted;}
 }

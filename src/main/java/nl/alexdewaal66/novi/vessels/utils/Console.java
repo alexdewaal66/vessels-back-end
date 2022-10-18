@@ -12,13 +12,13 @@ public class Console {
     }
 
     static public void logv(String path) {
-        System.out.println("\n➖➖ " + now() + " ➖➖ " + path);
+        System.out.println("\n\n➖➖ " + now() + " ➖➖ " + path);
     }
 
     static public void logv(String path, String... pairs) {
         logv(path);
         for (String pair : pairs) {
-            System.out.println("\t " + pair);
+            System.out.println("\n\t " + pair);
         }
         System.out.println();
     }

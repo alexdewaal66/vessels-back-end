@@ -10,14 +10,14 @@ CREATE OR REPLACE FUNCTION relation_type_id(x character varying) RETURNS bigint 
  WHERE x = name_en'
     LANGUAGE sql;
 
-INSERT INTO relation (organisation1_id, organisation2_id, relation_type_id, timestamp) VALUES
-    ( (SELECT organisation_id('Maersk Line')),
-      (SELECT organisation_id('Maersk')),
-      (SELECT relation_type_id('subsidiary')) , '2022-01-01');
+INSERT INTO relation (organisation1_id, organisation2_id, relation_type_id, timestamp)
+VALUES (organisation_id('Maersk Line'),
+        organisation_id('Maersk'),
+        relation_type_id('subsidiary'), '2022-01-01');
 
-INSERT INTO relation (organisation1_id, organisation2_id, relation_type_id, timestamp) VALUES
-    ( (SELECT organisation_id('Arklow Shipping')),
-      (SELECT organisation_id('Bureau Veritas')),
-      (SELECT relation_type_id('classification')) , '2022-01-01');
+INSERT INTO relation (organisation1_id, organisation2_id, relation_type_id, timestamp)
+VALUES (organisation_id('Arklow Shipping'),
+        organisation_id('Bureau Veritas'),
+        relation_type_id('classification'), '2022-01-01');
 
 

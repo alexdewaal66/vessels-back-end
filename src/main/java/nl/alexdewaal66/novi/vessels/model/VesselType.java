@@ -1,7 +1,6 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.*;
-//import nl.alexdewaal66.novi.vessels.config.SpringConfiguration;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;

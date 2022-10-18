@@ -1,9 +1,6 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
-import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
-import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
-import nl.alexdewaal66.novi.vessels.exceptions.UsernameNotFoundException;
-import nl.alexdewaal66.novi.vessels.exceptions.UsernameExistsException;
+import nl.alexdewaal66.novi.vessels.exceptions.*;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +28,11 @@ public class ExceptionController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
+    @ExceptionHandler(value = FileStorageException.class)
+    public ResponseEntity<Object> exception(FileStorageException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+
     @ExceptionHandler(value = BadRequestException.class)
     public ResponseEntity<Object> exception(BadRequestException exception) {
         return ResponseEntity.badRequest().body(exception.getMessage());
@@ -45,8 +47,6 @@ public class ExceptionController {
     public ResponseEntity<Object> exception(UsernameExistsException exception) {
         return ResponseEntity.badRequest().build();
     }
-
-    //
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Object> exception(MethodArgumentNotValidException exception) {

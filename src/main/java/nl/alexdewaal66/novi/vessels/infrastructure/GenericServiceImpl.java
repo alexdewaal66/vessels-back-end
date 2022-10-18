@@ -28,7 +28,7 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
     private DeletionService deletionService;
 
     @Autowired
-    private Authorization authorization;
+    private AuthorizationHelper authorizationHelper;
 
     // GenericRepository2<> is by design not to be a bean, error reported by IntelliJ is erroneous
     public GenericServiceImpl(GenericRepository<T> repository, String entityName) {
@@ -74,8 +74,8 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
     public Mutations<T> getByTimestampAfter(Timestamp timestamp) {
         Collection<T> fresh = repository.findAllByTimestampAfter(timestamp);
 
-        Collection<Deletion> deletions = deletionService.findDeletions(this.entityName, timestamp);
-        return new Mutations<>(fresh, deletions);
+        Collection<Deletion> deleted = deletionService.findDeletions(this.entityName, timestamp);
+        return new Mutations<>(fresh, deleted);
     }
     //---------------------------------------------------------------------------------
 
@@ -103,10 +103,10 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
 
     @Override
     public Long create(T item) {
-        String className = item.getClass().getSimpleName();
+//        String className = item.getClass().getSimpleName();
 //        Console.logv(className.equals("Image"), "» GenericServiceImpl » create()", "item=" + item);
         item.setId(null); // protects from overwriting existing instance
-        item.setOwner(authorization.getPrincipalName());
+        item.setOwner(authorizationHelper.getPrincipalName());
 //        System.out.println("» GenericServiceImpl2 » create()"
 //                + "\n\t item=" + item.toString());
         T newItem = repository.save(item);
@@ -155,18 +155,16 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
 //            Console.logv(path + "*after* setId()", "newItem=" + newItem);
             T oldItem = repository.getOne(id);
             String owner = oldItem.getOwner();
-            if (authorization.isEligible(owner)) {
+            if (authorizationHelper.isEligible(owner)) {
                 newItem.setOwner(owner);
-                newItem.setUpdater(authorization.getPrincipalName());
+                newItem.setUpdater(authorizationHelper.getPrincipalName());
                 repository.save(newItem);
                 //todo: choose return value or skip entirely
 //                return new Object() {final boolean saved = true;};
 //                return "saved";
                 return new UpdateResponse(true, "");
             } else {
-//                return new Object() {final boolean saved = false;final String reason = "not eligible";};
-//                return "not eligible";
-                return new UpdateResponse(false, "not eligible");
+                throw new BadRequestException("user not eligible to update this item");
             }
         } else {
             System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", newItem.getClass().getSimpleName(), id);
@@ -188,13 +186,15 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
             String owner = oldItem.getOwner();
 //            String path = "GenericServiceImpl<" + className + "> » delete() ";
 //            Console.logv(path, "owner=" + owner, "principal=" + principal);
-            if (authorization.isEligible(owner)) {
+            if (authorizationHelper.isEligible(owner)) {
                 //todo: replace getSimpleName by getName ?
                 String className = oldItem.getClass().getSimpleName();
                 int dollarIndex = className.indexOf('$');
                 String entityName = className.substring(0, dollarIndex).toLowerCase();
                 deletionService.create(entityName, id);
                 repository.deleteById(id);
+            } else {
+                throw new BadRequestException("user not eligible to delete this item");
             }
         } else {
             throw new RecordNotFoundException();

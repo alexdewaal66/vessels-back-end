@@ -9,7 +9,6 @@ import java.util.Collection;
 public interface VesselTypeRepository
         extends GenericRepository<VesselType>
 {
-
     VesselType findByNameENContainsOrNameNLContains(String nameEN, String nameNL);
 
     Collection<VesselTypeSummary> findAllSummariesBy();

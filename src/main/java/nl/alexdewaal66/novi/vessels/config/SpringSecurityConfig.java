@@ -1,7 +1,7 @@
 package nl.alexdewaal66.novi.vessels.config;
 
 import nl.alexdewaal66.novi.vessels.filter.JwtRequestFilter;
-import nl.alexdewaal66.novi.vessels.service.CustomUserDetailsService;
+import nl.alexdewaal66.novi.vessels.service.EnduserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,14 +22,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    public CustomUserDetailsService customUserDetailsService;
+    public EnduserService enduserService;
+//    public CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService);
+        auth.userDetailsService(enduserService);
     }
 
     @Override
@@ -52,12 +53,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
 //                .formLogin().disable()
             .authorizeRequests()
-                .antMatchers("/members/**")
-                    .hasAnyRole("MEMBER", "EXPERT", "ADMIN")
-                .antMatchers("/experts/**").hasAnyRole("EXPERT", "ADMIN")
-                .antMatchers("/admins/**").hasRole("ADMIN")
-                .antMatchers("/authenticated").authenticated()
+//                .antMatchers("/members/**")
+//                    .hasAnyRole("MEMBER", "EXPERT", "ADMIN")
+//                .antMatchers("/experts/**").hasAnyRole("EXPERT", "ADMIN")
+//                .antMatchers("/admins/**").hasRole("ADMIN")
+//                .antMatchers("/authenticated").authenticated()
                 .antMatchers("/authenticate").permitAll()
+                .antMatchers(HttpMethod.POST,"/signup").permitAll()
                 .antMatchers("/users").authenticated()
 
 //                .antMatchers("/files/**").permitAll()

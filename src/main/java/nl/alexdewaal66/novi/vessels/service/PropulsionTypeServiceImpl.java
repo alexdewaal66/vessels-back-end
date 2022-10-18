@@ -5,7 +5,7 @@ import nl.alexdewaal66.novi.vessels.infrastructure.GenericRepository;
 import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.PropulsionType;
 import nl.alexdewaal66.novi.vessels.repository.PropulsionTypeRepository;
-import nl.alexdewaal66.novi.vessels.utils.Authorization;
+import nl.alexdewaal66.novi.vessels.utils.AuthorizationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ implements PropulsionTypeService {
     private PropulsionTypeRepository propulsionTypeRepository;
 
     @Autowired
-    private Authorization authorization;
+    private AuthorizationHelper authorizationHelper;
 
 
     @Override
@@ -33,16 +33,6 @@ implements PropulsionTypeService {
         PropulsionType superType = repository.getOne(superTypeId);
         item.setSuperType(superType);
         return super.create(item);
-    }
-
-    @Override
-    public Object update(Long id, PropulsionType newItem) {
-        if (id != 1L || authorization.checkRole("ADMIN")) {
-            return super.update(id, newItem);
-        } else {
-//            logv("PropulsionTypeServiceImpl.java » update() REJECTED", "id=" + id);
-            throw new BadRequestException("Can't update PropulsionType record #1");
-        }
     }
 
 }

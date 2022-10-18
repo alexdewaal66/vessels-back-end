@@ -5,7 +5,7 @@ import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.VesselType;
 import nl.alexdewaal66.novi.vessels.repository.VesselTypeRepository;
-import nl.alexdewaal66.novi.vessels.utils.Authorization;
+import nl.alexdewaal66.novi.vessels.utils.AuthorizationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class VesselTypeServiceImpl
     private VesselTypeRepository vesselTypeRepository;
 
     @Autowired
-    private Authorization authorization;
+    private AuthorizationHelper authorizationHelper;
 
 
     @Override
@@ -44,24 +44,5 @@ public class VesselTypeServiceImpl
         return super.create(item);
     }
 
-    @Override
-    public Object update(Long id, VesselType newItem) {
-        if (id != 1L) {
-            return super.update(id, newItem);
-        } else {
-//            logv("VesselTypeServiceImpl.java » update() REJECTED", "id=" + id);
-            throw new BadRequestException("not even the Admin can update VesselType record #1");
-        }
-    }
-
-//    @Override
-    public void delete(Long id, VesselType newItem) {
-        if (id != 1L) {
-            super.delete(id);
-        } else {
-//            logv("VesselTypeServiceImpl.java » update() REJECTED", "id=" + id);
-            throw new BadRequestException("not even the Admin can delete VesselType record #1");
-        }
-    }
 
 }

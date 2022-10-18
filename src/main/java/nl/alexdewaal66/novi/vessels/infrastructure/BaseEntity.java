@@ -1,5 +1,6 @@
 package nl.alexdewaal66.novi.vessels.infrastructure;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.GeneratedValue;
@@ -18,8 +19,10 @@ public abstract class BaseEntity<T> implements GenericEntity<T> {
     @UpdateTimestamp
     protected Timestamp timestamp;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected String owner;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected String updater;
 
     public Long getId() { return id; }
