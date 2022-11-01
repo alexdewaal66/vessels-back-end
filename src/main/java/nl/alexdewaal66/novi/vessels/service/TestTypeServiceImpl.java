@@ -14,15 +14,15 @@ public class TestTypeServiceImpl
         extends GenericServiceImpl<TestType>
         implements TestTypeService{
 
-    public TestTypeServiceImpl(TestTypeRepository repository) {
+    public TestTypeServiceImpl(TestTypeRepository repository, TestTypeRepository TestTypeRepository, AuthorizationHelper authorizationHelper) {
         super(repository, "TestType");
+        this.TestTypeRepository = TestTypeRepository;
+        this.authorizationHelper = authorizationHelper;
     }
 
-    @Autowired
-    private TestTypeRepository TestTypeRepository;
+    private final TestTypeRepository TestTypeRepository;
 
-    @Autowired
-    private AuthorizationHelper authorizationHelper;
+    private final AuthorizationHelper authorizationHelper;
 
 
     @Override

@@ -10,8 +10,11 @@ import java.util.Collection;
 @Service
 public class DeletionServiceImpl implements DeletionService {
 
-    @Autowired
+    final
     DeletionRepository repository;
+    public DeletionServiceImpl(DeletionRepository repository) {
+        this.repository = repository;
+    }
     @Override
     public Collection<Deletion> findDeletions(String entityName, Timestamp timestamp) {
 

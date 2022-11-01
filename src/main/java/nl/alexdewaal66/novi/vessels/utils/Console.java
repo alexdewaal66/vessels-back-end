@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Console {
-    static SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS");
+    static final SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS");
 
     static private String now() {
         Date date = new Date();
@@ -33,11 +33,4 @@ public class Console {
         return var + "=" + value.toString();
     }
 
-    static public boolean classCheck(Object item, String className) {
-        return item.getClass().getSimpleName().equals(className);
-    }
-
-    static public boolean classCheck(Object item, Class claz) {
-        return item.getClass().getSimpleName().equals(claz.getSimpleName());
-    }
 }

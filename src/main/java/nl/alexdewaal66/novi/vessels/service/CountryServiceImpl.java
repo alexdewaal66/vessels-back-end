@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CountryServiceImpl extends GenericServiceImpl<Country> implements CountryService {
 
-    @Autowired
+    final
     CountryRepository countryRepository;
 
-    public CountryServiceImpl(CountryRepository repository) {
+    public CountryServiceImpl(CountryRepository repository, CountryRepository countryRepository) {
         super(repository, "Country");
+        this.countryRepository = countryRepository;
     }
 
 

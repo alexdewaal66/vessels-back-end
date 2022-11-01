@@ -11,11 +11,11 @@ public class RelationTypeServiceImpl
         extends GenericServiceImpl<RelationType>
         implements RelationTypeService {
 
-        @Autowired
-    private RelationTypeRepository relationTypeRepository;
+    private final RelationTypeRepository relationTypeRepository;
 
-    public RelationTypeServiceImpl(RelationTypeRepository repository) {
+    public RelationTypeServiceImpl(RelationTypeRepository repository, RelationTypeRepository relationTypeRepository) {
         super(repository, "RelationType");
+        this.relationTypeRepository = relationTypeRepository;
     }
 
 }

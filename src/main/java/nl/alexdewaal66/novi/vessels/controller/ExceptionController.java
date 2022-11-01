@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import javax.validation.Path;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -72,6 +70,7 @@ public class ExceptionController {
 
 @ExceptionHandler(value = IncorrectResultSizeDataAccessException.class)
     public ResponseEntity<Object> exception(IncorrectResultSizeDataAccessException exception) {
-        return ResponseEntity.badRequest().body(exception.getMessage().split(":")[0]);
+        String message = exception.getMessage() + "";
+        return ResponseEntity.badRequest().body(message.split(":")[0]);
 }
 }

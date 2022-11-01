@@ -112,7 +112,6 @@ CSC testing
 Port industry association
 Ship registry
 
-    Read more about Bahamas Maritime Authority Add new comment 1400 reads
 
 American Bureau of Shipping
 Address:
@@ -135,7 +134,6 @@ CSC approval
 CSC inspection
 CSC testing
 
-    Read more about American Bureau of Shipping Add new comment 1296 reads
 
 Korean Register of Shipping
 Address:
@@ -203,7 +201,6 @@ Classification society
 Port authority
 Ship registry
 
-    Read more about Bahamas Maritime Authority Add new comment 1987 reads
 
 China Corporation Register of Shipping
 Address:
@@ -226,7 +223,6 @@ CSC approval
 CSC inspection
 CSC testing
 
-    Read more about China Corporation Register of Shipping Add new comment 3084 reads
 
 Russian Maritime Register of Shipping
 Address:
@@ -706,7 +702,6 @@ CSC approval
 CSC inspection
 CSC testing
 
-    Read more about China Classification Society Add new comment 1354 reads
 
 
 Bulgarian Register of Shipping
@@ -730,7 +725,6 @@ CSC approval
 CSC inspection
 CSC testing
 
-    Read more about Bulgarian Register of Shipping Add new comment 2264 reads
 
 Bahamas Maritime Authority
 Address:
@@ -755,5 +749,5 @@ CSC testing
 Port authority
 Ship registry
 
-    Read more about Bahamas Maritime Authority Add new comment 1450 reads
+    Read more about the Bahamas Maritime Authority Add new comment 1450 reads
 

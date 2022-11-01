@@ -15,11 +15,16 @@ import static nl.alexdewaal66.novi.vessels.utils.Console.logv;
 @CrossOrigin(origins = "*")
 public class SignupController {
 
-    @Autowired
+    final
     EnduserService enduserService;
 
-    @Autowired
+    final
     PasswordEncoder passwordEncoder;
+
+    public SignupController(EnduserService enduserService, PasswordEncoder passwordEncoder) {
+        this.enduserService = enduserService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @PostMapping(value = "")
     public ResponseEntity<Object> signup(@RequestBody Enduser item) {

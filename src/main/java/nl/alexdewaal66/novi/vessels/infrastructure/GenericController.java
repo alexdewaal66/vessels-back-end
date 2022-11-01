@@ -1,9 +1,7 @@
 package nl.alexdewaal66.novi.vessels.infrastructure;
 
-import nl.alexdewaal66.novi.vessels.model.Hull;
-import nl.alexdewaal66.novi.vessels.payload.IdContainer;
-import nl.alexdewaal66.novi.vessels.utils.Match;
 import nl.alexdewaal66.novi.vessels.payload.Mutations;
+import nl.alexdewaal66.novi.vessels.utils.Match;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +10,6 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import static nl.alexdewaal66.novi.vessels.utils.Console.*;
 
 public abstract class GenericController<T extends BaseEntity<T>> {
 
@@ -34,10 +30,10 @@ public abstract class GenericController<T extends BaseEntity<T>> {
         return ResponseEntity.ok().body(service.getById(id));
     }
 
-    @GetMapping(value = "/summaries/{id}")
-    public ResponseEntity<Object> getSummary(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(service.getSummaryById(id));
-    }
+//    @GetMapping(value = "/summaries/{id}")
+//    public ResponseEntity<Object> getSummary(@PathVariable("id") Long id) {
+//        return ResponseEntity.ok().body(service.getSummaryById(id));
+//    }
 
     @GetMapping(value = "")
     public ResponseEntity<Object> getAll() {
@@ -61,15 +57,15 @@ public abstract class GenericController<T extends BaseEntity<T>> {
         return ResponseEntity.ok().body(service.getByIds(ids));
     }
 
-    @PostMapping(value = "/summaries")
-    public ResponseEntity<Object> getSummariesByIds(@RequestBody List<Long> ids) {
-        return ResponseEntity.ok().body(service.getSummariesByIds(ids));
-    }
+//    @PostMapping(value = "/summaries")
+//    public ResponseEntity<Object> getSummariesByIds(@RequestBody List<Long> ids) {
+//        return ResponseEntity.ok().body(service.getSummariesByIds(ids));
+//    }
 
-    @GetMapping(value = "/summaries")
-    public ResponseEntity<Object> getAllSummaries() {
-        return ResponseEntity.ok().body(service.getAllSummaries());
-    }
+//    @GetMapping(value = "/summaries")
+//    public ResponseEntity<Object> getAllSummaries() {
+//        return ResponseEntity.ok().body(service.getAllSummaries());
+//    }
 
     @PostMapping(value = "/findall")
     public ResponseEntity<Object> findItemsByExample(@RequestBody Match<T> match) {
@@ -93,25 +89,25 @@ public abstract class GenericController<T extends BaseEntity<T>> {
         return new ResponseEntity<>(String.format("%s %d created", item.getClass().getSimpleName(), newId), HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/sum1")
-    public ResponseEntity<Object> create1(@RequestBody T item) {
-        boolean doLog = classCheck(item, Hull.class);
-//        logv(doLog, "» GenericController » create1()", pair("item", item));
-        IdContainer responseData = service.create1(item);
-//        logv(doLog, "» GenericController » create1()", pair("responseData", responseData));
-//        System.out.println("» GenericController » create()"
-//                + "\n\tid=" + newId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseData);
-    }
-
-    @PostMapping(value = "/sum2")
-    public ResponseEntity<Object> create2(@RequestBody T item) {
-//        logv(classCheck(item, "Xyz"), "» GenericController2 » create2()", pair("item", item));
-//        SummaryProjection<T> responseData = service.create2(item);
-        Object responseData = service.create2(item);
-//        logv(classCheck(item, "Xyz"), "» GenericController2 » create2()", pair("responseData", responseData));
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseData);
-    }
+//    @PostMapping(value = "/sum1")
+//    public ResponseEntity<Object> create1(@RequestBody T item) {
+//        boolean doLog = classCheck(item, Hull.class);
+////        logv(doLog, "» GenericController » create1()", pair("item", item));
+//        IdContainer responseData = service.create1(item);
+////        logv(doLog, "» GenericController » create1()", pair("responseData", responseData));
+////        System.out.println("» GenericController » create()"
+////                + "\n\tid=" + newId);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(responseData);
+//    }
+//
+//    @PostMapping(value = "/sum2")
+//    public ResponseEntity<Object> create2(@RequestBody T item) {
+////        logv(classCheck(item, "Xyz"), "» GenericController2 » create2()", pair("item", item));
+////        SummaryProjection<T> responseData = service.create2(item);
+//        Object responseData = service.create2(item);
+////        logv(classCheck(item, "Xyz"), "» GenericController2 » create2()", pair("responseData", responseData));
+//        return ResponseEntity.status(HttpStatus.CREATED).body(responseData);
+//    }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> update(@PathVariable("id") Long id,

@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class XyzController extends GenericController<Xyz> {
 
-    @Autowired
-    private XyzService xyzService;
+    private final XyzService xyzService;
 
-    public XyzController(XyzServiceImpl service) {
+    public XyzController(XyzServiceImpl service, XyzService xyzService) {
         super(service);
+        this.xyzService = xyzService;
     }
 
 }

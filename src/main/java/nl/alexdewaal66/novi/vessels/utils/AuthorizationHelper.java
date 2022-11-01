@@ -9,12 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static nl.alexdewaal66.novi.vessels.utils.Console.logv;
 
 enum Level {
     NONE, ROLE_MEMBER, ROLE_EXPERT, ROLE_ADMIN, ROLE_DEMIURG;
@@ -29,21 +25,17 @@ public class AuthorizationHelper {
     @Autowired
     EnduserService enduserService;
 
-    public boolean isEligible(String username) {
-        String principal = getPrincipalName();
-        return username == null || principal.equals(username) || hasPrincipalHigherRoleThan(username);
+    public boolean isEligible(String username) {// does Principal is or outranks provided user
+        return username == null
+                || isSelf(username)
+                || hasPrincipalHigherRoleThan(username);
     }
 
     public boolean isSelf(String username) {
-        Authentication auth = getAuth();
-        String principal = getPrincipalName(auth);
-        return principal.equals(username);
+        String principalName = getPrincipalName();
+        return principalName.equals(username);
     }
-    public boolean isSelfOrAdmin(String username) {
-        Authentication auth = getAuth();
-        String principal = getPrincipalName(auth);
-        return principal.equals(username) || checkRole(auth, Role.Roles.ADMIN.label);
-    }
+
 
     private boolean hasPrincipalHigherRoleThan(String username) {
         return getHighestLevel(null).greaterThan(getHighestLevel(username));
@@ -53,11 +45,11 @@ public class AuthorizationHelper {
         final var ref = new Object() {
             Level highest = Level.ROLE_MEMBER;
         };
-        Set<String> roles = getRoles(username);
-        roles.forEach(role -> {
+        Set<String> roleNames = getRoleNames(username);
+        roleNames.forEach(roleName -> {
             Level level = Level.NONE;
             try {
-                level = Level.valueOf(role);
+                level = Level.valueOf(roleName);
             } finally {
                 if (level.greaterThan(ref.highest)) ref.highest = level;
             }
@@ -65,7 +57,7 @@ public class AuthorizationHelper {
         return ref.highest;
     }
 
-    private Set<String> getRoles(String username) {
+    private Set<String> getRoleNames(String username) {
         if (username == null) {
             return getAuth().getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
@@ -91,7 +83,6 @@ public class AuthorizationHelper {
     public boolean checkRole(String roleName) {
         return checkRole(getAuth(), roleName);
     }
-
 
     public boolean checkRole(Authentication auth, String roleName) {
 //        logv("checkRole(" + roleName + ")", "auth=" + auth);

@@ -13,10 +13,10 @@ import nl.alexdewaal66.novi.vessels.service.SubdivisionService;
 @CrossOrigin(origins = "*")
 public class SubdivisionController extends GenericController<Subdivision> {
 
-    @Autowired
-    private SubdivisionService subdivisionService;
-    public SubdivisionController(SubdivisionServiceImpl service) {
+    private final SubdivisionService subdivisionService;
+    public SubdivisionController(SubdivisionServiceImpl service, SubdivisionService subdivisionService) {
         super(service);
+        this.subdivisionService = subdivisionService;
     }
 
 

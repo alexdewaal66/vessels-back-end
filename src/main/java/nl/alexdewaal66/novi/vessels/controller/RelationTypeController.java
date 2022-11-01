@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class RelationTypeController extends GenericController<RelationType> {
 
-    @Autowired
-    private RelationTypeServiceImpl service;
+    private final RelationTypeServiceImpl relationTypeService;
 
-    public RelationTypeController(GenericServiceImpl<RelationType> service) {
+    public RelationTypeController(GenericServiceImpl<RelationType> service, RelationTypeServiceImpl relationTypeService) {
         super(service);
+        this.relationTypeService = relationTypeService;
     }
 
 }

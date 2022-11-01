@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class SubdivisionServiceImpl extends GenericServiceImpl<Subdivision> implements SubdivisionService {
 
-    @Autowired
-    private SubdivisionRepository subdivisionRepository;
-    public SubdivisionServiceImpl(SubdivisionRepository repository) {
+    private final SubdivisionRepository subdivisionRepository;
+    public SubdivisionServiceImpl(SubdivisionRepository repository, SubdivisionRepository subdivisionRepository) {
         super(repository, "Subdivision");
+        this.subdivisionRepository = subdivisionRepository;
     }
 
     public Subdivision findSubdivision(String alpha2Code, String subdivisionCode) {

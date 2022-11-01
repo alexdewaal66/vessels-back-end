@@ -1,7 +1,5 @@
 package nl.alexdewaal66.novi.vessels.utils;
 
-import nl.alexdewaal66.novi.vessels.model.DBFile;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,9 +9,9 @@ import java.io.IOException;
 
 public class ImageHelper {
 
-    private static final int MAX_HEIGHT = 50;
+    public static final int MAX_HEIGHT = 50;
 
-    private static BufferedImage bytesToImage(byte[] imageData) {
+    public static BufferedImage bytesToImage(byte[] imageData) {
         ByteArrayInputStream bais = new ByteArrayInputStream(imageData);
         try {
             return ImageIO.read(bais);
@@ -22,7 +20,7 @@ public class ImageHelper {
         }
     }
 
-    private static byte[] imageToBytes(BufferedImage image) {
+    public static byte[] imageToBytes(BufferedImage image) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             ImageIO.write(image, "jpg", baos);
@@ -37,7 +35,7 @@ public class ImageHelper {
         return Math.round(originalImage.getWidth() / ratio);
     }
 
-    public static byte[] resizeImage(byte[] imageData, String fileType) {
+    public static byte[] resizeImage(byte[] imageData) {
         BufferedImage originalImage = bytesToImage(imageData);
         int targetWidth = calcWidth(originalImage);
         BufferedImage resizedImage =

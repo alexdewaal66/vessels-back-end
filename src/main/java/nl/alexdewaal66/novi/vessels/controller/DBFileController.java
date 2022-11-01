@@ -19,10 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 @CrossOrigin(origins = "*")
 public class DBFileController extends GenericController<DBFile> {
 
-    @Autowired
-    private DBFileServiceImpl dbFileService;
-    public DBFileController(GenericServiceImpl<DBFile> service) {
+    private final DBFileServiceImpl dbFileService;
+    public DBFileController(GenericServiceImpl<DBFile> service, DBFileServiceImpl dbFileService) {
         super(service);
+        this.dbFileService = dbFileService;
     }
 
     @PostMapping(value = "/upload")

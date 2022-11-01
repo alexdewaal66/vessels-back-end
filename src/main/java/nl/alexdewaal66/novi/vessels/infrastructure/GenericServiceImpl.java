@@ -6,14 +6,14 @@ import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.infrastructure.deletion.Deletion;
 import nl.alexdewaal66.novi.vessels.infrastructure.deletion.DeletionService;
-import nl.alexdewaal66.novi.vessels.payload.IdContainer;
 import nl.alexdewaal66.novi.vessels.payload.Mutations;
-import nl.alexdewaal66.novi.vessels.utils.*;
+import nl.alexdewaal66.novi.vessels.utils.AuthorizationHelper;
+import nl.alexdewaal66.novi.vessels.utils.Match;
+import nl.alexdewaal66.novi.vessels.utils.Matcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -46,28 +46,31 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
         return repository.findById(id).orElseThrow(RecordNotFoundException::new);
     }
 
-    @Override
-    public SummaryProjection<T> getSummaryById(Long id) {
-        return null;
-    }
+//    @Override
+//    public SummaryProjection<T> getSummaryById(Long id) {
+//        return null;
+//    }
 
     @Override
     public List<T> getByIds(List<Long> ids) {
         return repository.findAllById(ids);
     }
-    @Override
-    public Collection<SummaryProjection<T>> getSummariesByIds(List<Long> ids) {
-        return (Collection<SummaryProjection<T>>) repository.findSummariesByIdIn(ids);
-    }
+
+//    @Override
+//    public Collection<SummaryProjection<T>> getSummariesByIds(List<Long> ids) {
+//        return (Collection<SummaryProjection<T>>) repository.findSummariesByIdIn(ids);
+//    }
 
     @Override
     public Collection<T> getAll() {
         return repository.findAll();
     }
-    @Override
-    public Collection<SummaryProjection<T>> getAllSummaries() {
-        return (Collection<SummaryProjection<T>>) repository.findAllSummariesBy();
-    }
+
+//    @Override
+//    public Collection<SummaryProjection<T>> getAllSummaries() {
+//        return (Collection<SummaryProjection<T>>) repository.findAllSummariesBy();
+////        return repository.findAllSummariesBy();
+//    }
 
     //---------------------------------------------------------------------------------
     @Override
@@ -115,34 +118,35 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
         return newItem.getId();
     }
 
-    @Override
-    public IdContainer create1(T item) {
-        String className = item.getClass().getSimpleName();
-//        Console.logv(className.equals("Image"), "» GenericServiceImpl » create()", "item=" + item);
-        item.setId(null); // protects from overwriting existing instance
-//        logv(classCheck(item, "Hull"), "» GenericServiceImpl » create1()", pair("item", item));
-        T newItem = repository.save(item);
-//        logv(classCheck(item, "Hull"), "» GenericServiceImpl » create1()", pair("newItem", newItem));
-        IdContainer idItem = new IdContainer();
-        idItem.setId(newItem.getId());
-//        System.out.println("» GenericServiceImpl2 » create()"
-//                + "\n\t item=" + item.toString());
-        return idItem;
-    }
+//    @Override
+//    public IdContainer create1(T item) {
+//        String className = item.getClass().getSimpleName();
+////        Console.logv(className.equals("Image"), "» GenericServiceImpl » create()", "item=" + item);
+//        item.setId(null); // protects from overwriting existing instance
+////        logv(classCheck(item, "Hull"), "» GenericServiceImpl » create1()", pair("item", item));
+//        T newItem = repository.save(item);
+////        logv(classCheck(item, "Hull"), "» GenericServiceImpl » create1()", pair("newItem", newItem));
+//        IdContainer idItem = new IdContainer();
+//        idItem.setId(newItem.getId());
+////        System.out.println("» GenericServiceImpl2 » create()"
+////                + "\n\t item=" + item.toString());
+//        return idItem;
+//    }
 
-    @Override
-//    public SummaryProjection<T> create2(T item) {
-    public Object create2(T item) {
-//        Console.logv(classCheck(item, "Xyz"),"» GenericServiceImpl » create2()", "item=" + item);
-        item.setId(null); // protects from overwriting existing instance
-        T newItem = repository.save(item);
-//        Console.logv(classCheck(item, "Xyz")"» GenericServiceImpl » create2()", "newItem=" + newItem);
-//        SummaryProjection<T> summary = repository.findSummaryById(newItem.getId());
-        Collection<Long> ids = Arrays.asList(newItem.getId());
-        Collection<SummaryProjection<T>> summaryList = (Collection<SummaryProjection<T>>) repository.findSummariesByIdIn(ids);
-//        Object summary = repository.findSummaryById(newItem.getId());
-        return summaryList.iterator().next();
-    }
+//    @Override
+////    public SummaryProjection<T> create2(T item) {
+//    public Object create2(T item) {
+////        Console.logv(classCheck(item, "Xyz"),"» GenericServiceImpl » create2()", "item=" + item);
+//        item.setId(null); // protects from overwriting existing instance
+//        T newItem = repository.save(item);
+////        Console.logv(classCheck(item, "Xyz")"» GenericServiceImpl » create2()", "newItem=" + newItem);
+////        SummaryProjection<T> summary = repository.findSummaryById(newItem.getId());
+//        Collection<Long> ids = Arrays.asList(newItem.getId());
+////        Collection<SummaryProjection<T>> summaryList = (Collection<SummaryProjection<T>>) repository.findSummariesByIdIn(ids);// used
+//        Collection<SummaryProjection<T>> summaryList = repository.findSummariesByIdIn(ids);
+////        Object summary = repository.findSummaryById(newItem.getId());
+//        return summaryList.iterator().next();
+//    }
 
 
     @Override

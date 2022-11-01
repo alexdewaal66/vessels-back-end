@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ZyxServiceImpl extends GenericServiceImpl<Zyx> implements ZyxService {
 
-    @Autowired
-    private ZyxRepository zyxRepository;
+    private final ZyxRepository zyxRepository;
 
-    public ZyxServiceImpl(ZyxRepository repository) {
-        super(repository, "Zyx"); }
+    public ZyxServiceImpl(ZyxRepository repository, ZyxRepository zyxRepository) {
+        super(repository, "Zyx");
+        this.zyxRepository = zyxRepository;
+    }
 
 
     @Override

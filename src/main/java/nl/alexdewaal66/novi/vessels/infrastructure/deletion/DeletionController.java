@@ -13,8 +13,10 @@ import java.util.Collection;
 @CrossOrigin(origins = "*")
 public class DeletionController {
 
-    @Autowired
-    private DeletionService deletionService;
+    private final DeletionService deletionService;
+    public DeletionController(DeletionService deletionService) {
+        this.deletionService = deletionService;
+    }
 
     @GetMapping
     public ResponseEntity<Object> deletions(

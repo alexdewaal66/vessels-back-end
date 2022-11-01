@@ -1,6 +1,5 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.infrastructure.GenericRepository;
 import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.PropulsionType;
@@ -9,22 +8,20 @@ import nl.alexdewaal66.novi.vessels.utils.AuthorizationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static nl.alexdewaal66.novi.vessels.utils.Console.logv;
-
 @Service
 public class PropulsionTypeServiceImpl
 extends GenericServiceImpl<PropulsionType>
 implements PropulsionTypeService {
 
-    public PropulsionTypeServiceImpl(GenericRepository<PropulsionType> repository) {
+    public PropulsionTypeServiceImpl(GenericRepository<PropulsionType> repository, PropulsionTypeRepository propulsionTypeRepository, AuthorizationHelper authorizationHelper) {
         super(repository, "PropulsionType");
+        this.propulsionTypeRepository = propulsionTypeRepository;
+        this.authorizationHelper = authorizationHelper;
     }
 
-    @Autowired
-    private PropulsionTypeRepository propulsionTypeRepository;
+    private final PropulsionTypeRepository propulsionTypeRepository;
 
-    @Autowired
-    private AuthorizationHelper authorizationHelper;
+    private final AuthorizationHelper authorizationHelper;
 
 
     @Override

@@ -19,14 +19,18 @@ import java.security.Principal;
 @CrossOrigin(origins = "*")
 public class AuthenticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private EnduserService userDetailsService;
+    private final EnduserService userDetailsService;
 
-    @Autowired
+    final
     JwtUtil jwtUtil;
+
+    public AuthenticationController(AuthenticationManager authenticationManager, EnduserService userDetailsService, JwtUtil jwtUtil) {
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+        this.jwtUtil = jwtUtil;
+    }
 
     @GetMapping(value = "/authenticated")
     public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {

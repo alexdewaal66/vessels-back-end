@@ -20,7 +20,7 @@ public class Role extends BaseEntity<Role> {
         public final Long id;
         public final String label;
 
-        private Roles(Long id, String label) {
+        Roles(Long id, String label) {
             this.id = id;
             this.label = label;
         }

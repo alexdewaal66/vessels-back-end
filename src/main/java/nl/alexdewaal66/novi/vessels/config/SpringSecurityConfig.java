@@ -21,12 +21,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    public EnduserService enduserService;
+    public final EnduserService enduserService;
 //    public CustomUserDetailsService customUserDetailsService;
 
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    private final JwtRequestFilter jwtRequestFilter;
+
+    public SpringSecurityConfig(EnduserService enduserService, JwtRequestFilter jwtRequestFilter) {
+        this.enduserService = enduserService;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

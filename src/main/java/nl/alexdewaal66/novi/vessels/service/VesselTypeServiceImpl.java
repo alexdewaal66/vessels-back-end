@@ -1,6 +1,5 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.exceptions.BadRequestException;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.VesselType;
@@ -9,22 +8,20 @@ import nl.alexdewaal66.novi.vessels.utils.AuthorizationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static nl.alexdewaal66.novi.vessels.utils.Console.logv;
-
 @Service
 public class VesselTypeServiceImpl
         extends GenericServiceImpl<VesselType>
         implements VesselTypeService{
 
-    public VesselTypeServiceImpl(VesselTypeRepository repository) {
+    public VesselTypeServiceImpl(VesselTypeRepository repository, VesselTypeRepository vesselTypeRepository, AuthorizationHelper authorizationHelper) {
         super(repository, "VesselType");
+        this.vesselTypeRepository = vesselTypeRepository;
+        this.authorizationHelper = authorizationHelper;
     }
 
-    @Autowired
-    private VesselTypeRepository vesselTypeRepository;
+    private final VesselTypeRepository vesselTypeRepository;
 
-    @Autowired
-    private AuthorizationHelper authorizationHelper;
+    private final AuthorizationHelper authorizationHelper;
 
 
     @Override

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class ZyxController extends GenericController<Zyx> {
 
-    @Autowired
-    private ZyxService zyxService;
+    private final ZyxService zyxService;
 
-    public ZyxController(ZyxServiceImpl service) {
+    public ZyxController(ZyxServiceImpl service, ZyxService zyxService) {
         super(service);
+        this.zyxService = zyxService;
     }
 
 }

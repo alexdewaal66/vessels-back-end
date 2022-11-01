@@ -1,13 +1,11 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
 import nl.alexdewaal66.novi.vessels.infrastructure.GenericController;
-import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.Enduser;
 import nl.alexdewaal66.novi.vessels.model.Role;
 import nl.alexdewaal66.novi.vessels.service.EnduserService;
-import nl.alexdewaal66.novi.vessels.service.RoleService;
+import nl.alexdewaal66.novi.vessels.service.EnduserServiceImpl;
 import nl.alexdewaal66.novi.vessels.utils.AuthorizationHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,15 +16,15 @@ import static nl.alexdewaal66.novi.vessels.utils.Console.logv;
 @CrossOrigin(origins = "*")
 public class EnduserController extends GenericController<Enduser> {
 
-    @Autowired
-    EnduserService enduserService;
+    private final EnduserService enduserService;
 
-    @Autowired
-    private AuthorizationHelper authorizationHelper;
+    private final AuthorizationHelper authorizationHelper;
 
 
-    public EnduserController(EnduserService service) {
-        super((GenericServiceImpl<Enduser>) service);
+    public EnduserController(EnduserServiceImpl service, EnduserService enduserService, AuthorizationHelper authorizationHelper) {
+        super(service);
+        this.enduserService = enduserService;
+        this.authorizationHelper = authorizationHelper;
     }
 
     @GetMapping(value = "/username/{username}")
@@ -58,14 +56,12 @@ public class EnduserController extends GenericController<Enduser> {
 
     @PostMapping(value = "/signup")
     public ResponseEntity<Object> signup(@RequestBody Enduser item) {
-//        Long newId = enduserService.create(item);
-//        return new ResponseEntity<>(String.format("%s %d created", item.getClass().getSimpleName(), newId), HttpStatus.CREATED);
         return super.create(item);
     }
 
 }
 
-/**************************************************
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  public class UserController {
 
 @Autowired private UserService userService;
@@ -148,4 +144,4 @@ return ResponseEntity.noContent().build();
 }
 
 }
- ************************************************************************************/
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

@@ -12,11 +12,11 @@ public class UNLocodeServiceImpl
         extends GenericServiceImpl<UNLocode>
         implements UNLocodeService{
 
-    @Autowired
-    private UNLocodeRepository unLocodeRepository;
+    private final UNLocodeRepository unLocodeRepository;
 
-    public UNLocodeServiceImpl(UNLocodeRepository repository) {
+    public UNLocodeServiceImpl(UNLocodeRepository repository, UNLocodeRepository unLocodeRepository) {
         super(repository, "UNLocode");
+        this.unLocodeRepository = unLocodeRepository;
     }
 
     @Override

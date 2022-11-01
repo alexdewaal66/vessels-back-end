@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 
-import javax.persistence.*;
-import java.util.Arrays;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import java.util.List;
 
 @Entity @ToString
@@ -13,7 +15,7 @@ public class Category extends BaseEntity<Category> {
 
     @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
-        return Arrays.asList("catName");
+        return List.of("catName");
     }
 
 

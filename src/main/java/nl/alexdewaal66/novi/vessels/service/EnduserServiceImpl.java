@@ -23,8 +23,7 @@ public class EnduserServiceImpl
         extends GenericServiceImpl<Enduser>
         implements EnduserService {
 
-    @Autowired
-    EnduserRepository enduserRepository;
+    final EnduserRepository enduserRepository;
 
     @Autowired
     AuthorizationHelper authorizationHelper;
@@ -32,8 +31,9 @@ public class EnduserServiceImpl
     @Autowired
     RoleService roleService;
 
-    public EnduserServiceImpl(EnduserRepository repository) {
+    public EnduserServiceImpl(EnduserRepository repository, EnduserRepository enduserRepository) {
         super(repository, "Enduser");
+        this.enduserRepository = enduserRepository;
     }
 
     @Override

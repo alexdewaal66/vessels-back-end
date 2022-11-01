@@ -14,11 +14,11 @@ import nl.alexdewaal66.novi.vessels.service.UNLocodeService;
 @CrossOrigin(origins = "*")
 public class UNLocodeController extends GenericController<UNLocode> {
 
-    @Autowired
-    private UNLocodeService unLocodeService;
+    private final UNLocodeService unLocodeService;
     
-    public UNLocodeController(UNLocodeServiceImpl service) {
+    public UNLocodeController(UNLocodeServiceImpl service, UNLocodeService unLocodeService) {
         super(service);
+        this.unLocodeService = unLocodeService;
     }
 
     @GetMapping(value = "/find")
