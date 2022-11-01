@@ -15,7 +15,7 @@ class JwtUtilTest {
     JwtUtil jwtUtil;
 
     @Test
-    @DisplayName("generateToken: produces JWT")
+    @DisplayName("generateToken: produces JWT with predictable header")
     void generateToken_producesJWT() {
         // arrange
         Enduser enduser = new Enduser();

@@ -25,7 +25,7 @@ public class AuthorizationHelper {
     @Autowired
     EnduserService enduserService;
 
-    public boolean isEligible(String username) {// does Principal is or outranks provided user
+    public boolean isEligible(String username) {// does Principal be or outrank provided user
         return username == null
                 || isSelf(username)
                 || hasPrincipalHigherRoleThan(username);

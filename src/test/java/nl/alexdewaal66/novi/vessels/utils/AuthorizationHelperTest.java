@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import nl.alexdewaal66.novi.vessels.model.Enduser;
 import nl.alexdewaal66.novi.vessels.model.Role;
 import nl.alexdewaal66.novi.vessels.service.EnduserService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -22,6 +23,7 @@ import java.util.Set;
 
 @SpringBootTest
 @ContextConfiguration
+@DisplayName("AuthorizationHelper")
 class AuthorizationHelperTest {
 
     @InjectMocks
@@ -31,10 +33,12 @@ class AuthorizationHelperTest {
     private EnduserService enduserServiceMock;
 
     @Nested
+    @DisplayName("isEligible: does Principal be or outrank provided user")
     class isEligible {
 
         @Test
         @WithMockUser(username = "Alice", roles = {"MEMBER", "ADMIN", "DEMIURG"})
+        @DisplayName("when there's no provided user")
         void whenUsernameIsNull() {
             // act
             boolean whenUsernameIsNull = authorizationHelperMock.isEligible(null);
@@ -44,6 +48,7 @@ class AuthorizationHelperTest {
 
         @Test
         @WithMockUser(username = "Alice")
+        @DisplayName("when provided user is the principal's")
         void whenUsernameIsPrincipal() {
             // act
             boolean whenPrincipal = authorizationHelperMock.isEligible("Alice");
@@ -53,6 +58,7 @@ class AuthorizationHelperTest {
 
         @Test
         @WithMockUser(username = "Alice", roles = {"MEMBER", "ADMIN", "DEMIURG"})
+        @DisplayName("when principal has higher role than provided user")
         void whenPrincipalHasHigherRole() {
             // arrange
             Role expert = new Role();
@@ -70,6 +76,7 @@ class AuthorizationHelperTest {
 
         @Test
         @WithMockUser(username = "Alice", roles = {"MEMBER"})
+        @DisplayName("when principal has lower role than provided user")
         void whenPrincipalHasLowerRole() {
             // arrange
             Role expert = new Role();
@@ -88,6 +95,7 @@ class AuthorizationHelperTest {
 
     @Test
     @WithMockUser(username = "current-user")
+    @DisplayName("isSelf:  should return true when provided user is principal")
     void isSelf_shouldReturnTrue_whenUsernameIsFromPrincipal() {
         // arrange
         // act
@@ -101,6 +109,7 @@ class AuthorizationHelperTest {
 
     @Test
     @WithMockUser(username = "currentUser")
+    @DisplayName("getPrincipalName: should return the principal's username")
     void getPrincipalName() {
         // arrange
         // act
@@ -111,6 +120,7 @@ class AuthorizationHelperTest {
 
     @Test
     @WithMockUser(username = "Alice", roles = {"MEMBER", "ADMIN"})
+    @DisplayName("checkRole: checks if principal provided role")
     void checkRole() {
         // act
         boolean aliceIsAdmin = authorizationHelperMock.checkRole("ROLE_ADMIN");
