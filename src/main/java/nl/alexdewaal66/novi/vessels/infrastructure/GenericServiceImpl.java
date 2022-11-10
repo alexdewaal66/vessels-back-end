@@ -130,10 +130,6 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
             T oldItem = repository.getOne(id);
             String owner = oldItem.getOwner();
             if (authorizationHelper.isEligible(owner)) {
-//                String className = oldItem.getClass().getSimpleName();
-//                int dollarIndex = className.indexOf('$');
-//                String entityName = className.substring(0, dollarIndex).toLowerCase();
-//                deletionService.create(entityName, id);
                 deletionService.create(entityName, id);
                 repository.deleteById(id);
             } else {
@@ -149,11 +145,6 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
         return repository.existsById(id);
     }
 
-//    private String getEntityName(T item) {
-//        String className = item.getClass().getSimpleName();
-//        int dollarIndex = className.indexOf('$');
-//        return dollarIndex == -1 ? className : className.substring(0, dollarIndex).toLowerCase();
-//    }
 }
 
 

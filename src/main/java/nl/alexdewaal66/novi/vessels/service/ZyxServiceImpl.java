@@ -4,7 +4,6 @@ import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
 import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.Zyx;
 import nl.alexdewaal66.novi.vessels.repository.ZyxRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

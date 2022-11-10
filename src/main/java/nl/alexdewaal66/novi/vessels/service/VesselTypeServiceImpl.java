@@ -5,7 +5,6 @@ import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.VesselType;
 import nl.alexdewaal66.novi.vessels.repository.VesselTypeRepository;
 import nl.alexdewaal66.novi.vessels.utils.AuthorizationHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +20,7 @@ public class VesselTypeServiceImpl
 
     private final VesselTypeRepository vesselTypeRepository;
 
-    private final AuthorizationHelper authorizationHelper;
+    final AuthorizationHelper authorizationHelper;
 
 
     @Override

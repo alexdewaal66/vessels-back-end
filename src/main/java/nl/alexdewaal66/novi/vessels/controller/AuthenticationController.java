@@ -4,7 +4,6 @@ import nl.alexdewaal66.novi.vessels.payload.AuthenticationRequest;
 import nl.alexdewaal66.novi.vessels.payload.AuthenticationResponse;
 import nl.alexdewaal66.novi.vessels.service.EnduserService;
 import nl.alexdewaal66.novi.vessels.utils.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

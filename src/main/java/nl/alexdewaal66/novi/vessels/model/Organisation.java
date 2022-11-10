@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @Entity @ToString
 public class Organisation extends BaseEntity<Organisation> {

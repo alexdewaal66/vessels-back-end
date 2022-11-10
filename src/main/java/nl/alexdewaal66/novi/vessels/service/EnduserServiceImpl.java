@@ -81,9 +81,6 @@ public class EnduserServiceImpl
         Enduser oldItem = getById(id);
         boolean isAdmin = authorizationHelper.checkRole(Role.Roles.ADMIN.label);
         boolean isSelf = authorizationHelper.isSelf(oldItem.getUsername());
-//        logv("\n EnduserServiceImpl » update()",
-//                "oldItem=" + oldItem, "item=" + item,
-//                "isAdmin=" + isAdmin, "isSelf=" + isSelf);
         if (isAdmin && !isSelf) {
             // admin can't change another users password
             item.setPassword(oldItem.getPassword());
@@ -94,7 +91,6 @@ public class EnduserServiceImpl
             // can't change your own roles
             item.setRoles(oldItem.getRoles());
         }
-//        logv("\n EnduserServiceImpl » update()", "item=" + item);
         return (isAdmin || isSelf)
                 ? super.update(id, item)
                 : null;
@@ -102,10 +98,8 @@ public class EnduserServiceImpl
 
     private void noDemiurg(Enduser user) {
         Set<Role> roles = user.getRoles();
-//        logv("\n EnduserServiceImpl » noDemiurg()", "user=" + user, "roles" + roles);
         roles.removeIf((Role role) -> role.getName().equals(Role.Roles.DEMIURG.label));
         user.setRoles(roles);
-//        logv("\n EnduserServiceImpl » noDemiurg()", "user=" + user, "roles" + roles);
     }
 
 }

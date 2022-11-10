@@ -20,8 +20,9 @@ class ImageHelperTest {
         try {
             Path path = Paths.get("test_data", filename);
             File file = ResourceUtils.getFile("classpath:" + path);
-            InputStream in = Files.newInputStream(file.toPath());
-            return in.readAllBytes();
+            try (InputStream in = Files.newInputStream(file.toPath())) {
+                return in.readAllBytes();
+            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

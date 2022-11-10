@@ -1,11 +1,10 @@
 package nl.alexdewaal66.novi.vessels.service;
 
-import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.UNLocode;
 import nl.alexdewaal66.novi.vessels.repository.UNLocodeRepository;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UNLocodeServiceImpl

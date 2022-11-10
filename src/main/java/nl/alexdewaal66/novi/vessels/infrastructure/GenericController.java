@@ -36,8 +36,6 @@ public abstract class GenericController<T extends BaseEntity<T>> {
 
     @GetMapping(value = "/changed/{since}")
     public ResponseEntity<Object> getByTimestampAfter(@PathVariable("since") Long milliseconds) {
-//        Instant instant = Instant.ofEpochMilli(milliseconds);
-//        Timestamp timestamp = Timestamp.from(instant);
         Timestamp timestamp=  new Timestamp(milliseconds);
         Mutations<T> result = service.getByTimestampAfter(timestamp);
         return ResponseEntity.ok().body(result);

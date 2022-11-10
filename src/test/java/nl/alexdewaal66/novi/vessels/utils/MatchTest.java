@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MatchTest {
 
      static class Something {
-        String string;
+         String string;
         public Something(String s) {
             string = s;
         }

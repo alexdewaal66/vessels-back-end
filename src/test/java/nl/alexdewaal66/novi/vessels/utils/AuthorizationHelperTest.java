@@ -1,7 +1,5 @@
 package nl.alexdewaal66.novi.vessels.utils;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import nl.alexdewaal66.novi.vessels.model.Enduser;
 import nl.alexdewaal66.novi.vessels.model.Role;
 import nl.alexdewaal66.novi.vessels.service.EnduserService;
@@ -12,14 +10,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ContextConfiguration

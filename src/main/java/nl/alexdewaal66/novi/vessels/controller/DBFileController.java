@@ -5,7 +5,6 @@ import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.DBFile;
 import nl.alexdewaal66.novi.vessels.service.DBFileServiceImpl;
 import nl.alexdewaal66.novi.vessels.utils.Console;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;

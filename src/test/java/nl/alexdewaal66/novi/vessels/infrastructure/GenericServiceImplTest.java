@@ -195,16 +195,12 @@ class GenericServiceImplTest {
         // act
         Object response = null;
 //        ArgumentChangingTestFunction testCode = (target) -> (target = dummyService.update(realId, newDummy));
-        ArgumentChangingTestFunction testCode = (target) -> {
-            target = dummyService.update(realId, newDummy);
-        };
+        ArgumentChangingTestFunction testCode = (target) -> target = dummyService.update(realId, newDummy);
         String actualMessage = "";
         if (exists && eligible) {
             testCode.run(response);
         } else {
-            Exception exception = Assertions.assertThrows(Exception.class, () -> {
-                testCode.run(response);
-            }, " ❌ assertThrows()");
+            Exception exception = Assertions.assertThrows(Exception.class, () -> testCode.run(response), " ❌ assertThrows()");
             actualMessage = exception.getMessage();
         }
         // assert

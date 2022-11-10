@@ -1,7 +1,5 @@
 package nl.alexdewaal66.novi.vessels.infrastructure.deletion;
 
-import nl.alexdewaal66.novi.vessels.utils.Console;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;

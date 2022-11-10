@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity @ToString @NoArgsConstructor
 public class Vessel extends BaseEntity<Vessel> {

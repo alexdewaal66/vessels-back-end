@@ -24,9 +24,6 @@ class DeletionRepositoryTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-//    @Autowired
-//    private TestEntityManager entityManager;
-
     @Autowired
     private DeletionRepository deletionRepository;
 

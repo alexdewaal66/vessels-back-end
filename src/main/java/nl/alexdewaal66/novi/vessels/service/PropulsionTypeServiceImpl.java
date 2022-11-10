@@ -5,7 +5,6 @@ import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.PropulsionType;
 import nl.alexdewaal66.novi.vessels.repository.PropulsionTypeRepository;
 import nl.alexdewaal66.novi.vessels.utils.AuthorizationHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,13 +14,10 @@ implements PropulsionTypeService {
 
     public PropulsionTypeServiceImpl(GenericRepository<PropulsionType> repository, PropulsionTypeRepository propulsionTypeRepository, AuthorizationHelper authorizationHelper) {
         super(repository, "PropulsionType");
-        this.propulsionTypeRepository = propulsionTypeRepository;
         this.authorizationHelper = authorizationHelper;
     }
 
-    private final PropulsionTypeRepository propulsionTypeRepository;
-
-    private final AuthorizationHelper authorizationHelper;
+    final AuthorizationHelper authorizationHelper;
 
 
     @Override
