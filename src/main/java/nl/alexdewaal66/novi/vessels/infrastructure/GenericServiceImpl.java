@@ -30,7 +30,6 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
     @Autowired
     private AuthorizationHelper authorizationHelper;
 
-    // GenericRepository2<> is by design not to be a bean, error reported by IntelliJ is erroneous
     public GenericServiceImpl(GenericRepository<T> repository, String entityName) {
         this.repository = repository;
         this.entityName = entityName.toLowerCase();
@@ -46,31 +45,15 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
         return repository.findById(id).orElseThrow(RecordNotFoundException::new);
     }
 
-//    @Override
-//    public SummaryProjection<T> getSummaryById(Long id) {
-//        return null;
-//    }
-
     @Override
     public List<T> getByIds(List<Long> ids) {
         return repository.findAllById(ids);
     }
 
-//    @Override
-//    public Collection<SummaryProjection<T>> getSummariesByIds(List<Long> ids) {
-//        return (Collection<SummaryProjection<T>>) repository.findSummariesByIdIn(ids);
-//    }
-
     @Override
     public Collection<T> getAll() {
         return repository.findAll();
     }
-
-//    @Override
-//    public Collection<SummaryProjection<T>> getAllSummaries() {
-//        return (Collection<SummaryProjection<T>>) repository.findAllSummariesBy();
-////        return repository.findAllSummariesBy();
-//    }
 
     //---------------------------------------------------------------------------------
     @Override
@@ -106,73 +89,31 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
 
     @Override
     public Long create(T item) {
-//        String className = item.getClass().getSimpleName();
-//        Console.logv(className.equals("Image"), "» GenericServiceImpl » create()", "item=" + item);
         item.setId(null); // protects from overwriting existing instance
         item.setOwner(authorizationHelper.getPrincipalName());
-//        System.out.println("» GenericServiceImpl2 » create()"
-//                + "\n\t item=" + item.toString());
         T newItem = repository.save(item);
-//        System.out.println("» GenericServiceImpl2 » create()"
-//                + "\n\t newItem=" + newItem.toString());
         return newItem.getId();
     }
-
-//    @Override
-//    public IdContainer create1(T item) {
-//        String className = item.getClass().getSimpleName();
-////        Console.logv(className.equals("Image"), "» GenericServiceImpl » create()", "item=" + item);
-//        item.setId(null); // protects from overwriting existing instance
-////        logv(classCheck(item, "Hull"), "» GenericServiceImpl » create1()", pair("item", item));
-//        T newItem = repository.save(item);
-////        logv(classCheck(item, "Hull"), "» GenericServiceImpl » create1()", pair("newItem", newItem));
-//        IdContainer idItem = new IdContainer();
-//        idItem.setId(newItem.getId());
-////        System.out.println("» GenericServiceImpl2 » create()"
-////                + "\n\t item=" + item.toString());
-//        return idItem;
-//    }
-
-//    @Override
-////    public SummaryProjection<T> create2(T item) {
-//    public Object create2(T item) {
-////        Console.logv(classCheck(item, "Xyz"),"» GenericServiceImpl » create2()", "item=" + item);
-//        item.setId(null); // protects from overwriting existing instance
-//        T newItem = repository.save(item);
-////        Console.logv(classCheck(item, "Xyz")"» GenericServiceImpl » create2()", "newItem=" + newItem);
-////        SummaryProjection<T> summary = repository.findSummaryById(newItem.getId());
-//        Collection<Long> ids = Arrays.asList(newItem.getId());
-////        Collection<SummaryProjection<T>> summaryList = (Collection<SummaryProjection<T>>) repository.findSummariesByIdIn(ids);// used
-//        Collection<SummaryProjection<T>> summaryList = repository.findSummariesByIdIn(ids);
-////        Object summary = repository.findSummaryById(newItem.getId());
-//        return summaryList.iterator().next();
-//    }
-
 
     @Override
     public Object update(Long id, T newItem) {
         if (exists(id)) {
-//            String className = newItem.getClass().getSimpleName();
-//            String path = "GenericServiceImpl<" + className + "> » update() ";
-//            Console.logv(path + "*before* setId()" , "newItem=" + newItem);
-            newItem.setId(id);
-//            Console.logv(path + "*after* setId()", "newItem=" + newItem);
             T oldItem = repository.getOne(id);
             String owner = oldItem.getOwner();
             if (authorizationHelper.isEligible(owner)) {
+                newItem.setId(id);
                 newItem.setOwner(owner);
                 newItem.setUpdater(authorizationHelper.getPrincipalName());
                 repository.save(newItem);
                 //todo: choose return value or skip entirely
-//                return new Object() {final boolean saved = true;};
-//                return "saved";
                 return new UpdateResponse(true, "");
             } else {
-                throw new BadRequestException("user not eligible to update this item");
+                throw new BadRequestException("User not eligible to update " + entityName + ": " + id);
             }
         } else {
-            System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", newItem.getClass().getSimpleName(), id);
-            throw new RecordNotFoundException(newItem.getClass().getSimpleName(), id);
+//            System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", newItem.getClass().getSimpleName(), id);
+            System.out.printf("❌ RecordNotFoundException(\"%s\", %d)%n", entityName, id);
+            throw new RecordNotFoundException(entityName, id);
         }
     }
 
@@ -188,20 +129,18 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
         if (exists(id)) {
             T oldItem = repository.getOne(id);
             String owner = oldItem.getOwner();
-//            String path = "GenericServiceImpl<" + className + "> » delete() ";
-//            Console.logv(path, "owner=" + owner, "principal=" + principal);
             if (authorizationHelper.isEligible(owner)) {
-                //todo: replace getSimpleName by getName ?
-                String className = oldItem.getClass().getSimpleName();
-                int dollarIndex = className.indexOf('$');
-                String entityName = className.substring(0, dollarIndex).toLowerCase();
+//                String className = oldItem.getClass().getSimpleName();
+//                int dollarIndex = className.indexOf('$');
+//                String entityName = className.substring(0, dollarIndex).toLowerCase();
+//                deletionService.create(entityName, id);
                 deletionService.create(entityName, id);
                 repository.deleteById(id);
             } else {
-                throw new BadRequestException("user not eligible to delete this item");
+                throw new BadRequestException("User not eligible to delete " + entityName + ": " + id);
             }
         } else {
-            throw new RecordNotFoundException();
+            throw new RecordNotFoundException(entityName, id);
         }
     }
 
@@ -209,5 +148,28 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
     public boolean exists(Long id) {
         return repository.existsById(id);
     }
+
+//    private String getEntityName(T item) {
+//        String className = item.getClass().getSimpleName();
+//        int dollarIndex = className.indexOf('$');
+//        return dollarIndex == -1 ? className : className.substring(0, dollarIndex).toLowerCase();
+//    }
 }
 
+
+
+//    @Override
+//    public SummaryProjection<T> getSummaryById(Long id) {
+//        return null;
+//    }
+
+//    @Override
+//    public Collection<SummaryProjection<T>> getSummariesByIds(List<Long> ids) {
+//        return (Collection<SummaryProjection<T>>) repository.findSummariesByIdIn(ids);
+//    }
+
+//    @Override
+//    public Collection<SummaryProjection<T>> getAllSummaries() {
+//        return (Collection<SummaryProjection<T>>) repository.findAllSummariesBy();
+////        return repository.findAllSummariesBy();
+//    }

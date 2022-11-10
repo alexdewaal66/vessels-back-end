@@ -10,13 +10,14 @@ import java.util.Collection;
 public interface GenericRepository<T extends GenericEntity<T>> extends JpaRepository<T, Long> {
     Collection<IdProjection> findBy();
 
+    Collection<T> findAllByTimestampAfter(Timestamp timestamp);
+
+}
+
 //    Collection<? extends SummaryProjection<T>> findAllSummariesBy();
 //    Collection<SummaryProjection<T>> findAllSummariesBy();
 
 //    Collection<? extends SummaryProjection<T>> findSummariesByIdIn(Collection<Long> ids);
 //    Collection<SummaryProjection<T>> findSummariesByIdIn(Collection<Long> ids);
 
-    Collection<T> findAllByTimestampAfter(Timestamp timestamp);
-
 //    SummaryProjection<T> findSummaryById(Long id);
-}

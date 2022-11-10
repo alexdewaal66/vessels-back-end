@@ -17,7 +17,6 @@ public class RelationType extends BaseEntity<RelationType> {
         return Arrays.asList("nameNL", "nameEN", "descNL", "descEN");
     }
 
-
     @Size(max = 100)
     @Column(name = "name_nl")
     private String nameNL;

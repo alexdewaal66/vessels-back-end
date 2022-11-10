@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Entity @ToString
 public class Organisation extends BaseEntity<Organisation> {
@@ -36,6 +37,8 @@ public class Organisation extends BaseEntity<Organisation> {
     @ManyToOne
     private Address address;
 
+//    @OneToMany(mappedBy = "organisation")
+//    Set<Operation> operations;
 
     public String getShortName() {
         return shortName;
@@ -79,4 +82,7 @@ public class Organisation extends BaseEntity<Organisation> {
         this.address = address;
     }
 
+//    public Set<Operation> getOperations() {return operations;}
+//    public void setOperations(Set<Operation> operations) {this.operations = operations;}
+//
 }

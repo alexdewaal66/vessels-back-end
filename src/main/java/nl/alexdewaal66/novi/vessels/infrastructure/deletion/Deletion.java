@@ -1,6 +1,8 @@
 package nl.alexdewaal66.novi.vessels.infrastructure.deletion;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -10,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 
-@Entity @ToString
+@Entity @ToString @NoArgsConstructor @AllArgsConstructor
 public class Deletion {
 
     @Id @JsonIgnore

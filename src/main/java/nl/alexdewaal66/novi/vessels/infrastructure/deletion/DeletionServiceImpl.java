@@ -17,18 +17,14 @@ public class DeletionServiceImpl implements DeletionService {
     }
     @Override
     public Collection<Deletion> findDeletions(String entityName, Timestamp timestamp) {
-
         return repository.findDeletions(entityName, timestamp);
     }
 
     @Override
     public void create(String entityName, Long itemId) {
-        Console.logv("DeletionServiceImpl » create()",
-                "entityName=" + entityName, "itemId=" + itemId);
         Deletion deletion = new Deletion();
         deletion.setEntityName(entityName);
         deletion.setItemId(itemId);
-        Console.logv("", "deletion=" + deletion);
         repository.save(deletion);
     }
 }

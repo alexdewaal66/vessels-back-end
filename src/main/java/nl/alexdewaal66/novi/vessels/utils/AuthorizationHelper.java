@@ -12,14 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-enum Level {
-    NONE, ROLE_MEMBER, ROLE_EXPERT, ROLE_ADMIN, ROLE_DEMIURG;
-
-    public boolean greaterThan(Level other) {
-        return this.compareTo(other) > 0;
-    }
-}
-
 @Service
 public class AuthorizationHelper {
     @Autowired

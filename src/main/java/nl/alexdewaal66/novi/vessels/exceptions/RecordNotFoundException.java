@@ -11,7 +11,7 @@ public class RecordNotFoundException extends RuntimeException {
         super(message);
     }
 
-    public RecordNotFoundException(String entity, long id) {
-        super("Cannot find " + entity + ": " + id);
+    public RecordNotFoundException(String entityName, Long id) {
+        super("Cannot find " + entityName + ": " + id);
     }
 }

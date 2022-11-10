@@ -26,6 +26,15 @@ import java.util.Set;
 @DisplayName("AuthorizationHelper")
 class AuthorizationHelperTest {
 
+    Enduser getUser(String name, Level level) {
+        Role role = new Role();
+        role.setName(level.name());
+        Enduser enduser = new Enduser();
+        enduser.setUsername(name);
+        enduser.setRoles(new HashSet<>(List.of(role)));
+        return enduser;
+    }
+
     @InjectMocks
     private AuthorizationHelper authorizationHelperMock;
 
@@ -61,13 +70,8 @@ class AuthorizationHelperTest {
         @DisplayName("when principal has higher role than provided user")
         void whenPrincipalHasHigherRole() {
             // arrange
-            Role expert = new Role();
-            expert.setName(Level.ROLE_EXPERT.name());
-            Enduser bob = new Enduser();
-            bob.setUsername("Bob");
-            bob.setRoles(new HashSet<>(List.of(expert)));
-
-            Mockito.when(enduserServiceMock.loadUserByUsername("Bob")).thenReturn(bob);
+            Mockito.when(enduserServiceMock.loadUserByUsername("Bob"))
+                    .thenReturn(getUser("Bob", Level.ROLE_EXPERT));
             // act
             boolean whenPrincipalOutranksProvided = authorizationHelperMock.isEligible("Bob");
             // assert
@@ -79,13 +83,8 @@ class AuthorizationHelperTest {
         @DisplayName("when principal has lower role than provided user")
         void whenPrincipalHasLowerRole() {
             // arrange
-            Role expert = new Role();
-            expert.setName(Level.ROLE_EXPERT.name());
-            Enduser bob = new Enduser();
-            bob.setUsername("Bob");
-            bob.setRoles(new HashSet<>(List.of(expert)));
-
-            Mockito.when(enduserServiceMock.loadUserByUsername("Bob")).thenReturn(bob);
+            Mockito.when(enduserServiceMock.loadUserByUsername("Bob"))
+                    .thenReturn(getUser("Carol", Level.ROLE_ADMIN));
             // act
             boolean whenProvidedOutranksPrincipal = authorizationHelperMock.isEligible("Bob");
             // assert

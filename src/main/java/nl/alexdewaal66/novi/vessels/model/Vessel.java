@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity @ToString @NoArgsConstructor
 public class Vessel extends BaseEntity<Vessel> {
@@ -67,7 +68,59 @@ public class Vessel extends BaseEntity<Vessel> {
     @Temporal(value = TemporalType.DATE)
     private Date endDate;
 
+//    @OneToMany(mappedBy = "vessel")
+//    Set<Operation> operations;
+
+
+    public Hull getHull() { return hull; }
+    public void setHull(Hull hull) { this.hull = hull; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getDescription() {return description;}
+    public void setDescription(String description) {this.description = description;}
+
+    public Image getImage() { return image; }
+    public void setImage(Image image) { this.image = image; }
+
+    public String getMmsi() { return mmsi; }
+    public void setMmsi(String mmsi) { this.mmsi = mmsi; }
+
+    public String getCallSign() { return callSign; }
+    public void setCallSign(String callsign) { this.callSign = callsign; }
+
+    public VesselType getVesselType() { return vesselType; }
+    public void setVesselType(VesselType vesselType) { this.vesselType = vesselType; }
+
+    public UNLocode getHomePort() { return homePort; }
+    public void setHomePort(UNLocode homePort) { this.homePort = homePort; }
+
+    public Double getLengthOA() { return lengthOA; }
+    public void setLengthOA(Double length) { this.lengthOA = length; }
+
+    public Double getBeam() { return beam; }
+    public void setBeam(Double beam) { this.beam = beam; }
+
+    public Double getDraft() { return draft; }
+    public void setDraft(Double draft) { this.draft = draft; }
+
+    public Double getDisplacement() { return displacement; }
+    public void setDisplacement(Double displacement) { this.displacement = displacement; }
+
+    public Date getStartDate() { return startDate; }
+    public void setStartDate(Date startDate) { this.startDate = startDate; }
+
+    public Date getEndDate() { return endDate; }
+    public void setEndDate(Date endDate) { this.endDate = endDate; }
+
+//    public Set<Operation> getOperations() {return operations;}
+//    public void setOperations(Set<Operation> operations) {this.operations = operations;}
+
+}
+
     /*
+    Potential Fields:
 
     Length:
         Length overall
@@ -132,48 +185,3 @@ public class Vessel extends BaseEntity<Vessel> {
     Length OS
     Net Tonnage
      */
-
-
-    public Hull getHull() { return hull; }
-    public void setHull(Hull hull) { this.hull = hull; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getDescription() {return description;}
-    public void setDescription(String description) {this.description = description;}
-
-    public Image getImage() { return image; }
-    public void setImage(Image image) { this.image = image; }
-
-    public String getMmsi() { return mmsi; }
-    public void setMmsi(String mmsi) { this.mmsi = mmsi; }
-
-    public String getCallSign() { return callSign; }
-    public void setCallSign(String callsign) { this.callSign = callsign; }
-
-    public VesselType getVesselType() { return vesselType; }
-    public void setVesselType(VesselType vesselType) { this.vesselType = vesselType; }
-
-    public UNLocode getHomePort() { return homePort; }
-    public void setHomePort(UNLocode homePort) { this.homePort = homePort; }
-
-    public Double getLengthOA() { return lengthOA; }
-    public void setLengthOA(Double length) { this.lengthOA = length; }
-
-    public Double getBeam() { return beam; }
-    public void setBeam(Double beam) { this.beam = beam; }
-
-    public Double getDraft() { return draft; }
-    public void setDraft(Double draft) { this.draft = draft; }
-
-    public Double getDisplacement() { return displacement; }
-    public void setDisplacement(Double displacement) { this.displacement = displacement; }
-
-    public Date getStartDate() { return startDate; }
-    public void setStartDate(Date startDate) { this.startDate = startDate; }
-
-    public Date getEndDate() { return endDate; }
-    public void setEndDate(Date endDate) { this.endDate = endDate; }
-
-}
