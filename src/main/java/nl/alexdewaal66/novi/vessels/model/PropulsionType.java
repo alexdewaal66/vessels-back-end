@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity @ToString
 public class PropulsionType extends BaseEntity<PropulsionType> {
 
-    @Override
+    @Override @JsonIgnore @Transient
     public List<String> getTextProperties() {
         return Arrays.asList("nameNL", "nameEN", "descNL", "descEN");
     }
