@@ -1,9 +1,11 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
+import nl.alexdewaal66.novi.vessels.utils.ItemIdSerializer;
 
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
@@ -33,9 +35,11 @@ public class Xyz extends BaseEntity<Xyz> {
     @PositiveOrZero(message = "Negative ratios not allowed")
     private Double ratio = 0.0;
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @ManyToOne
     private Zyx zyx;
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @OneToOne
     private Image image;
 

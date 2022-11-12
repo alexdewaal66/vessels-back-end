@@ -1,8 +1,10 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
+import nl.alexdewaal66.novi.vessels.utils.ItemIdSerializer;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,13 +18,16 @@ public class Relation extends BaseEntity<Relation> {
     }
 
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @ManyToOne
     @JoinColumn(name = "organisation1_id")
     Organisation organisation1;
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @ManyToOne
     RelationType relationType;
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @ManyToOne
     @JoinColumn(name = "organisation2_id")
     Organisation organisation2;

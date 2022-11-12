@@ -1,9 +1,11 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
+import nl.alexdewaal66.novi.vessels.utils.ItemIdSerializer;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -56,6 +58,7 @@ public class VesselType extends BaseEntity<VesselType> {
     @PositiveOrZero(message = "Negative draft not allowed")
     private Double draft;
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @ManyToOne
     @JoinColumn(name = "super_type_id")
     private VesselType superType;

@@ -1,8 +1,10 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
+import nl.alexdewaal66.novi.vessels.utils.ItemIdSerializer;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -35,6 +37,7 @@ public class PropulsionType extends BaseEntity<PropulsionType> {
     @Column(name = "desc_en")
     private String descEN;
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @ManyToOne
     @JoinColumn(name = "super_type_id")
     private PropulsionType superType;

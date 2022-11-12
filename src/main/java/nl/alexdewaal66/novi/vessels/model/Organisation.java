@@ -1,15 +1,19 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
+import nl.alexdewaal66.novi.vessels.utils.ItemIdSerializer;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Entity @ToString
 public class Organisation extends BaseEntity<Organisation> {
@@ -35,11 +39,12 @@ public class Organisation extends BaseEntity<Organisation> {
     @Size(max = 320)
     private String email;
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @ManyToOne
     private Address address;
 
-//    @OneToMany(mappedBy = "organisation")
-//    Set<Operation> operations;
+    @OneToMany(mappedBy = "organisation")
+    Set<Operation> operations;
 
     public String getShortName() {
         return shortName;
@@ -83,7 +88,7 @@ public class Organisation extends BaseEntity<Organisation> {
         this.address = address;
     }
 
-//    public Set<Operation> getOperations() {return operations;}
-//    public void setOperations(Set<Operation> operations) {this.operations = operations;}
-//
+    public Set<Operation> getOperations() {return operations;}
+    public void setOperations(Set<Operation> operations) {this.operations = operations;}
+
 }

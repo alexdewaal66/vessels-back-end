@@ -1,9 +1,12 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
+import nl.alexdewaal66.novi.vessels.utils.ItemIdSerializer;
+import nl.alexdewaal66.novi.vessels.utils.ItemIdSetSerializer;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
@@ -11,6 +14,7 @@ import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity @ToString @NoArgsConstructor
 public class Vessel extends BaseEntity<Vessel> {
@@ -21,6 +25,7 @@ public class Vessel extends BaseEntity<Vessel> {
     }
 
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @ManyToOne
     @JoinColumn(name = "hull_id")
     private Hull hull;
@@ -40,10 +45,12 @@ public class Vessel extends BaseEntity<Vessel> {
     @Size(max = 10)
     private String callSign;
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @ManyToOne
     @JoinColumn(name = "vessel_type_id")
     private VesselType vesselType;
 
+    @JsonSerialize(using = ItemIdSerializer.class)
     @ManyToOne
     @JoinColumn(name = "un_locode_id")
     private UNLocode homePort;
@@ -67,8 +74,9 @@ public class Vessel extends BaseEntity<Vessel> {
     @Temporal(value = TemporalType.DATE)
     private Date endDate;
 
-//    @OneToMany(mappedBy = "vessel")
-//    Set<Operation> operations;
+    @JsonSerialize(using = ItemIdSetSerializer.class)
+    @OneToMany(mappedBy = "vessel")
+    Set<Operation> operations;
 
 
     public Hull getHull() { return hull; }
@@ -113,13 +121,19 @@ public class Vessel extends BaseEntity<Vessel> {
     public Date getEndDate() { return endDate; }
     public void setEndDate(Date endDate) { this.endDate = endDate; }
 
-//    public Set<Operation> getOperations() {return operations;}
-//    public void setOperations(Set<Operation> operations) {this.operations = operations;}
+    public Set<Operation> getOperations() {return operations;}
+    public void setOperations(Set<Operation> operations) {this.operations = operations;}
 
 }
 
     /*
     Potential Fields:
+
+    Management
+        Manager
+        Owner
+        Classification Society
+        Insurer
 
     Length:
         Length overall
