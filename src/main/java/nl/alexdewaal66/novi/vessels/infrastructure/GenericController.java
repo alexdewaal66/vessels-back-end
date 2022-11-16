@@ -76,7 +76,7 @@ public abstract class GenericController<T extends BaseEntity<T>> {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     private void sleep5seconds() {

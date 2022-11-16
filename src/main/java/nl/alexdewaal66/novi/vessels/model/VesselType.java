@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 import nl.alexdewaal66.novi.vessels.utils.ItemIdSerializer;
+import nl.alexdewaal66.novi.vessels.utils.ItemIdSetSerializer;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -63,6 +64,7 @@ public class VesselType extends BaseEntity<VesselType> {
     @JoinColumn(name = "super_type_id")
     private VesselType superType;
 
+    @JsonSerialize(using = ItemIdSetSerializer.class)
     @OneToMany(mappedBy = "superType")
     private Set<VesselType> subTypes = new HashSet<>();
 

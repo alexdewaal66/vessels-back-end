@@ -53,16 +53,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //JWT token authentication
         http
                 .cors().and()
-            .csrf().disable()
-//                .formLogin().disable()
-            .authorizeRequests()
-//                .antMatchers("/members/**")
-//                    .hasAnyRole("MEMBER", "EXPERT", "ADMIN")
-//                .antMatchers("/experts/**").hasAnyRole("EXPERT", "ADMIN")
-//                .antMatchers("/admins/**").hasRole("ADMIN")
-//                .antMatchers("/authenticated").authenticated()
+                .csrf().disable()
+                .formLogin().disable()
+                .authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
-                .antMatchers(HttpMethod.POST,"/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/signup").permitAll()
                 .antMatchers("/users").authenticated()
 
 //                .antMatchers("/files/**").permitAll()
@@ -76,7 +71,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
-            .sessionManagement()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

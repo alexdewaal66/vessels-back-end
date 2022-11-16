@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 import nl.alexdewaal66.novi.vessels.utils.ItemIdSerializer;
+import nl.alexdewaal66.novi.vessels.utils.ItemIdSetSerializer;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -42,6 +43,7 @@ public class PropulsionType extends BaseEntity<PropulsionType> {
     @JoinColumn(name = "super_type_id")
     private PropulsionType superType;
 
+    @JsonSerialize(using = ItemIdSetSerializer.class)
     @OneToMany(mappedBy = "superType")
     private Set<PropulsionType> subTypes = new HashSet<>();
 

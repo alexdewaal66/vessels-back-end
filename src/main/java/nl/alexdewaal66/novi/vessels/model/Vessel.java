@@ -74,6 +74,11 @@ public class Vessel extends BaseEntity<Vessel> {
     @Temporal(value = TemporalType.DATE)
     private Date endDate;
 
+    @JsonSerialize(using = ItemIdSerializer.class)
+    @ManyToOne
+    @JoinColumn(name = "propulsion_type_id")
+    private PropulsionType propulsionType;
+
     @JsonSerialize(using = ItemIdSetSerializer.class)
     @OneToMany(mappedBy = "vessel")
     Set<Operation> operations;

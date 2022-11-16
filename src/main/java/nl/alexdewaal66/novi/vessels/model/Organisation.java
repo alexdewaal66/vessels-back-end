@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.ToString;
 import nl.alexdewaal66.novi.vessels.infrastructure.BaseEntity;
 import nl.alexdewaal66.novi.vessels.utils.ItemIdSerializer;
+import nl.alexdewaal66.novi.vessels.utils.ItemIdSetSerializer;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -43,6 +44,7 @@ public class Organisation extends BaseEntity<Organisation> {
     @ManyToOne
     private Address address;
 
+    @JsonSerialize(using = ItemIdSetSerializer.class)
     @OneToMany(mappedBy = "organisation")
     Set<Operation> operations;
 
