@@ -11,7 +11,9 @@ CREATE OR REPLACE FUNCTION role_id(x character varying) RETURNS bigint AS
     LANGUAGE sql;
 
 INSERT INTO enduser (username, password, enabled, email, timestamp, owner)
-VALUES ('gewoonlid', '$2a$10$KlL3ZzRPDz4JWxhgrfoAyeawo5OFkYSfYPY/uIiN1pDx5kGiK7DgS', TRUE,
+VALUES ('system', '$2a$20$0LqT2S/5pYHIjJ1fko.GWeOXioOwI1VvxclrFHkwCoU/.FgfetS72', TRUE,
+        'system@vessels.alexdewaal66.nl', '2022-01-01', 'alexdewaal'),
+       ('gewoonlid', '$2a$10$KlL3ZzRPDz4JWxhgrfoAyeawo5OFkYSfYPY/uIiN1pDx5kGiK7DgS', TRUE,
         'gewoonlid@vessels.alexdewaal66.nl', '2022-01-01', 'gewoonlid'), -- IkMagBeperkt
        ('deskundige', '$2a$10$2yCcoDgyC3UnusuXf8ICr.vgyS6gNYKRVnde0INpXEMV.lE0O6ZMW', TRUE,
         'deskundige@vessels.alexdewaal66.nl', '2022-01-01', 'deskundige'), -- IkMagVeel
@@ -27,7 +29,8 @@ VALUES ('ROLE_MEMBER', '2022-01-01', 'beheerder'),
        ('ROLE_DEMIURG', '2022-01-01', 'alexdewaal');
 
 INSERT INTO user_role (user_id, role_id)
-VALUES (user_id('gewoonlid'), role_id('ROLE_MEMBER')),
+VALUES (user_id('system'), role_id('ROLE_ADMIN')),
+       (user_id('gewoonlid'), role_id('ROLE_MEMBER')),
        (user_id('deskundige'), role_id('ROLE_MEMBER')),
        (user_id('deskundige'), role_id('ROLE_EXPERT')),
        (user_id('beheerder'), role_id('ROLE_MEMBER')),

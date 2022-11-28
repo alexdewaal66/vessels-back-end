@@ -30,18 +30,6 @@ public class DBFileController extends GenericController<DBFile> {
         return new ResponseEntity<>(String.format("%s %d created", "file", newId), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/ids")
-    public ResponseEntity<Object> getIds() {
-        return ResponseEntity.ok().body(dbFileService.getAllIds());
-    }
-
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Object> get(@PathVariable("id") Long id) {
-        DBFile dbFile = dbFileService.getById(id);
-//        dbFile.setContent(null);
-        return ResponseEntity.ok().body(dbFile);
-    }
 
     @GetMapping(value = "/{id}/download", produces = MediaType.IMAGE_JPEG_VALUE)
     Resource download(@PathVariable("id") Long id) {

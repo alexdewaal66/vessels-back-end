@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class SubdivisionController extends GenericController<Subdivision> {
 
-    private final SubdivisionService subdivisionService;
+    final SubdivisionService subdivisionService;
+
     public SubdivisionController(SubdivisionServiceImpl service, SubdivisionService subdivisionService) {
         super(service);
         this.subdivisionService = subdivisionService;

@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import static nl.alexdewaal66.novi.vessels.utils.Console.logv;
-
 @RestController
 @RequestMapping(value = "/signup")
 @CrossOrigin(origins = "*")
@@ -27,12 +25,11 @@ public class SignupController {
 
     @PostMapping(value = "")
     public ResponseEntity<Object> signup(@RequestBody Enduser item) {
-        logv("SignupController » create()",
-                "user=" + item);
+//        logv("SignupController » create()", "user=" + item);
         item.setPassword(passwordEncoder.encode(item.getPassword()));
+        item.setOwner("system");
         Long newId = enduserService.create(item);
-        logv("SignupController » create()",
-                "id=" + newId);
+//        logv("SignupController » create()", "id=" + newId);
         return new ResponseEntity<>(String.format("%s %d created", item.getClass().getSimpleName(), newId), HttpStatus.CREATED);
     }
 }

@@ -17,10 +17,14 @@ public class AuthorizationHelper {
     @Autowired
     EnduserService enduserService;
 
-    public boolean isEligible(String username) {// does Principal be or outrank provided user
+    public boolean isEligible(String username) {// principal == user or principal > user
         return username == null
                 || isSelf(username)
                 || hasPrincipalHigherRoleThan(username);
+    }
+
+    public boolean hasCompleteAccess(String username) {// principal == user or principal == admin
+        return isSelf(username) || checkRole(Role.Roles.ADMIN.label);
     }
 
     public boolean isSelf(String username) {
@@ -60,9 +64,9 @@ public class AuthorizationHelper {
         }
     }
 
-    public String getPrincipalName(Authentication auth) {
-        return auth.getName();
-    }
+//    public String getPrincipalName(Authentication auth) {
+//        return auth.getName();
+//    }
 
     public String getPrincipalName() {
         return getAuth().getName();

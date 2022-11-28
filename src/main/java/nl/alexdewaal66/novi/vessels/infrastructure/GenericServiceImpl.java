@@ -90,7 +90,8 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
     @Override
     public Long create(T item) {
         item.setId(null); // protects from overwriting existing instance
-        item.setOwner(authorizationHelper.getPrincipalName());
+        String principalName = authorizationHelper.getPrincipalName();
+        item.setOwner(principalName);
         T newItem = repository.save(item);
         return newItem.getId();
     }
@@ -146,7 +147,6 @@ public class GenericServiceImpl<T extends BaseEntity<T>>
     }
 
 }
-
 
 
 //    @Override

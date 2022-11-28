@@ -20,19 +20,6 @@ public class CountryController extends GenericController<Country> {
         super(service);
     }
 
-
-    @GetMapping(value = "/name")
-    public ResponseEntity<Object> getCountryByName(
-            @RequestParam(name = "name") String name) {
-        return ResponseEntity.ok().body(countryService.getCountryByName(name));
-    }
-
-    @GetMapping(value = "/code")
-    public ResponseEntity<Object> getCountryByCode(
-            @RequestParam(name = "code") String code) {
-        return ResponseEntity.ok().body(countryService.getCountryByCode(code));
-    }
-
     @GetMapping(value = "/find")
     public ResponseEntity<Object> findCountry(
             @RequestParam(required = false, name = "code") String code,
