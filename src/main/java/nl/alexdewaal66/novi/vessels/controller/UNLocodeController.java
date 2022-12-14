@@ -1,26 +1,22 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericController;
+import nl.alexdewaal66.novi.vessels.model.UNLocode;
+import nl.alexdewaal66.novi.vessels.service.UNLocodeService;
+import nl.alexdewaal66.novi.vessels.service.UNLocodeServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import nl.alexdewaal66.novi.vessels.service.UNLocodeService;
 
 @RestController
 @RequestMapping(value = "/un_locode")
 @CrossOrigin(origins = "*")
-public class UNLocodeController {
+public class UNLocodeController extends GenericController<UNLocode> {
 
-    @Autowired
-    private UNLocodeService unLocodeService;
-
-    @GetMapping(value = "")
-    public ResponseEntity<Object> getUNLocodes() {
-        return ResponseEntity.ok().body(unLocodeService.getUNLocodes());
-    }
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Object> getUNLocode(@PathVariable("id") long id) {
-        return ResponseEntity.ok().body(unLocodeService.getUNLocodeById(id));
+    private final UNLocodeService unLocodeService;
+    
+    public UNLocodeController(UNLocodeServiceImpl service, UNLocodeService unLocodeService) {
+        super(service);
+        this.unLocodeService = unLocodeService;
     }
 
     @GetMapping(value = "/find")
@@ -31,5 +27,4 @@ public class UNLocodeController {
                 .getUNLocodeByCodes(alpha2Code, locationCode)
         );
     }
-
 }

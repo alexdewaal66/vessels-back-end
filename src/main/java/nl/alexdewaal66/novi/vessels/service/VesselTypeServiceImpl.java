@@ -1,29 +1,27 @@
 package nl.alexdewaal66.novi.vessels.service;
 
 import nl.alexdewaal66.novi.vessels.exceptions.RecordNotFoundException;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.VesselType;
 import nl.alexdewaal66.novi.vessels.repository.VesselTypeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import nl.alexdewaal66.novi.vessels.utils.AuthorizationHelper;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Optional;
-
 @Service
-public class VesselTypeServiceImpl implements VesselTypeService{
+public class VesselTypeServiceImpl
+        extends GenericServiceImpl<VesselType>
+        implements VesselTypeService{
 
-    @Autowired
-    private VesselTypeRepository vesselTypeRepository;
-
-    @Override
-    public Collection<VesselType> getVesselTypes() {
-        return vesselTypeRepository.findAll();
+    public VesselTypeServiceImpl(VesselTypeRepository repository, VesselTypeRepository vesselTypeRepository, AuthorizationHelper authorizationHelper) {
+        super(repository, "VesselType");
+        this.vesselTypeRepository = vesselTypeRepository;
+        this.authorizationHelper = authorizationHelper;
     }
 
-    @Override
-    public Optional<VesselType> getVesselTypeById(long id) {
-        return vesselTypeRepository.findById(id);
-    }
+    private final VesselTypeRepository vesselTypeRepository;
+
+    final AuthorizationHelper authorizationHelper;
+
 
     @Override
     public VesselType getVesselTypeByName(String nameEN, String nameNL) {
@@ -35,30 +33,12 @@ public class VesselTypeServiceImpl implements VesselTypeService{
     }
 
     @Override
-    public long createVesselType(VesselType vesselType) {
-        vesselType.setId(0);
-        VesselType newVesselType = vesselTypeRepository.save(vesselType);
-        return newVesselType.getId();
+    public Long create(VesselType item) {
+        Long superTypeId = item.getSuperType().getId();
+        VesselType superType = repository.getOne(superTypeId);
+        item.setSuperType(superType);
+        return super.create(item);
     }
 
-    @Override
-    public void updateVesselType(long id, VesselType newVesselType) {
-        if (vesselTypeExists(id)) {
-            newVesselType.setId(id);
-            //todo: is supertype updated?
-            vesselTypeRepository.save(newVesselType);
-        } else {
-            throw new RecordNotFoundException("VesselType", id);
-        }
-    }
 
-    @Override
-    public void deleteVesselType(long id) {
-
-    }
-
-    @Override
-    public boolean vesselTypeExists(long id) {
-        return vesselTypeRepository.existsById(id);
-    }
 }

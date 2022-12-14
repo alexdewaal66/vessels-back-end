@@ -1,46 +1,32 @@
 package nl.alexdewaal66.novi.vessels.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Subdivision;
 import nl.alexdewaal66.novi.vessels.service.SubdivisionService;
+import nl.alexdewaal66.novi.vessels.service.SubdivisionServiceImpl;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/subdivisions")
 @CrossOrigin(origins = "*")
-public class SubdivisionController {
+public class SubdivisionController extends GenericController<Subdivision> {
 
-    @Autowired
-    private SubdivisionService subdivisionService;
+    final SubdivisionService subdivisionService;
 
-    @GetMapping(value = "")
-    public ResponseEntity<Object> getSubdivisions() {
-        return ResponseEntity.ok().body(subdivisionService.getSubdivisions());
+    public SubdivisionController(SubdivisionServiceImpl service, SubdivisionService subdivisionService) {
+        super(service);
+        this.subdivisionService = subdivisionService;
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Object> getSubdivision(@PathVariable("id") long id) {
-        return ResponseEntity.ok().body(subdivisionService.getSubdivisionById(id));
-    }
 
     @GetMapping(value = "/find")
-    public ResponseEntity<Object> getSubdivisionByCodes(
+    public ResponseEntity<Object> findSubdivision(
             @RequestParam(name = "alpha2code") String alpha2Code,
-            @RequestParam(name = "code") String code) {
+            @RequestParam(name = "subcode") String subdivisionCode) {
         return ResponseEntity.ok().body(subdivisionService
-                .getSubdivisionByCodes(alpha2Code, code)
+                .findSubdivision(alpha2Code, subdivisionCode)
         );
     }
 
 }
-
-/*
-    @GetMapping(value = "/find")
-    public ResponseEntity<Object> getCountryByName(
-            @RequestParam(required = false, name = "name_en") String nameEN,
-            @RequestParam(required = false, name = "name_nl") String nameNL) {
-        return ResponseEntity.ok().body(countryService.getCountryByName(nameEN, nameNL));
-    }
-
- */

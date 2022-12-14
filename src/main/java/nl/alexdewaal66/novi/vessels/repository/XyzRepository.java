@@ -1,12 +1,15 @@
 package nl.alexdewaal66.novi.vessels.repository;
 
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericRepository;
 import nl.alexdewaal66.novi.vessels.model.Xyz;
-import org.springframework.data.jpa.repository.JpaRepository;
+import nl.alexdewaal66.novi.vessels.model.XyzSummary;
 
-public interface XyzRepository extends JpaRepository<Xyz, Long> {
+import java.util.Collection;
 
-    Xyz findByXyzStringIgnoreCase(String xyzString);
+public interface XyzRepository extends GenericRepository<Xyz> {
 
-    Xyz findByXyzStringContainsOrNameContainsOrDescriptionContains(
-            String xyzString, String name, String description);
+    Collection<XyzSummary> findAllSummariesBy();
+
+    Collection<XyzSummary> findSummariesByIdIn(Collection<Long> ids);
+
 }

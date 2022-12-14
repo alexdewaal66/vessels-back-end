@@ -2,52 +2,52 @@ package nl.alexdewaal66.novi.vessels.controller;
 
 import nl.alexdewaal66.novi.vessels.payload.AuthenticationRequest;
 import nl.alexdewaal66.novi.vessels.payload.AuthenticationResponse;
-import nl.alexdewaal66.novi.vessels.service.CustomUserDetailsService;
+import nl.alexdewaal66.novi.vessels.service.EnduserService;
 import nl.alexdewaal66.novi.vessels.utils.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @CrossOrigin(origins = "*")
 public class AuthenticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private final EnduserService userDetailsService;
 
-    @Autowired
+    final
     JwtUtil jwtUtil;
 
-    // TODO: WTF is this?
-    @GetMapping(value = "/authenticated")
-    public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
-        return ResponseEntity.ok().body(principal);
+    public AuthenticationController(AuthenticationManager authenticationManager, EnduserService userDetailsService, JwtUtil jwtUtil) {
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+        this.jwtUtil = jwtUtil;
     }
+
+//    @GetMapping(value = "/authenticated")
+//    public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
+//        return ResponseEntity.ok().body(principal);
+//    }
 
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
-        System.out.println(" -----> username: " + username );
-        System.out.println(" -----> password: " + password );
-
+//        logv("AuthenticationController » createAuthenticationToken()", " username=" + username );
 
         try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
-            );
+            UsernamePasswordAuthenticationToken token =
+                    new UsernamePasswordAuthenticationToken(username, password);
+//        logv("AuthenticationController » createAuthenticationToken()", "token=" + token);
+            authenticationManager.authenticate(token);
         }
         catch (BadCredentialsException ex) {
             throw new Exception("Incorrect username or password", ex);

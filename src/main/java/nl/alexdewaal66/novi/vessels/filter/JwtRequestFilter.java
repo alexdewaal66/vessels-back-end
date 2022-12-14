@@ -1,6 +1,6 @@
 package nl.alexdewaal66.novi.vessels.filter;
 
-import nl.alexdewaal66.novi.vessels.service.CustomUserDetailsService;
+import nl.alexdewaal66.novi.vessels.service.EnduserService;
 import nl.alexdewaal66.novi.vessels.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +20,9 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private EnduserService userDetailsService;
+// TODO: ❌❌❌❌❌
+//    private CustomUserDetailsService userDetailsService;
 
     @Autowired
     private JwtUtil jwtUtil;

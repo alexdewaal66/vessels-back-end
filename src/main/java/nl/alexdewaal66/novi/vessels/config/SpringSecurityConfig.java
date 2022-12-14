@@ -1,7 +1,7 @@
 package nl.alexdewaal66.novi.vessels.config;
 
 import nl.alexdewaal66.novi.vessels.filter.JwtRequestFilter;
-import nl.alexdewaal66.novi.vessels.service.CustomUserDetailsService;
+import nl.alexdewaal66.novi.vessels.service.EnduserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,15 +21,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    public CustomUserDetailsService customUserDetailsService;
+    public final EnduserService enduserService;
+//    public CustomUserDetailsService customUserDetailsService;
 
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    private final JwtRequestFilter jwtRequestFilter;
+
+    public SpringSecurityConfig(EnduserService enduserService, JwtRequestFilter jwtRequestFilter) {
+        this.enduserService = enduserService;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService);
+        auth.userDetailsService(enduserService);
     }
 
     @Override
@@ -49,29 +53,26 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         //JWT token authentication
         http
                 .cors().and()
-            .csrf().disable()
-//                .formLogin().disable()
-            .authorizeRequests()
-                .antMatchers("/members/**")
-                    .hasAnyRole("MEMBER", "EXPERT", "ADMIN")
-                .antMatchers("/experts/**").hasAnyRole("EXPERT", "ADMIN")
-                .antMatchers("/admins/**").hasRole("ADMIN")
-                .antMatchers("/authenticated").authenticated()
+                .csrf().disable()
+                .formLogin().disable()
+                .authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
+                .antMatchers(HttpMethod.POST, "/signup").permitAll()
                 .antMatchers("/users").authenticated()
+
+//                .antMatchers("/files/**").permitAll()
+
                 .antMatchers(HttpMethod.GET, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/**").authenticated()
+
+                .antMatchers(HttpMethod.POST, "/*/ids").permitAll()
+                .regexMatchers(HttpMethod.POST, "/*/(?!ids).+").authenticated()
+
                 .antMatchers(HttpMethod.PUT, "/**").authenticated()
-                .antMatchers(HttpMethod.PATCH, "/**").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
-            .sessionManagement()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
-/*
-        Rob gebruikt geen literals als Role:
-        .antMatchers("/customers/**").hasRole(Role.CUSTOMER.toString())
- */

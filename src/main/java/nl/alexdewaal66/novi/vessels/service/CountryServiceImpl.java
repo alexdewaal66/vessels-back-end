@@ -1,34 +1,38 @@
 package nl.alexdewaal66.novi.vessels.service;
 
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericServiceImpl;
 import nl.alexdewaal66.novi.vessels.model.Country;
 import nl.alexdewaal66.novi.vessels.repository.CountryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Optional;
-
 @Service
-public class CountryServiceImpl implements CountryService {
+public class CountryServiceImpl extends GenericServiceImpl<Country> implements CountryService {
 
-    @Autowired
-    private CountryRepository countryRepository;
+    final CountryRepository countryRepository;
 
-    public Collection<Country> getCountries() {
-        return countryRepository.findAll();
+    public CountryServiceImpl(CountryRepository repository, CountryRepository countryRepository) {
+        super(repository, "Country");
+        this.countryRepository = countryRepository;
     }
 
-    @Override
-    public Optional<Country> getCountry(long id) {
-        return countryRepository.findById(id);
+
+    public Country findCountry(String code, String name) {
+        if (code != null) {
+            return getCountryByCode(code);
+        }
+        if (name != null) {
+            return getCountryByName(name);
+        }
+        return null;
     }
 
-    public Country getCountryByName(String nameEN, String nameNL) {
-        return countryRepository.findByShortNameENContainsOrShortNameNLContains(nameEN, nameNL);
+    public Country getCountryByName(String name) {
+        return countryRepository.findByShortNameENContainsOrShortNameNLContains(name, name);
     }
 
-    public Country getCountryByCode(String alpha2Code, String alpha3Code, String numericCode) {
+    public Country getCountryByCode(String code) {
         return countryRepository.findByAlpha2CodeEqualsOrAlpha3CodeEqualsOrNumericCodeEquals(
-                alpha2Code, alpha3Code, numericCode);
+                code, code, code);
     }
+
 }

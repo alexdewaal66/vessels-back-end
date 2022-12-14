@@ -1,12 +1,19 @@
 package nl.alexdewaal66.novi.vessels.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import nl.alexdewaal66.novi.vessels.infrastructure.GenericRepository;
 import nl.alexdewaal66.novi.vessels.model.Subdivision;
+import nl.alexdewaal66.novi.vessels.model.SubdivisionSummary;
 
-public interface SubdivisionRepository extends JpaRepository<Subdivision, Long> {
+import java.util.Collection;
 
-    Subdivision findByAlpha2CodeAndCode(String alpha2Code, String code);
+public interface SubdivisionRepository extends GenericRepository<Subdivision> {
+
+    Subdivision findByAlpha2CodeAndSubdivisionCode(String alpha2Code, String subdivisionCode);
 
     Subdivision findByNameContains(String name);
+
+    Collection<SubdivisionSummary> findAllSummariesBy();
+
+    Collection<SubdivisionSummary> findSummariesByIdIn(Collection<Long> ids);
 
 }

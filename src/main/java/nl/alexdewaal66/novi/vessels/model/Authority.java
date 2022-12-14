@@ -1,6 +1,7 @@
 package nl.alexdewaal66.novi.vessels.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -8,38 +9,39 @@ import java.io.Serializable;
 @Table(name = "authorities")
 public class Authority implements Serializable {
 
+    public Authority() {}
+    public Authority(String username, String role) {
+        this.username = username;
+        this.role = role;
+    }
+
     @Id
     @Column(nullable = false)
+    @Size(max = 100)
     private String username;
 
     @Id
     @Column(nullable = false)
-    private String authority;
+    @Size(max = 100)
+    private String role;
 
-    public Authority() {}
-    public Authority(String username, String authority) {
-        this.username = username;
-        this.authority = authority;
-    }
-
-    public String getUsername() {
-        return username;
-    }
+    public String getUsername() {return username;}
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getAuthority() {
-        return authority;
+
+    public String getRole() {
+        return role;
     }
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setRole(String authority) {
+        this.role = authority;
     }
 
     @Override
     public String toString() {
         return "Authority{" +
                 "username='" + username + '\'' +
-                ", authority='" + authority + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
