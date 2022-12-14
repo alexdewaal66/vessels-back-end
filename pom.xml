@@ -10,7 +10,7 @@
     </parent>
     <groupId>nl.alexdewaal66.novi</groupId>
     <artifactId>vessels</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>vessels</name>
     <description>Vessels project for Spring Boot</description>
     <properties>
@@ -92,6 +92,13 @@
                 <configuration>
                     <source>11</source>
                     <target>11</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
         </plugins>
