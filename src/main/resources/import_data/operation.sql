@@ -26,3 +26,13 @@ INSERT INTO operation (organisation_id, vessel_id, operation_type_id, timestamp)
 VALUES (organisation_id('Bureau Veritas'),
         vessel_id('IMO9649548'),
         operation_type_id('Classification Society'), '2022-01-01');
+
+INSERT INTO operation (organisation_id, vessel_id, operation_type_id, timestamp)
+VALUES (organisation_id('Arklow Shipping'),
+        vessel_id('IMO9649536'),
+        operation_type_id('Owner'), '2022-01-01');
+
+INSERT INTO operation (organisation_id, vessel_id, operation_type_id, timestamp)
+VALUES (organisation_id('Bureau Veritas'),
+        vessel_id('IMO9649536'),
+        operation_type_id('Classification Society'), '2022-01-01');
