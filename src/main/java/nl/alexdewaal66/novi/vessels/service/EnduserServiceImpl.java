@@ -83,18 +83,12 @@ public class EnduserServiceImpl
             return super.create(newUser);
         } else {
             String principalName = authorizationHelper.getPrincipalName();
-            if (!Objects.equals(principalName, "anonymousUser")) {
-                newUser.setOwner(principalName);
-            } else {
-                newUser.setOwner(newUser.getUsername());
-            }
-
+            String owner =  (Objects.equals(principalName, "anonymousUser"))
+                ? newUser.getUsername()
+                : principalName;
             Role role = roleService.getById(Role.Roles.MEMBER.id);
             newUser.setRoles(Set.of(role));
-            newUser.setId(null);
-            Enduser savedUser = enduserRepository.save(newUser);
-            logv("EnduserServiceImpl » create()", "newUser=" + newUser);
-            return savedUser.getId();
+            return create(newUser, owner);
         }
     }
 

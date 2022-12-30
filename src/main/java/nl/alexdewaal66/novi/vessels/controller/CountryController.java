@@ -4,7 +4,6 @@ import nl.alexdewaal66.novi.vessels.infrastructure.GenericController;
 import nl.alexdewaal66.novi.vessels.model.Country;
 import nl.alexdewaal66.novi.vessels.service.CountryService;
 import nl.alexdewaal66.novi.vessels.service.CountryServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class CountryController extends GenericController<Country> {
 
-    @Autowired
+    final
     CountryService countryService;
 
-    public CountryController(CountryServiceImpl service) {
+    public CountryController(CountryServiceImpl service, CountryService countryService) {
         super(service);
+        this.countryService = countryService;
     }
 
     @GetMapping(value = "/find")
