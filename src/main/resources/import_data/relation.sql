@@ -20,4 +20,8 @@ VALUES (organisation_id('Arklow Shipping'),
         organisation_id('Bureau Veritas'),
         relation_type_id('classification'), '2022-01-01');
 
+INSERT INTO relation (organisation1_id, organisation2_id, relation_type_id, timestamp)
+VALUES (organisation_id('Arklow Shipping NL'),
+        organisation_id('Arklow Shipping'),
+        relation_type_id('subsidiary'), '2022-01-01');
 

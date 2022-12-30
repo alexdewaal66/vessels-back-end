@@ -6,8 +6,11 @@ INSERT INTO organisation (short_name, long_name, description, email, url, addres
 ('KNVR', 'Koninklijke Vereniging van Nederlandse Reders',
     null, 'kvnr@kvnr.nl', 'https://www.kvnr.nl/home', 3, '2022-01-01'),
 
-('Arklow Shipping', 'Arklow Shipping Nederland B.V.',
-    null, 'info@arklowshipping.nl', 'https://www.asl.ie', 4, '2022-01-01'),
+('Arklow Shipping', 'Arklow Shipping Unlimited Company',
+ null, 'chartering@asl.ie', 'https://www.asl.ie', 4, '2022-01-01'),
+
+('Arklow Shipping NL', 'Arklow Shipping Nederland B.V.',
+ null, 'info@arklowshipping.nl', 'https://www.asl.ie', 4, '2022-01-01'),
 
 ('LR', 'Lloyd''s Register',
     'classification society, abbrev:LR', null, 'https://www.lr.org/', 11, '2022-01-01'),

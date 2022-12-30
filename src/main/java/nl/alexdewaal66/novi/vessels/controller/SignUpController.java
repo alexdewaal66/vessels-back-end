@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/signup")
 @CrossOrigin(origins = "*")
-public class SignupController {
+public class SignUpController {
 
     final
     EnduserService enduserService;
@@ -18,18 +18,18 @@ public class SignupController {
     final
     PasswordEncoder passwordEncoder;
 
-    public SignupController(EnduserService enduserService, PasswordEncoder passwordEncoder) {
+    public SignUpController(EnduserService enduserService, PasswordEncoder passwordEncoder) {
         this.enduserService = enduserService;
         this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping(value = "")
     public ResponseEntity<Object> signup(@RequestBody Enduser item) {
-//        logv("SignupController » create()", "user=" + item);
+//        logv("SignUpController » create()", "user=" + item);
         item.setPassword(passwordEncoder.encode(item.getPassword()));
-        item.setOwner("system");
+//        item.setOwner("system");
         Long newId = enduserService.create(item);
-//        logv("SignupController » create()", "id=" + newId);
+//        logv("SignUpController » create()", "id=" + newId);
         return new ResponseEntity<>(String.format("%s %d created", item.getClass().getSimpleName(), newId), HttpStatus.CREATED);
     }
 }

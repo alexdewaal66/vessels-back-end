@@ -32,9 +32,7 @@ public interface GenericService<T extends BaseEntity<T>> {
 
     Long create(T item);
 
-//    IdContainer create1(T item);
-//    SummaryProjection<T> create2(T item);
-//    Object create2(T item);
+    Long create(T item, String owner);
 
     Object update(Long id, T newItem);
 
